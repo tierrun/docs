@@ -1,0 +1,18 @@
+{
+    // For ESLint
+    "eslint.validate": ["javascript", "javascriptreact", "html", "json", "jsonc", "typescript", "typescriptreact"],
+    "editor.codeActionsOnSave": {
+        "source.fixAll": false
+    },
+    "eslint.packageManager": "pnpm",
+    // For activating stylelint config
+    // "css.validate": false,
+    // "less.validate": false,
+    // "scss.validate": false,
+    // For Prettier
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "prettier.requireConfig": true,
+    // Override spellings in workspace
+    "cSpell.words": ["infisical", "nextjs", "recma", "rehype", "shiki", "tailwindcss"]
+}

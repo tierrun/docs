@@ -1,0 +1,22 @@
+{
+    "name": "docs",
+    "version": "0.0.0",
+    "private": true,
+    "workspaces": ["apps/*", "packages/*"],
+    "scripts": {
+        "build": "turbo run build",
+        "dev": "turbo run dev",
+        "lint": "turbo run lint",
+        "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    },
+    "devDependencies": {
+        "eslint-config-custom": "workspace:*",
+        "prettier": "^2.8.4",
+        "prettier-plugin-tailwindcss": "^0.2.4",
+        "turbo": "latest"
+    },
+    "engines": {
+        "node": ">=14.0.0"
+    },
+    "packageManager": "pnpm@7.28.0"
+}
