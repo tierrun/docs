@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export const highLevelNav = [
     {title: 'Documentation', href: '/', external: false},
-    {title: 'Examples', href: '/example', external: false},
+    {title: 'Examples', href: '/examples', external: false},
     {
         title: 'Stripe Glossary',
         href: 'https://stripe-glossary.tier.run',
@@ -118,6 +118,24 @@ export const navigation = [
     }
 ];
 
+export const miscellaneous = [
+    {
+        main: {title: 'Miscellaneous'},
+        links: [
+            {title: 'Stripe mapping', href: '/miscellaneous/stripe-mapping'},
+            {title: 'Troubleshooting', href: '/miscellaneous/troubleshooting'},
+            {title: 'Tier Glossary', href: '/miscellaneous/tier-glossary'}
+        ]
+    },
+    {
+        main: {title: 'Updates'},
+        links: [
+            {title: 'System status', href: '/system-status'},
+            {title: 'Changelog', href: '/changelog'}
+        ]
+    }
+];
+
 export function Sidebar() {
     return (
         <div className="mt-10 block">
@@ -138,6 +156,27 @@ export function Sidebar() {
                     <h2 className="text-sm font-semibold">
                         <Link href={item.main.href}>{item.main.title}</Link>
                     </h2>
+                    <div className="relative mt-3 pl-2">
+                        <ul className="border-l">
+                            {item.links?.map((sublink, sublinkIndex) => (
+                                <li className="relative" key={sublinkIndex}>
+                                    <Link
+                                        href={sublink.href}
+                                        className="flex justify-between gap-2 py-1 pr-3 pl-4 text-sm text-white">
+                                        {sublink.title}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            ))}
+            <div className="mb-8 h-8 border-b border-dashed border-white/10"></div>
+
+            {/* Miscellaneous Navigation */}
+            {miscellaneous.map((item, itemIndex) => (
+                <div className="relative mt-2" key={itemIndex}>
+                    <h2 className="text-sm font-semibold">{item.main.title}</h2>
                     <div className="relative mt-3 pl-2">
                         <ul className="border-l">
                             {item.links?.map((sublink, sublinkIndex) => (

@@ -1,4 +1,4 @@
-import Content from '../content/index/overview.mdx';
+import Content from '../../content/index/tutorials.mdx';
 
 export default function Home() {
     return (
