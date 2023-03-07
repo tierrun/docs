@@ -1,15 +1,12 @@
 import {Inter} from 'next/font/google';
-import Content from './message.mdx';
-
-import {Button} from 'ui';
+import Content from '../content/index/overview.mdx';
 
 const inter = Inter({subsets: ['latin']});
 
 export default function Home() {
     return (
-        <main>
+        <div className="prose invert">
             <Content />
-            <Button />
-        </main>
+        </div>
     );
 }

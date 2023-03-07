@@ -17,6 +17,7 @@ importers:
   apps/docs:
     specifiers:
       '@mdx-js/react': ^2.3.0
+      '@next/font': ^13.2.3
       '@next/mdx': ^13.2.3
       '@sindresorhus/slugify': ^2.2.0
       '@tailwindcss/typography': ^0.5.9
@@ -47,6 +48,7 @@ importers:
       unist-util-visit: ^4.1.2
     dependencies:
       '@mdx-js/react': 2.3.0_react@18.2.0
+      '@next/font': 13.2.3
       '@next/mdx': 13.2.3_@mdx-js+react@2.3.0
       '@sindresorhus/slugify': 2.2.0
       acorn: 8.8.2
@@ -436,6 +438,10 @@ packages:
     resolution: {integrity: sha512-z+gnX4Zizatqatc6f4CQrcC9oN8Us3Vrq/OLyc98h7K/eWctrnV91zFZodmJHUjx0cITY8uYM7LXD7IdYkg3kg==}
     dependencies:
       glob: 7.1.7
+    dev: false
+
+  /@next/font/13.2.3:
+    resolution: {integrity: sha512-7EHzk0f7FVYICLUZTpyPk93IfcTUao++Xt1Sgb+Zk5dVOCYHabqLtlF5ywSoXIqyFlo0qlshEBxsrzHAGTWkDw==}
     dev: false
 
   /@next/mdx/13.2.3_@mdx-js+react@2.3.0:
