@@ -14,5 +14,5 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "prettier.requireConfig": true,
     // Override spellings in workspace
-    "cSpell.words": ["infisical", "nextjs", "recma", "rehype", "shiki", "tailwindcss"]
+    "cSpell.words": ["infisical", "mdast", "nextjs", "recma", "rehype", "shiki", "sindresorhus", "tailwindcss", "unist"]
 }

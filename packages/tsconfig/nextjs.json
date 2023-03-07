@@ -21,7 +21,10 @@
             {
                 "name": "next"
             }
-        ]
+        ],
+        "paths": {
+            "@atoms/*": ["./*"]
+        }
     },
     "include": ["src", "next-env.d.ts"],
     "exclude": ["node_modules"]

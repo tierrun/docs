@@ -1,4 +1,6 @@
-import {mdxAnnotations} from 'mdx-annotations';
-import remarkGfm from 'remark-gfm';
+import { mdxAnnotations } from 'mdx-annotations'
+import remarkGfm from 'remark-gfm'
 
-export const remarkPlugins = [mdxAnnotations.remark, remarkGfm];
+// mdx-annotations -Markdoc style annotation for MDX
+// remark-gfm - To support Github Flavoured Markdown support
+export const remarkPlugins = [mdxAnnotations.remark, remarkGfm]
