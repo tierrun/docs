@@ -29,11 +29,91 @@ export const navigation = [
     {
         main: {title: 'Tier Concepts', href: '/tier-concepts'},
         links: [
-            {title: 'What is Tier?', href: '/tier-concepts'},
-            {title: 'Features', href: '/tier-concepts'},
-            {title: 'Architecture', href: '/tier-concepts'},
-            {title: 'Pricing model', href: '/tier-concepts'},
-            {title: 'Attachments', href: '/tier-concepts'}
+            {title: 'What is Tier?', href: '/tier-concepts/what-is-tier'},
+            {title: 'Features', href: '/tier-concepts/features'},
+            {title: 'Architecture', href: '/tier-concepts/architecture'},
+            {title: 'Pricing model', href: '/tier-concepts/pricing-model'}
+        ]
+    },
+    {
+        main: {title: 'Tutorials', href: '/tutorials'},
+        links: [
+            {
+                title: 'Flat monthly pricing?',
+                href: '/tutorials/flat-monthly-pricing'
+            },
+            {title: 'Per seat pricing', href: '/tutorials/per-set-pricing'},
+            {
+                title: 'Per seat & tiered pricing',
+                href: '/tutorials/per-seat-tiered-pricing'
+            },
+            {
+                title: 'Mixed interval pricing',
+                href: '/tutorials/mixed-interval-pricing'
+            },
+            {title: 'Spike pricing', href: '/tutorials/spike-pricing'}
+        ]
+    },
+    {
+        main: {title: 'Tier Cloud', href: '/tier-cloud'},
+        links: [
+            {
+                title: 'Versioning',
+                href: '/tier-cloud/versioning'
+            },
+            {title: 'Hidden features', href: '/tier-cloud/hidden-features'},
+            {
+                title: 'Journey',
+                href: '/tier-cloud/journey'
+            },
+            {
+                title: 'Pricing A/B Test',
+                href: '/tier-cloud/a-b-testing'
+            }
+        ]
+    },
+    {
+        main: {title: 'References', href: '/references'},
+        links: [
+            {
+                title: 'Tier CLI',
+                href: '/references/tier-cli'
+            },
+            {title: 'Node', href: '/references/node'},
+            {
+                title: 'Go',
+                href: '/references/go'
+            },
+            {
+                title: 'Elixir',
+                href: '/references/elixir'
+            }
+        ]
+    },
+    {
+        main: {title: 'Self Hosting', href: '/self-hosting'},
+        links: [
+            {
+                title: 'Comparison',
+                href: '/self-hosting/comparison'
+            },
+            {title: 'Node', href: '/self-hosting/node'},
+            {
+                title: 'Contribtion',
+                href: '/self-hosting/contribtion'
+            },
+            {
+                title: 'Docker',
+                href: '/self-hosting/docker'
+            },
+            {
+                title: 'Fly.io',
+                href: '/self-hosting/fly-io'
+            },
+            {
+                title: 'Heroku',
+                href: '/self-hosting/heroku'
+            }
         ]
     }
 ];
