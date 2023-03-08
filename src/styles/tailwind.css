@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    /* Inter Variable - Subsetting : Latin */
+    @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: optional;
+        src: url('/assets/fonts/Inter/inter-var-latin.woff2') format('woff2');
+    }
+}
