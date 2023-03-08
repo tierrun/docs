@@ -5,8 +5,17 @@ import {Sidebar} from '@/components/Sidebar';
 
 export default function Document() {
     return (
-        <Html lang="en" className="bg-slate-900">
-            <Head />
+        <Html lang="en" className="font-sans bg-slate-900">
+            <Head>
+                {/* Preloading Inter */}
+                <link
+                    rel="preload"
+                    href="/fonts/Inter/inter-var-latin.woff2"
+                    as="font"
+                    type="font/woff2"
+                    crossOrigin="anonymous"
+                />
+            </Head>
             <body className="antialiased text-white ">
                 <header className="fixed inset-0 z-40 flex">
                     <div className="block px-6 pt-4 pb-8 overflow-y-auto border-r w-72 border-white/10 ">
@@ -22,7 +31,6 @@ export default function Document() {
                         <Main />
                     </main>
                 </div>
-
                 <NextScript />
             </body>
         </Html>
