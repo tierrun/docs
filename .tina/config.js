@@ -46,6 +46,32 @@ export default defineConfig({
                 ]
             },
             {
+                name: 'tierConcepts',
+                label: 'Tier Concepts',
+                path: 'src/pages/tier-concepts',
+                format: 'mdx',
+                defaultItem: () => {
+                    return {
+                        title: 'Tier Concepts'
+                    };
+                },
+                fields: [
+                    {
+                        type: 'string',
+                        name: 'title',
+                        label: 'Title',
+                        isTitle: true,
+                        required: true
+                    },
+                    {
+                        type: 'rich-text',
+                        name: 'body',
+                        label: 'Body',
+                        isBody: true
+                    }
+                ]
+            },
+            {
                 name: 'tutorials',
                 label: 'Tutorials',
                 path: 'src/pages/tutorials',
@@ -53,6 +79,110 @@ export default defineConfig({
                 defaultItem: () => {
                     return {
                         title: 'New Tutorial'
+                    };
+                },
+                fields: [
+                    {
+                        type: 'string',
+                        name: 'title',
+                        label: 'Title',
+                        isTitle: true,
+                        required: true
+                    },
+                    {
+                        type: 'rich-text',
+                        name: 'body',
+                        label: 'Body',
+                        isBody: true
+                    }
+                ]
+            },
+            {
+                name: 'tierCloud',
+                label: 'Tier Cloud',
+                path: 'src/pages/tier-cloud',
+                format: 'mdx',
+                defaultItem: () => {
+                    return {
+                        title: 'Tier Cloud'
+                    };
+                },
+                fields: [
+                    {
+                        type: 'string',
+                        name: 'title',
+                        label: 'Title',
+                        isTitle: true,
+                        required: true
+                    },
+                    {
+                        type: 'rich-text',
+                        name: 'body',
+                        label: 'Body',
+                        isBody: true
+                    }
+                ]
+            },
+            {
+                name: 'references',
+                label: 'References',
+                path: 'src/pages/references',
+                format: 'mdx',
+                defaultItem: () => {
+                    return {
+                        title: 'References'
+                    };
+                },
+                fields: [
+                    {
+                        type: 'string',
+                        name: 'title',
+                        label: 'Title',
+                        isTitle: true,
+                        required: true
+                    },
+                    {
+                        type: 'rich-text',
+                        name: 'body',
+                        label: 'Body',
+                        isBody: true
+                    }
+                ]
+            },
+            {
+                name: 'selHosting',
+                label: 'Self Hosting',
+                path: 'src/pages/self-hosting',
+                format: 'mdx',
+                defaultItem: () => {
+                    return {
+                        title: 'Self Hosting'
+                    };
+                },
+                fields: [
+                    {
+                        type: 'string',
+                        name: 'title',
+                        label: 'Title',
+                        isTitle: true,
+                        required: true
+                    },
+                    {
+                        type: 'rich-text',
+                        name: 'body',
+                        label: 'Body',
+                        isBody: true
+                    }
+                ]
+            },
+            {
+                name: 'miscellaneous',
+                label: 'Miscellaneous',
+                path: 'src/pages/miscellaneous',
+                format: 'mdx',
+                defaultItem: () => {
+                    return {
+                        title: 'Miscellaneous'
                     };
                 },
                 fields: [
