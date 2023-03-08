@@ -3,15 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "tinacms dev -c \"next dev\"",
+    "build": "tinacms build && next build",
+    "start": "tinacms build && next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@mdx-js/react": "^2.3.0",
     "@next/mdx": "^13.2.3",
     "@sindresorhus/slugify": "^2.2.0",
+    "@tinacms/cli": "^1.2.2",
     "acorn": "^8.8.2",
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.3",
@@ -25,6 +26,7 @@
     "rehype-mdx-title": "^2.0.0",
     "remark-gfm": "^3.0.1",
     "shiki": "^0.14.1",
+    "tinacms": "^1.2.2",
     "unist-util-visit": "^4.1.2"
   },
   "devDependencies": {
