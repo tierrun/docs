@@ -6,7 +6,14 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Inter', ...defaultTheme.fontFamily.sans]
+                sans: ['var(--font-dmSans)']
+            },
+            fontSize: {
+                title: ['36px', '42px'],
+                'title-md': ['20px', '24px'],
+                'title-sm': ['16px', '24px'],
+                body: ['16px', '24px'],
+                caption: ['14px', '24px']
             }
         }
     },
