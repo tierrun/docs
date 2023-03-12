@@ -31,13 +31,6 @@ export default defineConfig({
                 },
                 fields: [
                     {
-                        type: 'string',
-                        name: 'title',
-                        label: 'Title',
-                        isTitle: true,
-                        required: true
-                    },
-                    {
                         type: 'rich-text',
                         name: 'body',
                         label: 'Body',
@@ -56,13 +49,6 @@ export default defineConfig({
                     };
                 },
                 fields: [
-                    {
-                        type: 'string',
-                        name: 'title',
-                        label: 'Title',
-                        isTitle: true,
-                        required: true
-                    },
                     {
                         type: 'rich-text',
                         name: 'body',
@@ -83,13 +69,6 @@ export default defineConfig({
                 },
                 fields: [
                     {
-                        type: 'string',
-                        name: 'title',
-                        label: 'Title',
-                        isTitle: true,
-                        required: true
-                    },
-                    {
                         type: 'rich-text',
                         name: 'body',
                         label: 'Body',
@@ -108,13 +87,6 @@ export default defineConfig({
                     };
                 },
                 fields: [
-                    {
-                        type: 'string',
-                        name: 'title',
-                        label: 'Title',
-                        isTitle: true,
-                        required: true
-                    },
                     {
                         type: 'rich-text',
                         name: 'body',
@@ -135,13 +107,6 @@ export default defineConfig({
                 },
                 fields: [
                     {
-                        type: 'string',
-                        name: 'title',
-                        label: 'Title',
-                        isTitle: true,
-                        required: true
-                    },
-                    {
                         type: 'rich-text',
                         name: 'body',
                         label: 'Body',
@@ -161,13 +126,6 @@ export default defineConfig({
                 },
                 fields: [
                     {
-                        type: 'string',
-                        name: 'title',
-                        label: 'Title',
-                        isTitle: true,
-                        required: true
-                    },
-                    {
                         type: 'rich-text',
                         name: 'body',
                         label: 'Body',
@@ -186,13 +144,6 @@ export default defineConfig({
                     };
                 },
                 fields: [
-                    {
-                        type: 'string',
-                        name: 'title',
-                        label: 'Title',
-                        isTitle: true,
-                        required: true
-                    },
                     {
                         type: 'rich-text',
                         name: 'body',
