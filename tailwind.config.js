@@ -4,6 +4,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 module.exports = {
     content: ['./src/**/*.{js,ts,jsx,tsx}'],
     theme: {
+        typography: require('./tier-style'),
         extend: {
             fontFamily: {
                 sans: ['var(--font-dmSans)']

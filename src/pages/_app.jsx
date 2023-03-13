@@ -1,6 +1,10 @@
 import '@/styles/tailwind.css';
 import {DM_Sans} from 'next/font/google';
 
+import {MDXProvider} from '@mdx-js/react';
+import * as mdxComponents from '@/components/MDX';
+
+import {Layout} from '@/components/Layout';
 import {Header} from '@/components/Header';
 import {Sidebar} from '@/components/Sidebar';
 
@@ -13,23 +17,11 @@ const dmSans = DM_Sans({
 export default function App({Component, pageProps}) {
     return (
         <div className={`${dmSans.variable} font-sans text-white antialiased`}>
-            <header className="fixed inset-0 z-40 flex">
-                <div className="block px-6 pt-4 pb-8 overflow-y-auto border-r w-72 border-white/10 ">
-                    <div className="flex">
-                        <p className="h-6">Logo</p>
-                    </div>
-                    <Header />
-                    <Sidebar />
-                </div>
-            </header>
-            <div className="relative px-8 ml-72 pt-14">
-                <main className="py-16 prose prose-slate invert">
+            <MDXProvider components={mdxComponents}>
+                <Layout>
                     <Component {...pageProps} />
-                </main>
-            </div>
+                </Layout>
+            </MDXProvider>
         </div>
-        // <div className={`${dmSans.variable} font-sans`}>
-
-        // </div>
     );
 }
