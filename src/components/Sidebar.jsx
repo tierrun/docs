@@ -138,7 +138,7 @@ export const miscellaneous = [
 
 export function Sidebar() {
     return (
-        <div className="block mt-10">
+        <div className="block mt-16">
             {/* Individual Link */}
             <div className="my-12">
                 {highLevelNav.map((group, groupIndex) => (
