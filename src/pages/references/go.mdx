@@ -14,11 +14,22 @@ Lorem ipsum dolor sit amet **consectetur**. Pharetra porttitor turpis tincidunt 
 
 Lorem ipsum dolor sit amet **consectetur**. Pharetra porttitor turpis tincidunt et consectetur vitae nunc faucibus pulvinar. Senectus semper arcu scelerisque eros augue interdum. Nibh viverra viverra magna nibh viverra imperdiet pretium. Parturient nisl fermentum at eu libero tortor nunc iaculis mauris. [Senclair](#).
 
-```go {{ title: 'Go example' }}
-var c = 0;
-const c = async ({some}) => {
-    this.some;
-};
+-   Point is that `var c = 0`
+-   Test is `p = c + e`
+
+```js {{ title: 'Planetscale' }}
+const boostedConn = mysql.createConnection(config);
+boostedConn.query('SET @@boost_cached_queries = true;');
+
+const conn = mysql.createConnection(config);
+```
+
+```js {{ title: "Query" }}
+// query run through connection with caching enabled
+const boostedQuery = boostedConn.query("SELECT COUNT(id) FROM big_table WHERE season = 'fall';")
+
+// regular connection
+const user = conn.query("SELECT id, username, email FROM users WHERE id = 1006”)
 ```
 
 ---
@@ -30,3 +41,36 @@ const c = async ({some}) => {
 
 1.  Lorem ipsum dolor sit amet consectetur. Pharetra porttitor turpis tincidunt et consectetur vitae nunc faucibus pulvinar.
 2.  Lorem ipsum dolor sit amet consectetur. Pharetra porttitor turpis tincidunt et consectetur vitae nunc faucibus pulvinar.
+
+<CodeGroup title="Hello World">
+
+```js
+const http = require('http');
+
+const hostname = '127.0.0.1';
+const port = 3000;
+
+const server = http.createServer((req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('Hello World');
+});
+
+server.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
+});
+```
+
+```go
+package main
+import "fmt"
+func main() {
+    fmt.Println("Hello, World!")
+}
+```
+
+```elixir
+IO.puts("Hello, World!")
+```
+
+</CodeGroup>
