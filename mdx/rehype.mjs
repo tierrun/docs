@@ -8,7 +8,6 @@ import {slugifyWithCounter} from '@sindresorhus/slugify';
 
 function rehypeParseCodeBlocks() {
     return tree => {
-        console.log('parse tree');
         visit(tree, 'element', (node, _nodeIndex, parentNode) => {
             if (node.tagName === 'code' && node.properties.className) {
                 parentNode.properties.language =
@@ -41,7 +40,6 @@ function rehypeShiki() {
                         textNode.value,
                         node.properties.language
                     );
-                    console.log('SHIKI');
 
                     textNode.value = shiki.renderToHtml(tokens, {
                         elements: {

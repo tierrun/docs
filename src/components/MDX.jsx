@@ -1,4 +1,4 @@
-export {Pre as pre} from '@/components/Code';
+export {CodeGroup, Code as code, Pre as pre} from '@/components/Code';
 
 function InfoIcon(props) {
     return (
