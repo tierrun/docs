@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg  version="1.1" viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+ <path transform="matrix(8.75,0,0,8.75,70,0)" d="m8 12h48v40h-48z" fill="none" stroke="#ececec" stroke-miterlimit="10" stroke-width="4"/>
+ <path transform="matrix(8.75,0,0,8.75,70,0)" d="m20 40 8-8-8-8" fill="none" stroke="#ececec" stroke-miterlimit="10" stroke-width="4"/>
+ <path transform="matrix(8.75,0,0,8.75,70,0)" d="m32 40h12" fill="none" stroke="#ececec" stroke-miterlimit="10" stroke-width="4"/>
+ <g>
+  <use x="70" y="691.25" xlink:href="#o"/>
+  <use x="102.109375" y="691.25" xlink:href="#d"/>
+  <use x="123.683594" y="691.25" xlink:href="#c"/>
+  <use x="153.355469" y="691.25" xlink:href="#b"/>
+  <use x="182.878906" y="691.25" xlink:href="#j"/>
+  <use x="203.792969" y="691.25" xlink:href="#c"/>
+  <use x="233.464844" y="691.25" xlink:href="#a"/>
+  <use x="280.011719" y="691.25" xlink:href="#i"/>
+  <use x="311.328125" y="691.25" xlink:href="#h"/>
+  <use x="355.078125" y="691.25" xlink:href="#g"/>
+  <use x="388.769531" y="691.25" xlink:href="#n"/>
+  <use x="403.765625" y="691.25" xlink:href="#f"/>
+  <use x="429.699219" y="691.25" xlink:href="#e"/>
+  <use x="460.84375" y="691.25" xlink:href="#b"/>
+  <use x="490.367188" y="691.25" xlink:href="#d"/>
+  <use x="511.945312" y="691.25" xlink:href="#a"/>
+  <use x="558.492188" y="691.25" xlink:href="#m"/>
+  <use x="590" y="691.25" xlink:href="#f"/>
+  <use x="615.933594" y="691.25" xlink:href="#e"/>
+  <use x="647.082031" y="691.25" xlink:href="#l"/>
+  <use x="678.226562" y="691.25" xlink:href="#k"/>
+ </g>
+</svg>

@@ -14,6 +14,16 @@ export {MainFooter} from '@/components/overview/MainFooter';
 export {QuickStartRecipe} from '@/components/getting-started/QuickStartRecipe';
 export {FrameworkQuickstart} from '@/components/getting-started/FrameworkQuickstart';
 
+export {TierConcepts} from '@/components/tier-concepts/TierConcepts';
+
+export {Tutorials} from '@/components/tutorials/Tutorials';
+
+export {TierCloudFeatures} from '@/components/tier-cloud/TierCloudFeatures';
+
+export {DeploymentOptions} from '@/components/self-hosting/DeploymentOptions';
+
+export {ReferencesIndex} from '@/components/references/ReferencesIndex';
+
 function InfoIcon(props) {
     return (
         <svg aria-hidden="true" {...props} viewBox="0 0 24 24">
@@ -30,8 +40,8 @@ function InfoIcon(props) {
 
 export function Banner({children}) {
     return (
-        <div className="my-6 flex gap-2.5 rounded-lg border border-slate-700 bg-slate-800 p-4 leading-6 text-gray-200">
-            <InfoIcon className="mt-1 h-4 w-4 flex-none stroke-slate-400 " />
+        <div className="my-6 flex gap-2.5 rounded-lg border border-slate-700 bg-slate-800 p-5 leading-6 text-gray-200">
+            <InfoIcon className="flex-none w-4 h-4 mt-1 stroke-slate-400 " />
             <div className="[&>:first-child]:mt-0 [&>:last-child]:mb-0">
                 {children}
             </div>
@@ -41,7 +51,7 @@ export function Banner({children}) {
 
 export function Row({children}) {
     return (
-        <div className="grid grid-cols-1 items-start gap-x-16 gap-y-10 xl:max-w-none xl:grid-cols-2">
+        <div className="grid items-start grid-cols-1 gap-x-16 gap-y-10 xl:max-w-none xl:grid-cols-2">
             {children}
         </div>
     );
