@@ -13,6 +13,8 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "prettier.requireConfig": true,
+
+    "workbench.editor.labelFormat": "short",
     // Custom file nesting
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.expand": false,
@@ -34,6 +36,7 @@
         "infisical",
         "mdast",
         "nextjs",
+        "quickstart",
         "Quickstarts",
         "recma",
         "rehype",

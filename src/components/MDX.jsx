@@ -11,6 +11,9 @@ export {ExploreFeatures} from '@/components/overview/ExploreFeatures';
 export {ExploreReferences} from '@/components/overview/ExploreReferences';
 export {MainFooter} from '@/components/overview/MainFooter';
 
+export {QuickStartRecipe} from '@/components/getting-started/QuickStartRecipe';
+export {FrameworkQuickstart} from '@/components/getting-started/FrameworkQuickstart';
+
 function InfoIcon(props) {
     return (
         <svg aria-hidden="true" {...props} viewBox="0 0 24 24">
