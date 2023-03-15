@@ -24,17 +24,41 @@ export default defineConfig({
                 label: 'Getting Started',
                 path: 'src/pages/getting-started',
                 format: 'mdx',
-                defaultItem: () => {
-                    return {
-                        title: 'Getting Started'
-                    };
-                },
                 fields: [
                     {
                         type: 'rich-text',
                         name: 'body',
                         label: 'Body',
-                        isBody: true
+                        isBody: true,
+                        templates: [
+                            {
+                                name: 'CodeGroup',
+                                label: 'Code Group',
+                                fields: [
+                                    {
+                                        name: 'title',
+                                        label: 'Title',
+                                        type: 'string'
+                                    },
+                                    {
+                                        name: 'children',
+                                        label: 'Code Blocks',
+                                        type: 'rich-text'
+                                    }
+                                ]
+                            },
+                            {
+                                name: 'Banner',
+                                label: 'Banner',
+                                fields: [
+                                    {
+                                        name: 'children',
+                                        label: 'Information',
+                                        type: 'rich-text'
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             },
@@ -43,17 +67,41 @@ export default defineConfig({
                 label: 'Tier Concepts',
                 path: 'src/pages/tier-concepts',
                 format: 'mdx',
-                defaultItem: () => {
-                    return {
-                        title: 'Tier Concepts'
-                    };
-                },
                 fields: [
                     {
                         type: 'rich-text',
                         name: 'body',
                         label: 'Body',
-                        isBody: true
+                        isBody: true,
+                        templates: [
+                            {
+                                name: 'CodeGroup',
+                                label: 'Code Group',
+                                fields: [
+                                    {
+                                        name: 'title',
+                                        label: 'Title',
+                                        type: 'string'
+                                    },
+                                    {
+                                        name: 'children',
+                                        label: 'Code Blocks',
+                                        type: 'rich-text'
+                                    }
+                                ]
+                            },
+                            {
+                                name: 'Banner',
+                                label: 'Banner',
+                                fields: [
+                                    {
+                                        name: 'children',
+                                        label: 'Information',
+                                        type: 'rich-text'
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             },
@@ -62,17 +110,41 @@ export default defineConfig({
                 label: 'Tutorials',
                 path: 'src/pages/tutorials',
                 format: 'mdx',
-                defaultItem: () => {
-                    return {
-                        title: 'New Tutorial'
-                    };
-                },
                 fields: [
                     {
                         type: 'rich-text',
                         name: 'body',
                         label: 'Body',
-                        isBody: true
+                        isBody: true,
+                        templates: [
+                            {
+                                name: 'CodeGroup',
+                                label: 'Code Group',
+                                fields: [
+                                    {
+                                        name: 'title',
+                                        label: 'Title',
+                                        type: 'string'
+                                    },
+                                    {
+                                        name: 'children',
+                                        label: 'Code Blocks',
+                                        type: 'rich-text'
+                                    }
+                                ]
+                            },
+                            {
+                                name: 'Banner',
+                                label: 'Banner',
+                                fields: [
+                                    {
+                                        name: 'children',
+                                        label: 'Information',
+                                        type: 'rich-text'
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             },
@@ -81,17 +153,41 @@ export default defineConfig({
                 label: 'Tier Cloud',
                 path: 'src/pages/tier-cloud',
                 format: 'mdx',
-                defaultItem: () => {
-                    return {
-                        title: 'Tier Cloud'
-                    };
-                },
                 fields: [
                     {
                         type: 'rich-text',
                         name: 'body',
                         label: 'Body',
-                        isBody: true
+                        isBody: true,
+                        templates: [
+                            {
+                                name: 'CodeGroup',
+                                label: 'Code Group',
+                                fields: [
+                                    {
+                                        name: 'title',
+                                        label: 'Title',
+                                        type: 'string'
+                                    },
+                                    {
+                                        name: 'children',
+                                        label: 'Code Blocks',
+                                        type: 'rich-text'
+                                    }
+                                ]
+                            },
+                            {
+                                name: 'Banner',
+                                label: 'Banner',
+                                fields: [
+                                    {
+                                        name: 'children',
+                                        label: 'Information',
+                                        type: 'rich-text'
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             },
@@ -100,17 +196,41 @@ export default defineConfig({
                 label: 'References',
                 path: 'src/pages/references',
                 format: 'mdx',
-                defaultItem: () => {
-                    return {
-                        title: 'References'
-                    };
-                },
                 fields: [
                     {
                         type: 'rich-text',
                         name: 'body',
                         label: 'Body',
-                        isBody: true
+                        isBody: true,
+                        templates: [
+                            {
+                                name: 'CodeGroup',
+                                label: 'Code Group',
+                                fields: [
+                                    {
+                                        name: 'title',
+                                        label: 'Title',
+                                        type: 'string'
+                                    },
+                                    {
+                                        name: 'children',
+                                        label: 'Code Blocks',
+                                        type: 'rich-text'
+                                    }
+                                ]
+                            },
+                            {
+                                name: 'Banner',
+                                label: 'Banner',
+                                fields: [
+                                    {
+                                        name: 'children',
+                                        label: 'Information',
+                                        type: 'rich-text'
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             },
@@ -119,17 +239,41 @@ export default defineConfig({
                 label: 'Self Hosting',
                 path: 'src/pages/self-hosting',
                 format: 'mdx',
-                defaultItem: () => {
-                    return {
-                        title: 'Self Hosting'
-                    };
-                },
                 fields: [
                     {
                         type: 'rich-text',
                         name: 'body',
                         label: 'Body',
-                        isBody: true
+                        isBody: true,
+                        templates: [
+                            {
+                                name: 'CodeGroup',
+                                label: 'Code Group',
+                                fields: [
+                                    {
+                                        name: 'title',
+                                        label: 'Title',
+                                        type: 'string'
+                                    },
+                                    {
+                                        name: 'children',
+                                        label: 'Code Blocks',
+                                        type: 'rich-text'
+                                    }
+                                ]
+                            },
+                            {
+                                name: 'Banner',
+                                label: 'Banner',
+                                fields: [
+                                    {
+                                        name: 'children',
+                                        label: 'Information',
+                                        type: 'rich-text'
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             },
@@ -138,17 +282,41 @@ export default defineConfig({
                 label: 'Miscellaneous',
                 path: 'src/pages/miscellaneous',
                 format: 'mdx',
-                defaultItem: () => {
-                    return {
-                        title: 'Miscellaneous'
-                    };
-                },
                 fields: [
                     {
                         type: 'rich-text',
                         name: 'body',
                         label: 'Body',
-                        isBody: true
+                        isBody: true,
+                        templates: [
+                            {
+                                name: 'CodeGroup',
+                                label: 'Code Group',
+                                fields: [
+                                    {
+                                        name: 'title',
+                                        label: 'Title',
+                                        type: 'string'
+                                    },
+                                    {
+                                        name: 'children',
+                                        label: 'Code Blocks',
+                                        type: 'rich-text'
+                                    }
+                                ]
+                            },
+                            {
+                                name: 'Banner',
+                                label: 'Banner',
+                                fields: [
+                                    {
+                                        name: 'children',
+                                        label: 'Information',
+                                        type: 'rich-text'
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             }

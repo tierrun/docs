@@ -11,7 +11,7 @@ export function Layout({children}) {
             <motion.header
                 layoutScroll
                 className="fixed inset-0 z-40 flex pointer-events-none">
-                <div className="block px-6 pt-4 pb-8 overflow-y-auto border-r pointer-events-auto w-72 border-slate-100/10">
+                <div className="pointer-events-auto block w-72 overflow-y-auto border-r border-slate-100/10 px-6 pt-4 pb-8 scrollbar:!h-2 scrollbar:!w-2  scrollbar:bg-transparent scrollbar-track:!rounded scrollbar-track:!bg-slate-500/[0.16] scrollbar-thumb:!rounded scrollbar-thumb:!bg-slate-500/50 ">
                     <div className="fixed z-50 flex w-64 px-6 py-4 -mx-6 -my-4 backdrop-blur-lg">
                         <Link href="/" aria-label="Home">
                             <p className="h-6">Logo</p>

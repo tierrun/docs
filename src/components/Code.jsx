@@ -104,7 +104,7 @@ function CodePanel({label, code, children}) {
         <div className="group">
             <CodePanelHeader label={child.props.label ?? label} />
             <div className="relative">
-                <pre className="p-4 overflow-x-auto font-mono text-caption text-slate-100">
+                <pre className="overflow-x-auto p-4 font-mono text-caption text-slate-100 scrollbar:!h-2 scrollbar:!w-2  scrollbar:bg-transparent scrollbar-track:!rounded scrollbar-track:!bg-slate-500/[0.16] scrollbar-thumb:!rounded scrollbar-thumb:!bg-slate-500/50 ">
                     {children}
                 </pre>
                 <CopyButton code={child.props.code ?? code} />

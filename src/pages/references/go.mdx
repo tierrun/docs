@@ -32,6 +32,14 @@ const boostedQuery = boostedConn.query("SELECT COUNT(id) FROM big_table WHERE se
 const user = conn.query("SELECT id, username, email FROM users WHERE id = 1006”)
 ```
 
+```js
+// query run through connection with caching enabled
+const boostedQuery = boostedConn.query("SELECT COUNT(id) FROM big_table WHERE season = 'fall';")
+
+// regular connection
+const user = conn.query("SELECT id, username, email FROM users WHERE id = 1006”)
+```
+
 ---
 
 ### Installation
