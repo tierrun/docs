@@ -29,10 +29,12 @@
     // Override spellings in workspace
     "cSpell.words": [
         "clsx",
+        "Grandparenting",
         "headlessui",
         "infisical",
         "mdast",
         "nextjs",
+        "Quickstarts",
         "recma",
         "rehype",
         "shiki",
