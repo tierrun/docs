@@ -17,7 +17,7 @@ export function Quickstarts() {
                 <p className="uppercase text-caption">Frameworks</p>
                 <div className="flex gap-3">
                     <Link
-                        href="/references/next-js"
+                        href="/getting-started/nextjs"
                         className="flex items-center gap-2 py-2 pl-2 pr-4 rounded-lg hover:bg-slate-800">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
@@ -28,7 +28,7 @@ export function Quickstarts() {
                         <p className="text-base">NextJS</p>
                     </Link>
                     <Link
-                        href="/references/node"
+                        href="/getting-started/node"
                         className="flex items-center gap-2 py-2 pl-2 pr-4 rounded-lg hover:bg-slate-800">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
@@ -39,7 +39,7 @@ export function Quickstarts() {
                         <p className="text-base">Node</p>
                     </Link>
                     <Link
-                        href="/references/go"
+                        href="/getting-started/go"
                         className="flex items-center gap-2 py-2 pl-2 pr-4 rounded-lg hover:bg-slate-800">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
@@ -50,7 +50,7 @@ export function Quickstarts() {
                         <p className="text-base">Go</p>
                     </Link>
                     <Link
-                        href="/references/elixir"
+                        href="/getting-started/elixir"
                         className="flex items-center gap-2 py-2 pl-2 pr-4 rounded-lg hover:bg-slate-800">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
