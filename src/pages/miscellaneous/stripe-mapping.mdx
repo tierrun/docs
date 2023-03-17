@@ -1,3 +1,13 @@
-# Stripe Mapping
+# Mapping to Stripe
 
-and this is something
+This document explains what specifically is created in Stripe based on various pricing.json options.
+
+## Quick Summary
+
+| Tier pricing.json field | Stripe Field or Object  |
+| ----------------------- | ----------------------- |
+| `plan` and `feature`    | `Product` and `Price`   |
+| `feature.base`          | flat-rate usage `Price` |
+| `feature.tiers`         | metered usage `Price`   |
+| `feature.interval`      | `Price.interval`        |
+|                         |                         |
