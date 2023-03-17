@@ -49,7 +49,7 @@ export default defineConfig({
                             },
                             {
                                 name: 'Banner',
-                                label: 'Banner',
+                                label: 'Banner Component',
                                 fields: [
                                     {
                                         name: 'children',
