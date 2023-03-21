@@ -101,7 +101,6 @@ export const navigation = [
                 title: 'Contribution',
                 href: '/self-hosting/contribution'
             },
-            {title: 'Node', href: '/self-hosting/node'},
             {
                 title: 'Docker',
                 href: '/self-hosting/docker'

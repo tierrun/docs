@@ -4,10 +4,130 @@ This document explains what specifically is created in Stripe based on various p
 
 ## Quick Summary
 
-| Tier pricing.json field | Stripe Field or Object  |
-| ----------------------- | ----------------------- |
-| `plan` and `feature`    | `Product` and `Price`   |
-| `feature.base`          | flat-rate usage `Price` |
-| `feature.tiers`         | metered usage `Price`   |
-| `feature.interval`      | `Price.interval`        |
-|                         |                         |
+| Tier pricing.json field | Stripe Field or Object                                    |
+| ----------------------- | --------------------------------------------------------- |
+| `plan` and `feature`    | `Product` and `Price`                                     |
+| `feature.base`          | flat-rate usage `Price`                                   |
+| `feature.tiers`         | metered usage `Price`                                     |
+| `feature.interval`      | `Price.interval`                                          |
+| `feature.aggregate`     | `Price.aggregate_usage`, also known as "Aggregation mode" |
+| `tier.upto`             | `upto` value on `Price` tier                              |
+| `tier.price`            | per-unit cost for `Price` tier                            |
+| `tier.base`             | flat-rate cost for `Price` tier |
+
+Note: nothing is created in Stripe until `tier push` is run. Also, everything Tier does is in test mode until `tier push --live` is run, which requires an additional permission step, so this is all very safe to play around with.
+
+## Plans and Features -> Products and Prices
+
+Each `plan` in the `pricing.json` file will be used to create a subscription in Stripe. To facilitate this, each unique combination of `plan` and `feature` results in a `Product` and `Price` being created in Stripe.
+
+Tier handles all of the details of creating these objects appropriately, so that they match the intent expressed in your `pricing.json` model.
+
+For example, consider this `pricing.json` file:
+
+```json
+{
+  "plans": {
+    "plan:name@title0": {
+      "title": "This is a plan with a title",
+      "features": {
+        "feature:empty": {
+          "title": "feature title goes here"
+        }
+      }
+    }
+  }
+}
+```
+
+This will create a single `Product` in Stripe with a single `Price` attached.
+
+![](/images/mapping-to-stripe/empty-plan-with-title.webp)
+
+Additional metadata is attached to each Product and Price for Tier's usage later.
+
+## Usage Pricing vs Flat Rate
+
+When a feature has a `"base"` price, and no `"tiers"`, then Tier will create the Price in Stripe as a flat rate, rather than usage-based.
+
+For example, this feature in `pricing.json` will produce the following Product and Price in Stripe:
+
+```json
+{
+  "plans": {
+    "plan:example@1": {
+      "title": "Just an example plan to show off features",
+      "features": {
+        "feature:base:only": {
+          "base": 1000
+        }
+      }
+    }
+  }
+}
+```
+
+![](/images/mapping-to-stripe/usage.webp)
+
+However, if `"tiers"` are defined, then Tier will create the appropriate Product and Price in Stripe to reflect this. For example:
+
+```json
+{
+  "plans": {
+    "plan:example@1": {
+      "title": "Just an example plan to show off features",
+      "features": {
+        "feature:graduated": {
+          "tiers": [
+            {
+              "upto": 10
+            },
+            {
+              "upto": 20,
+              "price": 100
+            },
+            {
+              "price": 50
+            }
+          ],
+          "mode": "graduated"
+        }
+      }
+    }
+  }
+}
+```
+
+![](/images/mapping-to-stripe/2.webp)
+
+![](/images/mapping-to-stripe/3.webp)
+
+## Feature Limits and Overages
+
+In Stripe, every tier-based price must include a final tier with an `"upto"` value of `Infinity`. However, Tier allows you to set a maximum amount of usage in a `pricing.json` file.
+
+In order to store this in Stripe's system, Tier creates the Price using the last feature tier as unbounded, and sets the `tier.limit` metadata.
+
+```json
+{
+  "plans": {
+    "plan:example@1": {
+      "title": "Just an example plan to show off features",
+      "interval": "@daily",
+      "features": {
+        "feature:daily": {
+          "tiers": [
+            {
+              "base": 1,
+              "upto": 10
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+![](/images/mapping-to-stripe/4.webp)
+
+Note the highlighted sections above. From Stripe's point of view, the feature is effectively free for any amount of usage (after a base price of $0.01). But, the `tier.limit` metadata tells us that we should only allow the user to consume 10 units before considering their account to be in an overage state.
