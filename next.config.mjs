@@ -14,6 +14,41 @@ const withMDX = nextMDX({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    async redirects() {
+        return [
+            {
+                source: '/self-hosting/docker',
+                destination: 'https://hub.docker.com/u/tierrun',
+                permanent: false
+            },
+            {
+                source: '/self-hosting/fly-io',
+                destination: 'https://github.com/gordalina/fly-tier',
+                permanent: false
+            },
+            {
+                source: '/self-hosting/heroku',
+                destination: 'https://github.com/tierrun/tier-run-buildpack',
+                permanent: false
+            },
+
+            {
+                source: '/references/node',
+                destination: 'https://www.npmjs.com/package/tier',
+                permanent: false
+            },
+            {
+                source: '/references/go',
+                destination: 'https://pkg.go.dev/tier.run/client/tier',
+                permanent: false
+            },
+            {
+                source: '/references/elixir',
+                destination: 'https://github.com/gordalina/ex_tier/',
+                permanent: false
+            }
+        ];
+    },
     reactStrictMode: true,
     pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
     experimental: {
