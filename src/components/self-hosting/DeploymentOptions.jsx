@@ -1,19 +1,19 @@
 import Link from 'next/link';
 const concepts = [
     {
-        href: '/self-deployment/docker',
+        href: '/self-hosting/docker',
         name: 'Docker',
         description: 'lorem Ipsum',
         icon: '/logos/docker.svg'
     },
     {
-        href: '/self-deployment/fly-io',
+        href: '/self-hosting/fly-io',
         name: 'Fly.io',
         description: 'lorem Ipsum',
         icon: '/logos/flyio.svg'
     },
     {
-        href: '/self-deployment/heroku',
+        href: '/self-hosting/heroku',
         name: 'Heroku',
         description: 'lorem Ipsum',
         icon: '/logos/heroku.svg'

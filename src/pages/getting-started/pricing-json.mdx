@@ -1,0 +1,290 @@
+# Pricing JSON
+
+Pricing models are expressed as a single JSON object.
+
+This document describes the structure of a `pricing.json` file, and the behavior that each option implies. It is intended to be a comprehensive reference.
+
+If you're getting started, or just want to see some examples, please check out the  to see examples of `pricing.json` files reflecting common SaaS pricing models or visit the  to create a pricing model.
+
+## JSON Schema
+
+A JSON schema for `pricing.json` can be found at [Pricing Schema](/pricing-json-schema).
+
+## Plans
+
+The root object in a `pricing.json` contains a `plans` object.
+
+Each key in the `plans` object is a versioned plan name starting with `plan:`. The values are `plan` definitions.
+
+For example:
+
+```json
+{
+  "plans": {
+    "plan:basic@0": {
+      "title": "Just a basic plan",
+      "features": {
+        "feature:foo": {
+          "tiers": []
+        }
+      }
+    }
+  }
+}
+```
+
+Note that we must put at least one `feature` in the plan, or else tier will not accept it.
+Once pushed, a plan may not be modified or deleted. A new version of the plan may be added, however:
+
+```json
+{
+  "plans": {
+    "plan:basic@0": {
+      "title": "Just a basic plan",
+      "features": {
+        "feature:message": {}
+      }
+    },
+    "plan:basic@1": {
+      "title": "A new version of the plan"
+      "features": {
+        "feature:message": {}
+      }
+    }
+  }
+}
+```
+
+## Plan Objects
+
+Each of the values in the `plans` collection are `plan` objects.
+
+### `title`
+
+A `plan` may contain a `title` field, which must be a string if provided. This serves as a human-readable description of the plan for invoices and other content. If no `title` is provided, then the plan ID is used instead.
+
+### `interval`
+
+This is a string specifying the billing interval for the feature. It must be one of the following values:
+
+- `"@daily"` - feature bills each day
+- `"@monthly"` - (default) feature bills each month
+- `"@yearly"` - The feature bills each year
+- `"@quarterly"` - The feature bills each quarter
+
+### `currency`
+
+This is a string specifying the currency that features are priced in. Default is `"usd"`.
+
+### `features`
+
+The `features` field is an object containing all of the features enabled by this plan. The keys in the `features` field are feature names starting with `feature:`. The values are `feature` objects.
+
+```json
+{
+  "plans": {
+    "plan:basic@2": {
+      "title": "Now with features!",
+      "features": {
+        "feature:message": {
+          "tiers": [{ "upto": 10, "price": 0 }]
+        }
+      }
+    }
+  }
+}
+```
+
+## Feature Objects
+
+A feature object describes the pricing of a feature within the context of a plan.
+
+A  `feature` object may contain the following fields:
+
+### `title`
+
+A `feature` may contain a `title` field, which must be a string if provided. This serves as a human-readable description of the feature for invoices and other content.
+
+### `mode`
+
+This is a string specifying how to determine a bill for a feature using `"tiers"`.
+
+- `"graduated"` - (default) price is set for each unit of usage according to the tier in which that usage occurs.
+- `"volume"` - price is set for all units based on the total usage.
+
+For example:
+
+```json
+{
+  "plans": {
+    "plan:mode-example@123": {
+      "feature:volume": {
+        "mode": "volume",
+        "tiers": [
+          { "upto": 10, "price": 2 },
+          { "price": 1 }
+        ],
+      },
+      "feature:graduated": {
+        "mode": "graduated",
+        "tiers": [
+          { "upto": 10, "price": 2 },
+          { "price": 1 }
+        ],
+      }
+    }
+  }
+}
+```
+
+If a customer on this plan consumed 10 units of either the `feature:graduated` or `feature:volume` feature, the price would be the same, because all usage falls within the first tier.
+
+However, if the customer consumed 15 units of both, then the price for `feature:graduated` would be:
+
+```bash
+v--- first tier usage and price
+(10 * 2) + (5 * 1) = 25  <-- total
+           ^--- second tier usage and price
+```
+
+However, their price for 15 units of the `feature:volume` feature would be:
+
+```bash
+v--- total usage
+15 * 1 = 15  <-- total
+     ^-- price of final tier reached
+```
+
+### `aggregate`
+
+This string specifies the function used to determine the usage multiplier for calculating the total price at billing time. It may only be set on features that include `tiers`.
+
+This maps directly to Stripe's [`aggregate_usage`](https://stripe.com/docs/products-prices/pricing-models#aggregate-metered-usage) field.
+
+- `sum` - (Default) Multiply total usage by the sum of all values reported during the period
+- `max` - Multiply total usage by the largest value reported during the period
+- `last` - Multiply total usage by the last value seen during the current period. If no usage was reported during the period, then `0` is used.
+- `perpetual` - Multiply total usage by the last value seen, across all periods.
+
+### ``divide.by`, `divide.rounding``
+
+The `divide.by` and `divide.rounding` fields specify a transformation to apply to metered + per-unit priced features (e.g. one tier with a base price of `0`). The transformation is applied to the reported quantity before multiplying by the price when calculating the amount owed.
+
+Valid  `divide.by` values are any positive integer.
+
+Valid `divide.rounding` values are `"up"` and `"down"`. The default is `"down"`.
+
+Example using `divide.by` for reporting bytes, but charge `$1.00per KB`, per period, rounding up to the nearest KB.
+
+```json
+{
+  "plans": {
+    "plan:free@0": {
+      "features": {
+        "feature:storage": {
+          "divide": {
+            "by": 1024,
+            "rounding": "up"
+          },
+          "tiers": [
+            {
+              "price": 100
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+### `base`
+
+The `base` field is a positive integer specifying the base price for features without tiers. It is an error to specify both the `base` field and tiers.
+
+### `tiers`
+
+An optional array of `tier` objects to specify usage-based price tiers. If the feature has a top-level `base` field, then this is not allowed.
+
+```json
+{
+  "plans": {
+    "plan:basic@3": {
+      "title": "Now with *enabled* features!",
+      "features": {
+        "feature:message": {
+          "tiers": [ { "price": 1 } ]
+        }
+      }
+    }
+  }
+}
+```
+
+An empty `tiers` array means that users on this plan are not entitled to any feature usage.
+
+## Tier Objects
+
+Each tier may include the following fields:
+
+### `upto`
+
+This is a positive integer specifying the maximum usage amount for this tier.
+
+If not specified, the default is an unbounded tier (that is, infinite).
+
+### `price`
+
+This is an integer specifying the per-unit price for any usage that occurs within this tier.
+
+If not specified, the default is `0`.
+
+### `base`
+
+This is an integer specifying flat price for any usage that occurs within this tier.
+
+If not specified, the default is `0`.
+
+## Example
+
+```json
+{
+  "plans": {
+    "plan:free@0": {
+      "title": "Todo (Free)",
+      "features": {
+        "feature:todo:lists": {
+          "tiers": [
+            {
+              "upto": 5
+            }
+          ]
+        }
+      }
+    },
+    "plan:pro@0": {
+      "title": "Todo (Pro)",
+      "features": {
+        "feature:support:email": {
+          "base": 9900
+        },
+        "feature:todo:lists": {
+          "tiers": [
+            {
+              "upto": 100
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+## Why Each Plan Must Have At Least One Feature
+
+Due to the way that Stripe defines Products and Prices, and the fact that Tier endeavors to make everything as safely immutable as possible, every plan in your `pricing.json` must have at least one feature defined.
+
+Without this restriction, it would be significantly more expensive to fetch your pricing model from Stripe's data.
+
+We aren't aware of any use cases where you'd want to have customers subscribed to plans that don't grant them access to any features (since that would be equivalent to not being subscribed to any plan at all!), but if you need this for your application, definitely [let us know](https://github.com/tierrun/tier/issues/new/choose)!

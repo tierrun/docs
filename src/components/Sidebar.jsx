@@ -92,6 +92,10 @@ export const navigation = [
         main: {title: 'References', href: '/references'},
         links: [
             {
+                title: 'Overview',
+                href: '/references'
+            },
+            {
                 title: 'Tier CLI',
                 href: '/references/tier-cli'
             },

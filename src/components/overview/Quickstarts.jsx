@@ -341,17 +341,30 @@ export function Quickstarts() {
                 </p>
                 <div className="flex items-center gap-4 not-prose">
                     <div className="pr-3 border-r border-slate-800">
-                        <Link
-                            href="/fullstack-framework-tutorials/flat-rate"
-                            className="flex items-center gap-2 py-2 pl-2 pr-4 rounded-lg hover:bg-slate-800">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                                src="/logos/nextjs.svg"
-                                className="w-6 h-6"
-                                alt="Elixir"
-                            />
-                            <p className="text-base">NextJS</p>
-                        </Link>
+                        <div className="flex gap-3">
+                            <Link
+                                href="/fullstack-framework-tutorials/flat-rate"
+                                className="flex items-center gap-2 py-2 pl-2 pr-4 rounded-lg hover:bg-slate-800">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                    src="/logos/nextjs.svg"
+                                    className="w-6 h-6"
+                                    alt="NextJS"
+                                />
+                                <p className="text-base">NextJS</p>
+                            </Link>
+                            <Link
+                                href="/fullstack-framework-tutorials/flat-rate"
+                                className="flex items-center gap-2 py-2 pl-2 pr-4 rounded-lg hover:bg-slate-800">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                    src="/logos/svelte.svg"
+                                    className="w-6 h-6"
+                                    alt="Svelte"
+                                />
+                                <p className="text-base">SvelteKit</p>
+                            </Link>
+                        </div>
                     </div>
                     <div className="flex gap-3">
                         <Link
@@ -361,7 +374,7 @@ export function Quickstarts() {
                             <img
                                 src="/logos/node.svg"
                                 className="w-6 h-6"
-                                alt="Elixir"
+                                alt="Node"
                             />
                             <p className="text-base">Node</p>
                         </Link>
@@ -372,7 +385,7 @@ export function Quickstarts() {
                             <img
                                 src="/logos/go.svg"
                                 className="w-6 h-6"
-                                alt="Elixir"
+                                alt="Go"
                             />
                             <p className="text-base">Go</p>
                         </Link>

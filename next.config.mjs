@@ -46,6 +46,12 @@ const nextConfig = {
                 source: '/references/elixir',
                 destination: 'https://github.com/gordalina/ex_tier/',
                 permanent: false
+            },
+            {
+                source: '/pricing-json-schema',
+                destination:
+                    'https://raw.githubusercontent.com/tierrun/tier/main/pricing/schema.json',
+                permanent: false
             }
         ];
     },
