@@ -15,11 +15,11 @@ const languageNames = {
     ts: 'TypeScript',
     javascript: 'JavaScript',
     typescript: 'TypeScript',
-    php: 'PHP',
-    python: 'Python',
-    ruby: 'Ruby',
     go: 'Go',
-    elixir: 'Elixir'
+    elixir: 'Elixir',
+    svelte: 'Svelte',
+    jsx: 'React',
+    vue: 'VueJS'
 };
 
 function getPanelTitle({title, language}) {

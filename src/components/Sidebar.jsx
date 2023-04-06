@@ -2,74 +2,90 @@ import Link from 'next/link';
 
 export const highLevelNav = [
     {title: 'Documentation', href: '/', external: false},
-    {title: 'Examples', href: '/examples', external: false},
+    {title: 'Examples & recipes', href: '/examples', external: false},
     {
-        title: 'Stripe Glossary',
-        href: 'https://stripe-glossary.tier.run',
-        external: true
+        title: 'Components',
+        href: '/components',
+        external: false
     },
-    {title: 'PriceOps', href: 'https://pricingops.com', external: true},
-    {title: 'Community', href: 'https://tier.slack.com', external: true}
+    {title: 'SDKs', href: '/sdk', external: false}
 ];
 
 export const navigation = [
     {
-        main: {title: 'Overview', href: '/'}
-    },
-    {
-        main: {title: 'Getting Started', href: '/getting-started'},
+        main: {title: 'Getting started', href: '/'},
         links: [
-            {title: 'Pricing recipe', href: '/getting-started/recipe'},
-            {title: 'Next.js', href: '/getting-started/nextjs'},
-            {title: 'Node', href: '/getting-started/node'},
-            {title: 'Go', href: '/getting-started/go'},
-            {title: 'Elixir', href: '/getting-started/elixir'}
+            {title: 'Overview', href: '/'},
+            {title: 'What is Tier?', href: '/getting-started/what-is-tier'},
+            {title: 'Tier Cloud', href: '/getting-started/tier-cloud'}
         ]
     },
     {
-        main: {title: 'Tier Concepts', href: '/tier-concepts'},
-        links: [
-            {title: 'What is Tier?', href: '/tier-concepts/what-is-tier'},
-            {title: 'Features', href: '/tier-concepts/features'},
-            {title: 'Architecture', href: '/tier-concepts/architecture'},
-            {title: 'Pricing model', href: '/tier-concepts/pricing-model'}
-        ]
-    },
-    {
-        main: {title: 'Tutorials', href: '/tutorials'},
+        main: {title: 'Quickstarts', href: '/quickstarts'},
         links: [
             {
-                title: 'Flat monthly pricing?',
-                href: '/tutorials/flat-monthly-pricing'
-            },
-            {title: 'Per seat pricing', href: '/tutorials/per-seat-pricing'},
-            {
-                title: 'Per seat & tiered pricing',
-                href: '/tutorials/per-seat-tiered-pricing'
+                title: 'Create & sync a pricing model',
+                href: '/quickstarts/create-pricing-model'
             },
             {
-                title: 'Mixed interval pricing',
-                href: '/tutorials/mixed-interval-pricing'
-            },
-            {title: 'Spike pricing', href: '/tutorials/spike-pricing'}
-        ]
-    },
-    {
-        main: {title: 'Tier Cloud', href: '/tier-cloud'},
-        links: [
-            {
-                title: 'Versioning',
-                href: '/tier-cloud/versioning'
-            },
-            {title: 'Hidden features', href: '/tier-cloud/hidden-features'},
-            {
-                title: 'Journey',
-                href: '/tier-cloud/journey'
+                title: 'Register a customer',
+                href: '/quickstarts/register-customer'
             },
             {
-                title: 'Pricing A/B Test',
-                href: '/tier-cloud/a-b-testing'
+                title: 'Check for feature access',
+                href: '/quickstarts/check-feature-access'
+            },
+            {
+                title: 'Render a pricing table',
+                href: '/quickstarts/render-pricing-table'
+            },
+            {
+                title: 'Initiate subscription',
+                href: '/quickstarts/initiate-subscription'
+            },
+            {
+                title: 'Report feature usage',
+                href: '/quickstarts/report-feature-usage'
+            },
+            {
+                title: 'Create customer portal',
+                href: '/quickstarts/create-customer-portal'
             }
+        ]
+    },
+    {
+        main: {
+            title: 'Fullstack framework tutorial',
+            href: '/fullstack-framework-tutorials'
+        },
+        links: [
+            {title: 'Overview', href: '/fullstack-framework-tutorials'},
+            {
+                title: 'Flat rate',
+                href: '/fullstack-framework-tutorials/flat-rate'
+            }
+        ]
+    },
+    {
+        main: {title: 'Features', href: '/features'},
+        links: [
+            {
+                title: 'Model builder',
+                href: '/features/model-builder'
+            },
+            {
+                title: 'Subscription & billing',
+                href: '/features/subscription-billing'
+            },
+            {
+                title: 'Grandparenting',
+                href: '/features/grandparenting'
+            },
+            {
+                title: 'Entitlements & access',
+                href: '/features/entitlements-access'
+            },
+            {title: 'Metering', href: '/features/metering'}
         ]
     },
     {
@@ -94,12 +110,8 @@ export const navigation = [
         main: {title: 'Self Hosting', href: '/self-hosting'},
         links: [
             {
-                title: 'Comparison',
-                href: '/self-hosting/comparison'
-            },
-            {
-                title: 'Contribution',
-                href: '/self-hosting/contribution'
+                title: 'Overview',
+                href: '/self-hosting'
             },
             {
                 title: 'Docker',
@@ -113,24 +125,6 @@ export const navigation = [
                 title: 'Heroku',
                 href: '/self-hosting/heroku'
             }
-        ]
-    }
-];
-
-export const miscellaneous = [
-    {
-        main: {title: 'Miscellaneous'},
-        links: [
-            {title: 'Stripe mapping', href: '/miscellaneous/stripe-mapping'},
-            {title: 'Troubleshooting', href: '/miscellaneous/troubleshooting'},
-            {title: 'Tier Glossary', href: '/miscellaneous/tier-glossary'}
-        ]
-    },
-    {
-        main: {title: 'Updates'},
-        links: [
-            {title: 'System status', href: '/system-status'},
-            {title: 'Changelog', href: '/changelog'}
         ]
     }
 ];
@@ -155,27 +149,6 @@ export function Sidebar() {
                     <h2 className="text-sm font-semibold">
                         <Link href={item.main.href}>{item.main.title}</Link>
                     </h2>
-                    <div className="relative pl-2 mt-3">
-                        <ul className="border-l">
-                            {item.links?.map((sublink, sublinkIndex) => (
-                                <li className="relative" key={sublinkIndex}>
-                                    <Link
-                                        href={sublink.href}
-                                        className="flex justify-between gap-2 py-1 pl-4 pr-3 text-sm text-white">
-                                        {sublink.title}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
-            ))}
-            <div className="h-8 mb-8 border-b border-dashed border-white/10"></div>
-
-            {/* Miscellaneous Navigation */}
-            {miscellaneous.map((item, itemIndex) => (
-                <div className="relative mt-2" key={itemIndex}>
-                    <h2 className="text-sm font-semibold">{item.main.title}</h2>
                     <div className="relative pl-2 mt-3">
                         <ul className="border-l">
                             {item.links?.map((sublink, sublinkIndex) => (

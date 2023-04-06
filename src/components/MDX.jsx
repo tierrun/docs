@@ -7,7 +7,6 @@ export {Button} from '@/components/Button';
 export {NewToTier} from '@/components/overview/NewToTier';
 export {Quickstarts} from '@/components/overview/Quickstarts';
 export {ExploreTier} from '@/components/overview/ExploreTier';
-export {ExploreFeatures} from '@/components/overview/ExploreFeatures';
 export {ExploreReferences} from '@/components/overview/ExploreReferences';
 export {MainFooter} from '@/components/overview/MainFooter';
 

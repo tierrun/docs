@@ -1,0 +1,130 @@
+# Render a pricing table
+
+Learn how to create a pricing table for your marketing page and also for use within your application for upselling plans to your customers.
+
+### Before getting started
+
+To get the most out of this quick-start guide, you’ll need:
+
+1. Stripe secret key
+2. Select your pricing model & sync with Stripe
+3. Basic auth implementation with auth guards
+4. [Registered customer](/quickstarts/register-customer)
+5. [Entitlement checks enabled](/quickstarts/check-feature-access)
+
+<Banner>
+Do note that you will never have to sync any Tier or pricing-specific details to your DB, Tier will ensure that you get the most updated pricing and usage data, except user data.
+
+</Banner>
+
+### SDK Object definition
+
+|  |  |
+| --- | --- |
+| [Model](https://tierrun.github.io/node-sdk/interfaces/types.Model.html) | This object will be returned by both `pull()` and `pullltest()` methods to help the user get access to all the plans & features created in the Model Builder, |
+| [Plan](https://tierrun.github.io/node-sdk/interfaces/types.Plan.html) | This object will show details about the plan like, title, currency, interval, and features. |
+| [FeatureDefinition](https://tierrun.github.io/node-sdk/interfaces/types.FeatureDefinition.html) | Shows information about a feature’s title, base, tiers etc. |
+|  |  |
+
+## 1. Initialize Tier SDK
+
+Initialize the Tier SDK, ideally in a singleton design pattern, with both `TIER_BASE_URL` and `TIER_API_KEY` environment variables set with the prescribed values.
+
+```js
+// To make use of Tier Cloud Alpha you need to
+// points base URL to the Tier API server
+TIER_BASE_URL="https://api.tier.run"
+// and set Tier API Key as your Stripe secret key
+TIER_API_KEY="sk_test_51..."
+```
+
+<CodeGroup title="Initialize Tier">
+
+```js
+import tier from 'tier';
+```
+</CodeGroup>
+
+### 2. Retrieve all the plans & features
+
+Tier allows you to retrieve plans and feature details using two methods
+
+**1. Retrieve every version of the plans using `pull()`**
+
+You should know which version of the plans you want to render. Filter the intended plans from the result, to always render the correct pricing irrespective of any changes in the model builder.
+
+<CodeGroup title="Retrieve all plans">
+
+```js
+const freePlan = "plan:free@3";
+
+const pricingModel = await tier.pull();
+const planA = pricingModel.plans[freePlan];
+```
+
+</CodeGroup>
+
+**2. Retrieve only the latest version of the plans using `pullLatest()` (experimental)**
+
+Tier provides an experimental `pullLatest()` method that only shows plans with the highest version number. This is extremely useful when you are prototyping your pricing model and also your pricing page, but we will not suggest you use this in production.
+
+You need to retrieve all the plan and feature details about your pricing from Tier using pullLatest
+
+<CodeGroup title="Retrieve all latest plans">
+
+```js
+const pricingModel = await tier.pullLatest();
+```
+
+</CodeGroup>
+
+<Banner>
+Do not use this in production
+
+</Banner>
+
+Once you have retrieved the plan details, you should send these to the front end to render the pricing table.
+
+### 3. Render a pricing table in the frontend
+
+Once you get the plan data to the frontend and you can easily populate a fully-fledged pricing page. Make sure that you set the `planId` for the subscribe button. This ID needs to be passed to the backend where you can call `tier.checkout()` to initiate a subscription for the pricing page.
+
+You can try out a sample pricing page in Svelte using the following code, since we only have a single feature, we can hardcode that and use `planId` from the backend.
+
+<CodeGroup title="Render pricing table">
+
+```svelte
+<section class="flex flex-col items-center w-full gap-6">
+	<h1 class="text-lg font-semibold text-slate-800">Pricing</h1>
+	<div class="flex gap-6">
+		{#each Object.entries(data.plans) as [planId, plan]}
+			<article
+				id={planId}
+				class="flex flex-col gap-2 p-6 border border-dashed rounded-lg border-slate-300"
+			>
+				<h2>{plan.title}</h2>
+				<p>
+					{(plan.features['feature:access'].base / 100).toLocaleString('en', {
+						style: 'currency',
+						currency: 'usd'
+					})}
+				</p>
+
+				<button
+					on:click|preventDefault={() => choose(`feature:access@${planId}`)}
+					class="px-6 py-1 text-base bg-green-500 rounded-md text-green-50">Choose</button
+				>
+			</article>
+		{/each}
+	</div>
+</section>
+```
+
+</CodeGroup>
+
+This quickstart will give you an idea of how to retrieve plans to render pricing table for your customers. You can also refer to our SDK references to understand more about `pull()`, and `pullLatest()`.
+
+<Banner>
+Check our SDK references for more details on these topics.
+
+</Banner>
