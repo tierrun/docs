@@ -17,8 +17,8 @@ const languageNames = {
     typescript: 'TypeScript',
     go: 'Go',
     elixir: 'Elixir',
-    svelte: 'Svelte',
-    jsx: 'React',
+    svelte: 'SvelteKit',
+    jsx: 'NextJS',
     vue: 'VueJS'
 };
 
