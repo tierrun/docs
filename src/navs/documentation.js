@@ -106,12 +106,4 @@ export const navigation = [
       },
     ],
   },
-  {
-    title: 'Guides',
-    links: [
-      { title: 'Introduction', href: '/docs/examples' },
-      { title: 'Quickstart', href: '/docs/examples/quickstart' },
-      { title: 'Messages', href: '/docs/examples/messages' },
-    ],
-  },
 ]
