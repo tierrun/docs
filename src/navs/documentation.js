@@ -78,7 +78,7 @@ export const navigation = [
         title: 'Tier CLI',
         href: '/docs/references/tier-cli',
       },
-      { title: 'Node', href: '/references/node' },
+      { title: 'Node', href: '/docs/references/node' },
       {
         title: 'Go',
         href: '/docs/references/go',
