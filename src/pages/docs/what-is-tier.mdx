@@ -1,0 +1,46 @@
+# What is Tier?
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/aSiX8sv0--4"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
+
+Tier will:
+
+- Give you an opinionated way to implement pricing
+- Limit the number of systems and data you have to deal with
+- Work within your existing architecture/app
+- Keep you from having to do anything custom or one-off
+- Provide a single place to handle anything related to pricing, billing, subscriptions, entitlements, metering, etc.
+
+Tier implements [PriceOps best practices](https://priceops.org/) for you.
+
+## How Tier is designed
+
+We've structured Tier as a service you can run yourself (or have us run for you). It is made up of 3 components:
+
+1. The Tier CLI. The CLI performs several tasks such as:
+
+   - Processing your pricing.json file and applying the changes to Stripe
+   - Acting as a metering service
+   - Providing responses for entitlement and access checks from the SDK
+
+2. Tier SDK. Our SDKs are what you implement in your own codebase. The SDK will talk to the Tier service to do things such as
+
+   - Record or update usage data
+   - Check entitlements as provide an on/off response to you
+   - Provide required information and meta data for things such as modals, paywalls, pricing pages, and more
+
+3. Pricing Model, where you store your pricing schmea. This is processed by the Tier CLI and is how you create new plans, modify existing plans to create new versions, or create custom plans for individual customers. Define it in a `pricing.json` file, or via the [Model Builder](https://model.tier.run/).
+
+![Tier Architecture](/images/getting-started/architecture.webp)
+
+## Advanced guides and reference docs:
+
+- [Pricing JSON](/docs/pricing-json) - All about the `pricing.json` format that Tier uses.
+- [Mapping to Stripe](/miscellaneous/stripe-mapping) - How `pricing.json` maps to Stripe's objects.

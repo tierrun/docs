@@ -1,27 +1,53 @@
-import '@/styles/tailwind.css';
-import {DM_Sans} from 'next/font/google';
+import Head from 'next/head'
+import { Router, useRouter } from 'next/router'
+import { MDXProvider } from '@mdx-js/react'
 
-import {MDXProvider} from '@mdx-js/react';
-import * as mdxComponents from '@/components/MDX';
+import { Layout } from '@/layouts/DocumentationLayout.jsx'
+import * as mdxComponents from '@/components/mdx/Components'
+import { useMobileNavigationStore } from '@/components/nav/MobileNav'
 
-import {Layout} from '@/components/Layout';
-import {Header} from '@/components/Header';
-import {Sidebar} from '@/components/Sidebar';
+import { DM_Sans } from 'next/font/google'
+import { Inter } from 'next/font/google'
+import '@/styles/globals.css'
+import 'focus-visible'
 
 const dmSans = DM_Sans({
-    subsets: ['latin'],
-    weight: ['400', '500', '700'],
-    variable: '--font-dmSans'
-});
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-dmSans',
+})
 
-export default function App({Component, pageProps}) {
-    return (
-        <div className={`${dmSans.variable} font-sans text-white antialiased`}>
-            <MDXProvider components={mdxComponents}>
-                <Layout>
-                    <Component {...pageProps} />
-                </Layout>
-            </MDXProvider>
-        </div>
-    );
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+})
+
+function onRouteChange() {
+  useMobileNavigationStore.getState().close()
+}
+
+Router.events.on('routeChangeStart', onRouteChange)
+Router.events.on('hashChangeStart', onRouteChange)
+
+export default function App({ Component, pageProps }) {
+  let router = useRouter()
+  return (
+    <>
+      <Head>
+        {router.pathname === '/' ? (
+          <title>Tier Docs</title>
+        ) : (
+          <title>{`${pageProps.title} - Tier Docs`}</title>
+        )}
+        <meta name="description" content={pageProps.description} />
+      </Head>
+      <div className={`${inter.variable} ${dmSans.variable} font-sans`}>
+        <MDXProvider components={mdxComponents}>
+          <Layout {...pageProps}>
+            <Component {...pageProps} />
+          </Layout>
+        </MDXProvider>
+      </div>
+    </>
+  )
 }

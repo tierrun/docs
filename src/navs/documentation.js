@@ -1,0 +1,117 @@
+export const navigation = [
+  {
+    title: 'Getting started',
+    links: [
+      { title: 'Overview', href: '/docs' },
+      { title: 'What is Tier?', href: '/docs/what-is-tier' },
+      { title: 'Tier Cloud', href: '/docs/tier-cloud' },
+    ],
+  },
+  {
+    title: 'Quickstarts',
+    links: [
+      {
+        title: 'Create & sync a pricing model',
+        href: '/docs/quickstarts/create-pricing-model',
+      },
+      {
+        title: 'Register a customer',
+        href: '/docs/quickstarts/register-customer',
+      },
+      {
+        title: 'Check for feature access',
+        href: '/docs/quickstarts/check-feature-access',
+      },
+      {
+        title: 'Render a pricing table',
+        href: '/docs/quickstarts/render-pricing-table',
+      },
+      {
+        title: 'Initiate subscription',
+        href: '/docs/quickstarts/initiate-subscription',
+      },
+      {
+        title: 'Report feature usage',
+        href: '/docs/quickstarts/report-feature-usage',
+      },
+      {
+        title: 'Create customer portal',
+        href: '/docs/quickstarts/create-customer-portal',
+      },
+    ],
+  },
+  {
+    title: 'Framework tutorial',
+    links: [
+      {
+        title: 'Flat rate',
+        href: '/docs/fullstack-framework-tutorials/flat-rate',
+      },
+    ],
+  },
+  {
+    title: 'Features',
+    links: [
+      {
+        title: 'Model builder',
+        href: '/docs/features/model-builder',
+      },
+      {
+        title: 'Subscription & billing',
+        href: '/docs/features/subscription-billing',
+      },
+      {
+        title: 'Grandparenting',
+        href: '/docs/features/grandparenting',
+      },
+      {
+        title: 'Entitlements & access',
+        href: '/docs/features/entitlements-access',
+      },
+      { title: 'Metering', href: '/docs/features/metering' },
+    ],
+  },
+  {
+    title: 'References',
+    links: [
+      {
+        title: 'Tier CLI',
+        href: '/docs/references/tier-cli',
+      },
+      { title: 'Node', href: '/references/node' },
+      {
+        title: 'Go',
+        href: '/docs/references/go',
+      },
+      {
+        title: 'Elixir',
+        href: '/docs/references/elixir',
+      },
+    ],
+  },
+  {
+    title: 'Self Hosting',
+    links: [
+      {
+        title: 'Docker',
+        href: '/docs/self-hosting/docker',
+      },
+      {
+        title: 'Fly.io',
+        href: '/docs/self-hosting/fly-io',
+      },
+      {
+        title: 'Heroku',
+        href: '/docs/self-hosting/heroku',
+      },
+    ],
+  },
+  {
+    title: 'Guides',
+    links: [
+      { title: 'Introduction', href: '/docs/examples' },
+      { title: 'Quickstart', href: '/docs/examples/quickstart' },
+      { title: 'Messages', href: '/docs/examples/messages' },
+    ],
+  },
+]

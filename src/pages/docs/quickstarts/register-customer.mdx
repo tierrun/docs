@@ -1,0 +1,100 @@
+# Register a customer
+
+Learn how to register a customer in Tier as soon as they are created in your application, either after registration or during onboarding.
+
+### Before getting started
+
+To get the most out of this quick-start guide, you’ll need:
+
+1. Stripe secret key
+2. Select your pricing model & sync with Stripe
+3. Basic auth implementation with auth guards
+
+<Banner>
+You will never have to sync any Tier or pricing-specific details to your DB, Tier will ensure that you get the most updated pricing and usage data, except user data.
+
+</Banner>
+
+<Banner>
+You need to ensure that your customer information in Tier is always updated whenever there is a change that happens in your DB
+
+</Banner>
+
+### SDK Object definition
+
+|                                                                             |                                                                                                                                                                         |
+| --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [OrgInfo](https://tierrun.github.io/node-sdk/interfaces/types.OrgInfo.html) | Stores information about your customer like email, description, name and billing info, it would be ideal if you can update these details before you request a checkout. |
+|                                                                             |                                                                                                                                                                         |
+
+<Banner>
+Do note that we call our “customers” as “organizations”, as it is very relevant in the billing terminology of the SaaS world. You will see the guide interchanging between the reference of a customer and an organization/org.
+
+</Banner>
+
+## 1. Initialize Tier SDK
+
+Initialize the Tier SDK, ideally in a singleton design pattern, with both `TIER_BASE_URL` and `TIER_API_KEY` environment variables set with the prescribed values.
+
+```js
+// To make use of Tier Cloud Alpha you need to
+// points base URL to the Tier API server
+TIER_BASE_URL = 'https://api.tier.run'
+// and set Tier API Key as your Stripe secret key
+TIER_API_KEY = 'sk_test_51...'
+```
+
+<CodeGroup title="Import Tier">
+
+```js
+import tier from 'tier'
+```
+
+</CodeGroup>
+
+## 2. Register a customer
+
+When you encounter a new customer, either after your sign-up or during your onboarding process, you should register the details of your customer in Tier as well.
+
+<CodeGroup title="Register a customer">
+
+```js
+await tier.updateOrg(
+	org: 'org:customer-id-from-your-db', // This is a concatenation of 'org' and your 'customerId' from your DB
+	{
+			// Update the organization/customer information if required,
+			// and provide all details even if you want to change just one field
+			name: 'Customer name', // Optional: update customer name if needed
+			email: 'customer@email.com', // Optional: update customer email if needed
+			phone: '+11 1111 1111', // Optional: update customer email if needed
+			metadata: {
+				any: 'any' // Optional: add any additional details as metadata
+			},
+			description: 'description', // Optional: update customer description if needed
+			invoiceSettings: {
+				defaultPaymentMethod: 'payment-method-id', // Optional: update customer default payment method if needed
+			},
+		},
+);
+```
+
+</CodeGroup>
+
+## 3. Assign a default plan (optional)
+
+If your customer has to be subscribed to a default plan of your pricing model then, you should subscribe them to it right after registering them in Tier.
+
+<CodeGroup title="Assign a default plan">
+
+```js
+await tier.subscribe(
+  `org:customer-id-from-your-db`,
+  `plan:free@1` // ID of the plan you created in the pricing model
+)
+```
+
+</CodeGroup>
+
+This quickstart will give you an idea of how to register your customer in Tier. You can also refer to our SDK references to understand more about `update()` and `subscribe()`.
+
+<Banner>Check our SDK references for more details on these topics.</Banner>
