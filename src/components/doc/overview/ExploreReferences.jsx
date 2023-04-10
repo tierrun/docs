@@ -1,25 +1,25 @@
 import Link from 'next/link'
 const references = [
   {
-    href: '/references/tier-cli',
+    href: '/docs/references/tier-cli',
     name: 'Tier CLI',
     description: 'Command Tier using from your terminal.',
     icon: '/logos/cli.svg',
   },
   {
-    href: '/references/node',
+    href: '/docs/references/node',
     name: 'Node SDK',
     description: 'Use in node, deno and edge workers envs.',
     icon: '/logos/node.svg',
   },
   {
-    href: '/references/go',
+    href: '/docs/references/go',
     name: 'Go SDK',
     description: 'Use the library that we used to build Tier.',
     icon: '/logos/go.svg',
   },
   {
-    href: '/references/elixir',
+    href: '/docs/references/elixir',
     name: 'Elixir SDK',
     description: 'Community contributed & maintained library.',
     icon: '/logos/elixir.svg',
