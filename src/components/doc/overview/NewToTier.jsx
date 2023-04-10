@@ -160,8 +160,7 @@ export function NewToTier() {
         <div className="flex flex-col gap-2">
           <p className="h6">New to Tier?</p>
           <p className="body">
-            Follow this step-by-step guide to quickly get up and running with
-            PlanetScale. You’ll learn the following:
+            Follow this quick guide to get you started with Tier:
           </p>
         </div>
         <ol className="grid grid-cols-2 gap-1 mb-10 ml-5 font-semibold list-decimal ">
