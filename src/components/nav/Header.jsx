@@ -20,7 +20,7 @@ function TopLevelNavItem({ href, children }) {
     <li>
       <Link
         href={href}
-        className="text-sm leading-5 text-l-slate-alpha-11 transition hover:text-l-slate-alpha-12 dark:text-d-slate-alpha-11 dark:hover:text-d-slate-alpha-12"
+        className="text-sm leading-5 transition text-l-slate-alpha-11 hover:text-l-slate-alpha-12 dark:text-d-slate-alpha-11 dark:hover:text-d-slate-alpha-12"
       >
         {children}
       </Link>
@@ -32,6 +32,10 @@ export const Header = forwardRef(function Header({ className }, ref) {
   let { isOpen: mobileNavIsOpen } = useMobileNavigationStore()
   let isInsideMobileNavigation = useIsInsideMobileNavigation()
 
+  let { scrollY } = useScroll()
+  let bgOpacityLight = useTransform(scrollY, [0, 72], [0.5, 0.9])
+  let bgOpacityDark = useTransform(scrollY, [0, 72], [0.2, 0.8])
+
   return (
     <motion.div
       ref={ref}
@@ -41,8 +45,12 @@ export const Header = forwardRef(function Header({ className }, ref) {
         !isInsideMobileNavigation && 'backdrop-blur-sm dark:backdrop-blur',
         isInsideMobileNavigation
           ? 'bg-l-slate-1 dark:bg-d-slate-1'
-          : 'bg-l-slate-alpha-1 dark:bg-d-slate-alpha-1'
+          : 'bg-white/[var(--bg-opacity-light)] dark:bg-zinc-900/[var(--bg-opacity-dark)]'
       )}
+      style={{
+        '--bg-opacity-light': bgOpacityLight,
+        '--bg-opacity-dark': bgOpacityDark,
+      }}
     >
       <div
         className={clsx(
