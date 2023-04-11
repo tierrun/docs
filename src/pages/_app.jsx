@@ -6,21 +6,8 @@ import { Layout } from '@/layouts/DocumentationLayout.jsx'
 import * as mdxComponents from '@/components/mdx/Components'
 import { useMobileNavigationStore } from '@/components/nav/MobileNav'
 
-import { DM_Sans } from 'next/font/google'
-import { Inter } from 'next/font/google'
 import '@/styles/globals.css'
 import 'focus-visible'
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '700'],
-  variable: '--font-dmSans',
-})
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-})
 
 function onRouteChange() {
   useMobileNavigationStore.getState().close()
@@ -41,7 +28,7 @@ export default function App({ Component, pageProps }) {
         )}
         <meta name="description" content={pageProps.description} />
       </Head>
-      <div className={`${inter.variable} ${dmSans.variable} font-sans`}>
+      <div>
         <MDXProvider components={mdxComponents}>
           <Layout {...pageProps}>
             <Component {...pageProps} />
