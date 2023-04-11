@@ -24,8 +24,8 @@ module.exports = {
     typography: require('./typography'),
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)', ...fontFamily.sans],
-        display: ['var(--font-dmSans)', ...fontFamily.sans],
+        sans: ['Inter', ...fontFamily.sans],
+        display: ['DM Sans', ...fontFamily.sans],
       },
       boxShadow: {
         glow: '0 0 4px rgb(0 0 0 / 0.1)',

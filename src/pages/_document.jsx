@@ -39,9 +39,39 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        {/* Preload Gilroy and Inter Fonts */}
+        <link
+          rel="preload"
+          href="/fonts/dmsans/dmsans-latin-400.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/dmsans/dmsans-latin-500.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/dmsans/dmsans-latin-700.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/inter/inter-var-latin.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+
         <script dangerouslySetInnerHTML={{ __html: modeScript }} />
       </Head>
-      <body className="bg-l-slate-1 antialiased dark:bg-d-slate-1">
+      <body className="font-sans antialiased bg-l-slate-1 dark:bg-d-slate-1">
         <Main />
         <NextScript />
       </body>
