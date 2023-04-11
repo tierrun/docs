@@ -1,6 +1,6 @@
 # Tier CLI
 
-```
+```js
 tier [flags] <command> [<arguments>]
 ```
 
@@ -55,7 +55,7 @@ go install tier.run/cmd/tier@latest
 
 ## `tier switch`
 
-```
+```js
 tier switch [-c] [accountID]
 ```
 
@@ -96,7 +96,7 @@ Commands run in isloated mode for an account not accessible by the current API k
 
 ## `tier ls`
 
-```
+```js
 tier ls
 ```
 
@@ -123,7 +123,7 @@ See Mapping to Stripe and Pricing JSON for more information about the various fi
 
 ## `tier report`
 
-```
+```js
 tier [--live] report <org> <feature> <n>
 ```
 
@@ -139,7 +139,7 @@ This will only work if the key minted with `tier connect` is granted `write` acc
 
 ## `tier push`
 
-```
+```js
 tier push [<filename> | -]
 ```
 
@@ -160,7 +160,7 @@ To read pricing.json data from standard input, supply `-` as the filename.
 
 To push live mode data, run:
 
-```
+```js
 tier push --live <filename>
 ```
 
@@ -170,7 +170,7 @@ This will only work if the key minted with `tier connect` is granted `write` acc
 
 ## `tier limits`
 
-```
+```js
 tier [--live] limits <org>
 ```
 
@@ -193,7 +193,7 @@ This will only work if the key minted with `tier connect` is granted `write` acc
 
 ## `tier phases`
 
-```
+```js
 tier [--live] [--verbose] phases <org>
 ```
 
@@ -216,7 +216,7 @@ This will only work if the key minted with `tier connect` is granted `write` acc
 
 ## `tier connect`
 
-```
+```js
 tier connect
 ```
 
@@ -295,7 +295,7 @@ An alternative to using `tier connect` is to set the `STRIPE_API_KEY` environmen
 
 ## `tier serve`
 
-```
+```js
 tier serve [--addr <addr>] [--live]
 ```
 
@@ -305,7 +305,7 @@ The default service address is `localhost:8080`.
 
 To run the service against your live data, run:
 
-```
+```js
 tier serve --live
 ```
 
@@ -315,7 +315,7 @@ This will only work if the key minted with `tier connect` is granted `write` acc
 
 ## `tier subscribe`
 
-```
+```js
 tier [--live] subscribe [--email=[email]] <org> [plan|featurePlan]...
 ```
 
@@ -329,11 +329,13 @@ To subscribe a customer in live mode, use the `--live` flag.
 
 This will only work if the key minted with `tier connect` is granted `write` access to "Billing Resources and Core Resources", or if a suitable `STRIPE_API_KEY` is set in the environment. See the `tier connect` documentation for more information.
 
-```
+```js
 Usage:
 
         tier [--live] subscribe [flags] <org> [plan|featurePlan]...
+```
 
+```
 Tier subscribe creates or updates a subscription for the provided org, applying
 the features in the plan.
 
@@ -363,7 +365,7 @@ Checkout only flags:
 
 ## `tier clean`
 
-```
+```js
 tier clean <flags>
 ```
 
@@ -384,7 +386,7 @@ tier clean -switchaccounts -1   # nop
 
 ### `tier version`
 
-```
+```js
 tier version
 ```
 
@@ -394,7 +396,7 @@ Print the version of the Tier CLI.
 
 ## `tier pull`
 
-```
+```js
 tier pull
 ```
 
@@ -404,11 +406,11 @@ This can be useful for generating content such as pricing pages in a CMS, synchr
 
 All optional fields are filled in with their default values, even if they were not specified in the original `pricing.json` file used to create the plans.
 
-```
+```js
 $ tier pull
 ```
 
-```
+```json
 {
   "plans": {
     "plan:free@1": {
@@ -475,7 +477,7 @@ $ tier pull
 
 ## `tier whoami`
 
-```
+```js
 tier whoami
 ```
 
@@ -495,7 +497,7 @@ URL:        https://dashboard.stripe.com/acct_1M21pw4Ca38F
 
 ## `tier whois`
 
-```
+```js
 tier [--live] whois <org>
 ```
 
