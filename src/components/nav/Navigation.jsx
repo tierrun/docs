@@ -150,7 +150,24 @@ function NavigationGroup({ group, className }) {
           {group.links.map((link) => (
             <motion.li key={link.href} layout="position" className="relative">
               <NavLink href={link.href} active={link.href === router.pathname}>
-                {link.title}
+                <div className="flex items-end gap-1">
+                  {link.title}
+                  {link.external === true && (
+                    <svg
+                      fill="none"
+                      viewBox="0 0 17 18"
+                      className="w-[17px] h-[17px]"
+                    >
+                      <path
+                        className="stroke-l-slate-8 dark:stroke-d-slate-8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.5"
+                        d="m4.958 12.542 7.084-7.084m-7.084 0h7.084v7.084"
+                      />
+                    </svg>
+                  )}
+                </div>
               </NavLink>
               <AnimatePresence mode="popLayout" initial={false}>
                 {link.href === router.pathname && sections.length > 0 && (

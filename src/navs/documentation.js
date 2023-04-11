@@ -78,14 +78,16 @@ export const navigation = [
         title: 'Tier CLI',
         href: '/docs/references/tier-cli',
       },
-      { title: 'Node', href: '/docs/references/node' },
+      { title: 'Node', href: '/docs/references/node', external: true },
       {
         title: 'Go',
         href: '/docs/references/go',
+        external: true,
       },
       {
         title: 'Elixir',
         href: '/docs/references/elixir',
+        external: true,
       },
     ],
   },
@@ -95,14 +97,17 @@ export const navigation = [
       {
         title: 'Docker',
         href: '/docs/self-hosting/docker',
+        external: true,
       },
       {
         title: 'Fly.io',
         href: '/docs/self-hosting/fly-io',
+        external: true,
       },
       {
         title: 'Heroku',
         href: '/docs/self-hosting/heroku',
+        external: true,
       },
     ],
   },
