@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 
 import { Button } from '@/components/common/Button'
 import { navigation } from '@/navs/documentation'
+import { footer } from '@/navs/footer'
 
 function PageLink({ label, page, previous = false }) {
   return (
@@ -104,7 +105,7 @@ function SmallPrint() {
       <p className="text-xs text-zinc-600 dark:text-zinc-400">
         &copy; Tier.run, Inc. {new Date().getFullYear()}. All rights reserved.
       </p>
-      {/* <div className="flex gap-4">
+      <div className="flex gap-4">
         <SocialLink href="#" icon={TwitterIcon}>
           Follow us on Twitter
         </SocialLink>
@@ -114,7 +115,81 @@ function SmallPrint() {
         <SocialLink href="#" icon={DiscordIcon}>
           Join our Discord server
         </SocialLink>
-      </div> */}
+      </div>
+    </div>
+  )
+}
+
+function FooterBase() {
+  return (
+    <div className="flex flex-col border-t border-l-slate-6 dark:border-d-slate-6">
+      <div className="flex flex-col items-start justify-between mt-16 lg:flex-row">
+        {/* Logo */}
+        <Link href="/" className="mb-12 lg:mb-0">
+          <svg className="w-[35px] h-[25px]" fill="none" viewBox="0 0 36 25">
+            <path
+              className="fill-l-slate-12 dark:fill-d-slate-12"
+              d="M.93 0h33.163a.93.93 0 0 1 .93.93v4.651a.93.93 0 0 1-.93.93H.93a.93.93 0 0 1-.93-.93V.931A.93.93 0 0 1 .93 0Zm6.651 8.744h19.86a.93.93 0 0 1 .931.93v4.652a.93.93 0 0 1-.93.93H7.582a.93.93 0 0 1-.93-.93V9.674a.93.93 0 0 1 .93-.93Zm6.186 8.744h7.489a.93.93 0 0 1 .93.93v4.652a.93.93 0 0 1-.93.93h-7.489a.93.93 0 0 1-.93-.93v-4.651a.93.93 0 0 1 .93-.93Z"
+            />
+          </svg>
+        </Link>
+        <div className="flex flex-col items-start lg:flex-row">
+          {/* Links Group */}
+          <div className="flex flex-wrap gap-x-16 gap-y-10">
+            {footer.map((group, groupIndex) => (
+              <div key={groupIndex} className="flex flex-col gap-3">
+                {/* Links group Title */}
+                <h5 className="caption-semibold text-l-slate-12 dark:text-d-slate-12">
+                  {group.title}
+                </h5>
+                {/* Links  */}
+                {group.links.map((link, linkIndex) => (
+                  <Link
+                    className="w-40 caption text-l-slate-11 dark:text-d-slate-11"
+                    key={linkIndex}
+                    href={link.href}
+                  >
+                    <div className="flex items-end gap-1">
+                      {link.title}
+                      {/* External Links */}
+                      {link.external === true && (
+                        <svg
+                          fill="none"
+                          viewBox="0 0 17 18"
+                          className="w-[17px] h-[17px]"
+                        >
+                          <path
+                            className="stroke-l-slate-8 dark:stroke-d-slate-8"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="1.5"
+                            d="m4.958 12.542 7.084-7.084m-7.084 0h7.084v7.084"
+                          />
+                        </svg>
+                      )}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            ))}
+          </div>
+          {/* Social Links */}
+          <div className="flex flex-row gap-3 mt-6 lg:flex-col lg:mt-0 ">
+            <SocialLink href="#" icon={TwitterIcon}>
+              Follow us on Twitter
+            </SocialLink>
+            <SocialLink href="#" icon={GitHubIcon}>
+              Follow us on GitHub
+            </SocialLink>
+            <SocialLink href="#" icon={DiscordIcon}>
+              Join our Discord server
+            </SocialLink>
+          </div>
+        </div>
+      </div>
+      <p className="mt-6 text-xs text-zinc-600 dark:text-zinc-400">
+        &copy; Tier.run, Inc. {new Date().getFullYear()}. All rights reserved.
+      </p>
     </div>
   )
 }
@@ -123,7 +198,7 @@ export function Footer() {
   return (
     <footer className="max-w-2xl pb-16 mx-auto space-y-10 lg:max-w-5xl">
       <PageNavigation />
-      <SmallPrint />
+      <FooterBase />
     </footer>
   )
 }
