@@ -174,7 +174,7 @@ function FooterBase() {
             ))}
           </div>
           {/* Social Links */}
-          <div className="flex flex-row gap-3 mt-6 lg:flex-col lg:mt-0 ">
+          <div className="flex flex-row gap-3 mt-12 lg:flex-col lg:mt-0 ">
             <SocialLink href="#" icon={TwitterIcon}>
               Follow us on Twitter
             </SocialLink>
