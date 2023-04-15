@@ -14,7 +14,7 @@ If your customer is using your product for the first time then it is reasonable 
 
 **Check for saved payment methods**
 
-```jsx
+```js
 const paymentDetails = await tier.lookupPaymentMethods(
 	org: 'org:customer-id-from-your-db', { // This is a concatenation of 'org' and your 'customerId' from your DB
 });
@@ -28,7 +28,7 @@ if(!paymentDetails.methods.length > 0) { // I need to test this code out
 
 Once you know for sure then our suggested way to create a subscription for such customers is to use the `checkout()` method. This will provide you with a checkout URL that can be used to redirect your customers to Stripe’s secure checkout page which will ask for all the payment details that you might require in the future.
 
-```jsx
+```js
 const checkoutResponse = await tier.checkout('org:customer-id-from-your-db',
 		"https://success-path.com", // Redirect your customer on success
 		{
@@ -50,7 +50,7 @@ If your customer has saved/preferred payment methods in Stripe then you have two
 
 You can make use of our `subscribe()` method if you want to initiate a subscription for this customer immediately or if you want to subscribe your customers to a set of features together on a given day.
 
-```jsx
+```js
 await tier.subscribe('org:customer-id-from-your-db',
 	features: 'plan:plan-id' // or it can be an array of feature-ids,
 	{
@@ -78,7 +78,7 @@ await tier.subscribe('org:customer-id-from-your-db',
 
 You could use `schedule()` if you prefer to subscribe your customer to your plan after a fixed schedule or combination of different dates.
 
-```jsx
+```js
 await tier.schedule('org:customer-id-from-your-db',
 	phases: [
 		// Phase 1
@@ -131,7 +131,7 @@ Based on your strategy you can either update the subscription of your customer i
 
 You can immediately cancel the subscription of your customer by invoking the `cancel()` method.
 
-```jsx
+```js
 await tier.cancel('org:customer-id-from-your-db')
 ```
 
