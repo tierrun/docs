@@ -1,1 +1,31 @@
 # Grandparenting
+
+An easy way to upgrade your existing customers from your old pricing plan to your new pricing plan.
+
+## Introduction
+
+Changing your pricing strategy is inevitable for your startup, and you will need a graceful strategy to upgrade your existing customer from your old pricing plan to your new one. You can make use of either our SDKs or CLI to do the migration
+
+## Migration of customers
+
+When you create a new plan and its associated features, you can migrate your existing customers by invoking `subscribe` in either Tier CLI or SDK.
+
+You can write a script that will enable you to upgrade all your existing customers using the `subscribe()` method.
+
+```js
+customers.map(customer => {
+	await tier.subscribe(`org:${customer.id}`,
+		features: 'plan:plan-id' // or it can be an array of feature-ids,
+	);
+})
+```
+
+You can do similar scripting using Tier CLI as well by invoking the `subscribe` command.
+
+```js
+tier subscribe <org> [plan|featurePlan]...
+```
+
+## Advanced takeaway
+
+You can always make use of the versioning of plans in smarter ways to allow customers to remain in your older plans while you experiment with a new plan for new customers.

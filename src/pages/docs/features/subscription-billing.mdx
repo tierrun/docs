@@ -1,1 +1,138 @@
-# Subscription & Billing
+# Subscription & billing
+
+Manage your customer’s subscription easily. You can create, update, and cancel subscriptions using Tier SDKs.
+
+## Introduction
+
+Once you have your pricing plan ready, it is important that you subscribe your customer to your pricing plan and also help them manage their current pricing plan as well.
+
+Tier offers you even deeper granularity, you can subscribe them to an entire plan or multiple plans with different versions or make them subscribe to individual features of a plan in any combination that you want, this is completely dependent on your requirements.
+
+## Creating a subscription - without saved payment methods
+
+If your customer is using your product for the first time then it is reasonable to believe that you might not have their payment method, but you should still check that using `lookupPaymentMethods()`.
+
+**Check for saved payment methods**
+
+```js
+const paymentDetails = await tier.lookupPaymentMethods(
+	org: 'org:customer-id-from-your-db', { // This is a concatenation of 'org' and your 'customerId' from your DB
+});
+
+if(!paymentDetails.methods.length > 0) { // I need to test this code out
+	// initiate Checkout
+} else {
+	// Subscribe
+}
+```
+
+Once you know for sure then our suggested way to create a subscription for such customers is to use the `checkout()` method. This will provide you with a checkout URL that can be used to redirect your customers to Stripe’s secure checkout page which will ask for all the payment details that you might require in the future.
+
+```js
+const checkoutResponse = await tier.checkout('org:customer-id-from-your-db',
+		"https://success-path.com", // Redirect your customer on success
+		{
+    "https://cancel-path.com", // Redirect your customer on cancellation
+    features: 'plan-id' // or it can be an array of feature-ids,
+		requireBillingAddress: true, // Optional: If you want to save the address
+		trialDays: 30 // Optional: If you your customers to have a product trial
+		}
+);
+
+const checkoutUrl = checkoutResponse.url;
+```
+
+## Create a subscription - with saved payment methods
+
+If your customer has saved/preferred payment methods in Stripe then you have two different ways you can initiate a subscription for your customer based on when you want your customer to be subscribed to your plan.
+
+### Subscribe
+
+You can make use of our `subscribe()` method if you want to initiate a subscription for this customer immediately or if you want to subscribe your customers to a set of features together on a given day.
+
+```js
+await tier.subscribe('org:customer-id-from-your-db',
+	features: 'plan:plan-id' // or it can be an array of feature-ids,
+	{
+		effective: new Date("Sun May 12, 2023"), // Optional: Provide effective data of subscription
+		paymentMethodID: 'payment-method-id', //Optional: provide if your customer wants to use something different from the default
+		trialDays: 30 // Optional: If you your customers to have a product trial
+		info: {
+			// Optional: Update the organization/customer information if required,
+			// and provide all details even if you want to change just one field
+			name: 'Customer name', // Optional: update customer name if needed
+			email: 'customer@email.com', // Optional: update customer email if needed
+			phone: '+11 1111 1111', // Optional: update customer email if needed
+			metadata: {
+				any: 'any' // Optional: add any additional details as metadata
+			},
+			description: 'description', // Optional: update customer description if needed
+			invoiceSettings: {
+				defaultPaymentMethod: 'payment-method-id', // Optional: update customer default payment method if needed
+			},
+		},
+});
+```
+
+### Schedule
+
+You could use `schedule()` if you prefer to subscribe your customer to your plan after a fixed schedule or combination of different dates.
+
+```js
+await tier.schedule('org:customer-id-from-your-db',
+	phases: [
+		// Phase 1
+		{
+			features: [
+				'feature:notes@plan:basic@2'
+			],
+			effective: new Date("Sun May 12, 2023"), // Optional: Provide effective data of subscription
+			trial: false,
+		},
+		// Phase 2
+		{
+			features: [
+				'feature:api@plan:basic@2',
+				'feature:golden-notes@plan:basic@2'
+			],
+			effective: new Date("Sun May 20, 2023"), // Optional: Provide effective data of subscription
+			trial: false,
+		}
+	],
+	{
+		paymentMethodID: 'payment-method-id', //Optional: provide if your customer wants to use something different from the default
+		info: {
+			// Optional: Update the organization/customer information if required,
+			// and provide all details even if you want to change just one field
+			name: 'Customer name', // Optional: update customer name if needed
+			email: 'customer@email.com', // Optional: update customer email if needed
+			phone: '+11 1111 1111', // Optional: update customer email if needed
+			metadata: {
+				any: 'any' // Optional: add any additional details as metadata
+			},
+			description: 'description', // Optional: update customer description if needed
+			invoiceSettings: {
+				defaultPaymentMethod: 'payment-method-id', // Optional: update customer default payment method if needed
+			},
+		},
+});
+```
+
+<Banner>
+You can check if your customer has saved/preferred payment methods in Stripe by using our `lookupPaymentMethods()`.
+
+</Banner>
+
+## Update a subscription
+
+Based on your strategy you can either update the subscription of your customer immediately using `subscribe()` or you can schedule the new subscription using `schedule()`as mentioned in the above section except here you will be mentioning the new plan/features that your customer is subscribing to.
+
+## Cancel a subscription
+
+You can immediately cancel the subscription of your customer by invoking the `cancel()` method.
+
+```js
+await tier.cancel('org:customer-id-from-your-db')
+```
+
+You can find more details about these in our SDK references.
