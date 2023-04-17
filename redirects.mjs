@@ -41,4 +41,20 @@ export const redirects = [
       'https://raw.githubusercontent.com/tierrun/tier/main/pricing/schema.json',
     permanent: false,
   },
+  // Footer
+  {
+    source: '/priceops',
+    destination: 'https://priceops.org/',
+    permanent: false,
+  },
+  {
+    source: '/stripe-glossary',
+    destination: 'https://github.com/tierrun/tier/wiki/Stripe-Glossary',
+    permanent: false,
+  },
+  {
+    source: '/system-status',
+    destination: '/',
+    permanent: false,
+  },
 ]

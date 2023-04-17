@@ -38,11 +38,15 @@ export const footer = [
       },
       {
         title: 'PriceOps',
-        href: '/priceops',
+        href: 'https://priceops.org/',
         external: true,
       },
       { title: 'Stripe mapping', href: '/docs/stripe mapping' },
-      { title: 'Stripe glossary', href: '/stripe-glossary', external: true },
+      {
+        title: 'Stripe glossary',
+        href: 'https://github.com/tierrun/tier/wiki/Stripe-Glossary',
+        external: true,
+      },
     ],
   },
 ]
