@@ -306,7 +306,7 @@ export function Quickstarts() {
           </div>
         </div>
         {/* Create customer portal */}
-        <div className="flex flex-row items-start gap-6">
+        {/* <div className="flex flex-row items-start gap-6">
           <div className="h-14 w-14">
             <svg
               className="h-14 w-14"
@@ -344,7 +344,7 @@ export function Quickstarts() {
               </Button>
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="flex flex-col mt-16">
         <p className="uppercase text-caption">Learn from framework tutorials</p>

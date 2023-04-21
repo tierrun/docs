@@ -4,7 +4,7 @@ export const navigation = [
     links: [
       { title: 'Overview', href: '/docs' },
       { title: 'What is Tier?', href: '/docs/what-is-tier' },
-      { title: 'Tier Cloud', href: '/docs/tier-cloud' },
+      // { title: 'Tier Cloud', href: '/docs/tier-cloud' },
     ],
   },
   {
@@ -34,10 +34,10 @@ export const navigation = [
         title: 'Report feature usage',
         href: '/docs/quickstarts/report-feature-usage',
       },
-      {
-        title: 'Create customer portal',
-        href: '/docs/quickstarts/create-customer-portal',
-      },
+      // {
+      //   title: 'Create customer portal',
+      //   href: '/docs/quickstarts/create-customer-portal',
+      // },
     ],
   },
   {
@@ -52,10 +52,10 @@ export const navigation = [
   {
     title: 'Features',
     links: [
-      {
-        title: 'Model builder',
-        href: '/docs/features/model-builder',
-      },
+      // {
+      //   title: 'Model builder',
+      //   href: '/docs/features/model-builder',
+      // },
       {
         title: 'Subscription & billing',
         href: '/docs/features/subscription-billing',

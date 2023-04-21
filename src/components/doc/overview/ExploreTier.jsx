@@ -5,7 +5,7 @@ export function ExploreTier() {
     <div className="mt-6 mb-16 xl:max-w-none">
       <div className="grid grid-cols-1 pt-10 mt-4 not-prose gap-x-6 gap-y-10 sm:grid-cols-2 xl:max-w-none xl:grid-cols-3">
         {/* Model Builder */}
-        <div className="flex flex-row items-start gap-6">
+        {/* <div className="flex flex-row items-start gap-6">
           <div className="h-14 w-14">
             <svg
               className="h-14 w-14"
@@ -47,7 +47,7 @@ export function ExploreTier() {
               </Button>
             </p>
           </div>
-        </div>
+        </div> */}
         {/* Subscription & billing */}
         <div className="flex flex-row items-start gap-6">
           <div className="h-14 w-14">

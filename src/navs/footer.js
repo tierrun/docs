@@ -21,12 +21,12 @@ export const footer = [
         title: 'Documentation',
         href: '/docs',
       },
-      {
-        title: 'Changelog',
-        href: '/changelog',
-      },
-      { title: 'Tier glossary', href: '/docs/tier-glossary' },
-      { title: 'System status', href: '/system-status', external: true },
+      // {
+      //   title: 'Changelog',
+      //   href: '/changelog',
+      // },
+      // { title: 'Tier glossary', href: '/docs/tier-glossary' },
+      // { title: 'System status', href: '/system-status', external: true },
     ],
   },
   {
@@ -34,14 +34,14 @@ export const footer = [
     links: [
       {
         title: 'Blog',
-        href: '/blog',
+        href: 'https://blog.tier.run/',
       },
       {
         title: 'PriceOps',
         href: 'https://priceops.org/',
         external: true,
       },
-      { title: 'Stripe mapping', href: '/docs/stripe mapping' },
+      // { title: 'Stripe mapping', href: '/docs/stripe mapping' },
       {
         title: 'Stripe glossary',
         href: 'https://github.com/tierrun/tier/wiki/Stripe-Glossary',

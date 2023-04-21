@@ -50,7 +50,7 @@ export function MainLinks({ mobile }) {
           Documentation
         </Link>
       </li>
-      <li>
+      {/* <li>
         <Link
           href="/examples-recipes"
           className={clsx(
@@ -103,8 +103,8 @@ export function MainLinks({ mobile }) {
           </div>
           Examples & recipes
         </Link>
-      </li>
-      <li>
+      </li> */}
+      {/* <li>
         <Link
           href="/components"
           className={clsx(
@@ -193,7 +193,7 @@ export function MainLinks({ mobile }) {
           </div>
           SDKs
         </Link>
-      </li>
+      </li> */}
     </div>
   )
 }
