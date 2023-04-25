@@ -166,33 +166,6 @@ You can try out a sample pricing page in Svelte using the following code, since 
 </section>
 ```
 
-```svelte
-<section class="flex flex-col items-center w-full gap-6">
-	<h1 class="text-lg font-semibold text-slate-800">Pricing</h1>
-	<div class="flex gap-6">
-		{#each Object.entries(data.plans) as [planId, plan]}
-			<article
-				id={planId}
-				class="flex flex-col gap-2 p-6 border border-dashed rounded-lg border-slate-300"
-			>
-				<h2>{plan.title}</h2>
-				<p>
-					{(plan.features['feature:access'].base / 100).toLocaleString('en', {
-						style: 'currency',
-						currency: 'usd'
-					})}
-				</p>
-
-				<button
-					on:click|preventDefault={() => choose(`feature:access@${planId}`)}
-					class="px-6 py-1 text-base bg-green-500 rounded-md text-green-50">Choose</button
-				>
-			</article>
-		{/each}
-	</div>
-</section>
-```
-
 </CodeGroup>
 
 ## 5. Create a Stripe checkout
