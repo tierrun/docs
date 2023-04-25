@@ -15,9 +15,13 @@ export const navigation = [
         href: '/docs/quickstarts/create-pricing-model',
       },
       {
-        title: 'Register a customer',
-        href: '/docs/quickstarts/register-customer',
+        title: 'Initiate subscription',
+        href: '/docs/quickstarts/initiate-subscription',
       },
+      // {
+      //   title: 'Register a customer',
+      //   href: '/docs/quickstarts/register-customer',
+      // },
       {
         title: 'Check for feature access',
         href: '/docs/quickstarts/check-feature-access',
@@ -25,10 +29,6 @@ export const navigation = [
       {
         title: 'Render a pricing table',
         href: '/docs/quickstarts/render-pricing-table',
-      },
-      {
-        title: 'Initiate subscription',
-        href: '/docs/quickstarts/initiate-subscription',
       },
       {
         title: 'Report feature usage',
