@@ -5,7 +5,12 @@ import { Heading } from '@/components/mdx/Heading'
 
 export const a = Link
 export { Button } from '@/components/common/Button'
-export { CodeGroup, Code as code, Pre as pre } from '@/components/mdx/Code'
+export {
+  CodeTabs,
+  CodeGroup,
+  Code as code,
+  Pre as pre,
+} from '@/components/mdx/Code'
 
 export const h2 = function H2(props) {
   return <Heading level={2} {...props} />

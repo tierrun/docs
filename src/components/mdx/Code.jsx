@@ -271,6 +271,56 @@ export function CodeGroup({ children, title, ...props }) {
   )
 }
 
+export function PlainCodePanel({ tag, label, code, children }) {
+  let child = Children.only(children)
+
+  return (
+    <div>{child}</div>
+    // <div className="group dark:bg-d-slate-2">
+    //   <div className="relative">
+    //     <div className="p-4 overflow-x-auto text-xs text-white">{children}</div>
+    //     {/* <CopyButton code={child.props.code ?? code} /> */}
+    //   </div>
+    // </div>
+  )
+}
+
+export function PlainCodeGroupPanels({ children, ...props }) {
+  return (
+    <Tab.Panels>
+      {Children.map(children, (child) => (
+        <Tab.Panel>
+          <PlainCodePanel {...props}>{child}</PlainCodePanel>
+        </Tab.Panel>
+      ))}
+    </Tab.Panels>
+  )
+}
+
+export function PlainCodeGroupHeader({ children }) {
+  return (
+    <Tab.List className="flex gap-4 -mb-px text-xs font-medium">
+      {Children.map(children, (child, childIndex) => (
+        <Tab key={childIndex} className="px-3 py-2">
+          {child.props.id}
+        </Tab>
+      ))}
+    </Tab.List>
+  )
+}
+
+export function CodeTabs({ children, ...props }) {
+  return (
+    <Tab.Group
+      as="div"
+      className="mt-9 overflow-hidden rounded shadow-md not-prose bg-l-slate-12 dark:ring-1 dark:ring-d-slate-6"
+    >
+      <PlainCodeGroupHeader>{children}</PlainCodeGroupHeader>
+      <PlainCodeGroupPanels {...props}>{children}</PlainCodeGroupPanels>
+    </Tab.Group>
+  )
+}
+
 export function Code({ children, ...props }) {
   let isGrouped = useContext(CodeGroupContext)
 

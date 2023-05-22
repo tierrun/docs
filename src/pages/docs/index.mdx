@@ -2,6 +2,7 @@ import { TierCloud } from '@/images/TierCloud'
 import { NewToTier } from '@/components/doc/overview/NewToTier'
 import { Quickstarts } from '@/components/doc/overview/Quickstarts'
 import { ExploreTier } from '@/components/doc/overview/ExploreTier'
+import { TabbedOnboarding } from '@/components/doc/overview/TabbedOnboarding'
 import { ExploreReferences } from '@/components/doc/overview/ExploreReferences'
 
 <Row>
@@ -22,6 +23,76 @@ import { ExploreReferences } from '@/components/doc/overview/ExploreReferences'
 </Row>
 
 {/* <NewToTier /> */}
+
+<CodeTabs>
+
+```js {{id:"Subscribe"}}
+await tier.subscribe('org:customer-id-from-your-db',
+	'plan:plan-id@version' // or it can be an array of feature-ids,
+	{
+		effective: new Date("Sun May 12, 2023"), // Optional: Provide effective data of subscription
+		paymentMethodID: 'payment-method-id', //Optional: provide if your customer wants to use something different from the default
+		trialDays: 30 // Optional: If you your customers to have a product trial
+		info: {
+			// Optional: Update the organization/customer information if required,
+			// and provide all details even if you want to change just one field
+			name: 'Customer name', // Optional: update customer name if needed
+			email: 'customer@email.com', // Optional: update customer email if needed
+			phone: '+11 1111 1111', // Optional: update customer email if needed
+			metadata: {}, // Optional: add any additional details as metadata
+			description: 'description', // Optional: update customer description if needed
+			invoiceSettings: {
+				defaultPaymentMethod: 'payment-method-id', // Optional: update customer default payment method if needed
+			},
+		},
+});
+
+```
+
+```js {{id:"Usage"}}
+await tier.report('org:customer-id-from-your-db',
+	'feature:feature-id',
+	 1 // This is the unit of feature consumption,
+	{
+		at: new Date('23 March 2023'),
+		clobber: true // If you want the usage amount to override any previously reported usage of the feature for the current phase
+	}
+);
+
+```
+
+```js {{id:"Access"}}
+const access = await tier.can(
+  'org:customer-id-from-your-db',
+  'feature:feature-from-base-plan'
+)
+if (access.ok) {
+  // Give access to the feature here
+} else {
+  // Handle restriction and even upselling here.
+}
+```
+
+```js {{id:"Checkout"}}
+const checkoutResponse = await tier.checkout('org:customer-id-from-your-db',
+		"https://success-path.com", // Redirect url for your customer on success
+		{
+    		cancelUrl: "https://cancel-path.com", // Redirect your customer on cancellation
+    		features: 'plan:plan-id@version' // Plan ID or it can be an array of feature-ids,
+			requireBillingAddress: true, // Optional: If you want to save the address
+			trialDays: 30 // Optional: If you your customers to have a product trial
+		}
+);
+
+const checkoutUrl = checkoutResponse.url;
+
+```
+
+```js {{id:"Lookup Phase"}}
+const phase = await tier.lookupPhase(`org:customer-id-from-your-db`)
+```
+
+</CodeTabs>
 
 ## Quickstarts
 
