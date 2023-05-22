@@ -8,7 +8,7 @@ export const navigation = [
     ],
   },
   {
-    title: 'Tutorials',
+    title: 'Quickstarts',
     links: [
       {
         title: 'Create & sync a pricing model',
@@ -34,25 +34,21 @@ export const navigation = [
         title: 'Report feature usage',
         href: '/docs/quickstarts/report-feature-usage',
       },
-      {
-        title: 'NextJS - Flat Rate',
-        href: '/docs/fullstack-framework-tutorials/flat-rate',
-      },
       // {
       //   title: 'Create customer portal',
       //   href: '/docs/quickstarts/create-customer-portal',
       // },
     ],
   },
-  // {
-  //   title: 'Framework tutorial',
-  //   links: [
-  //     {
-  //       title: 'Flat rate',
-  //       href: '/docs/fullstack-framework-tutorials/flat-rate',
-  //     },
-  //   ],
-  // },
+  {
+    title: 'Tutorials',
+    links: [
+      {
+        title: 'Flat rate - NextJS',
+        href: '/docs/fullstack-framework-tutorials/flat-rate',
+      },
+    ],
+  },
   {
     title: 'Features',
     links: [

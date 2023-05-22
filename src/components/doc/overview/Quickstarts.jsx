@@ -348,7 +348,7 @@ export function Quickstarts() {
         </div> */}
       </div>
       <div className="flex flex-col mt-16">
-        <p className="uppercase text-caption">Learn from framework tutorials</p>
+        <p className="uppercase text-caption">Tutorials</p>
         <div className="flex items-center gap-4 not-prose">
           <div className="pr-3">
             <div className="flex gap-3">

@@ -16,13 +16,13 @@ If your customer is using your product for the first time then it is reasonable 
 
 ```js
 const paymentDetails = await tier.lookupPaymentMethods(
-	org: 'org:customer-id-from-your-db', { // This is a concatenation of 'org' and your 'customerId' from your DB
-});
+  'org:customer-id-from-your-db' // This is a concatenation of 'org' and your 'customerId' from your DB
+)
 
-if(!paymentDetails.methods.length > 0) { // I need to test this code out
-	// initiate Checkout
+if (!paymentMethod.methods[0] === undefined) {
+  // initiate Checkout
 } else {
-	// Subscribe
+  // Subscribe
 }
 ```
 
@@ -30,12 +30,12 @@ Once you know for sure then our suggested way to create a subscription for such 
 
 ```js
 const checkoutResponse = await tier.checkout('org:customer-id-from-your-db',
-		"https://success-path.com", // Redirect your customer on success
+		"https://success-path.com", // Redirect url for your customer on success
 		{
-    "https://cancel-path.com", // Redirect your customer on cancellation
-    features: 'plan-id' // or it can be an array of feature-ids,
-		requireBillingAddress: true, // Optional: If you want to save the address
-		trialDays: 30 // Optional: If you your customers to have a product trial
+    		cancelUrl: "https://cancel-path.com", // Redirect your customer on cancellation
+    		features: 'plan:plan-id@version' // Plan ID or it can be an array of feature-ids,
+			requireBillingAddress: true, // Optional: If you want to save the address
+			trialDays: 30 // Optional: If you your customers to have a product trial
 		}
 );
 
@@ -52,7 +52,7 @@ You can make use of our `subscribe()` method if you want to initiate a subscript
 
 ```js
 await tier.subscribe('org:customer-id-from-your-db',
-	features: 'plan:plan-id' // or it can be an array of feature-ids,
+	'plan:plan-id@version' // or it can be an array of feature-ids,
 	{
 		effective: new Date("Sun May 12, 2023"), // Optional: Provide effective data of subscription
 		paymentMethodID: 'payment-method-id', //Optional: provide if your customer wants to use something different from the default
@@ -63,9 +63,7 @@ await tier.subscribe('org:customer-id-from-your-db',
 			name: 'Customer name', // Optional: update customer name if needed
 			email: 'customer@email.com', // Optional: update customer email if needed
 			phone: '+11 1111 1111', // Optional: update customer email if needed
-			metadata: {
-				any: 'any' // Optional: add any additional details as metadata
-			},
+			metadata: {}, // Optional: add any additional details as metadata
 			description: 'description', // Optional: update customer description if needed
 			invoiceSettings: {
 				defaultPaymentMethod: 'payment-method-id', // Optional: update customer default payment method if needed
@@ -79,43 +77,42 @@ await tier.subscribe('org:customer-id-from-your-db',
 You could use `schedule()` if you prefer to subscribe your customer to your plan after a fixed schedule or combination of different dates.
 
 ```js
-await tier.schedule('org:customer-id-from-your-db',
-	phases: [
-		// Phase 1
-		{
-			features: [
-				'feature:notes@plan:basic@2'
-			],
-			effective: new Date("Sun May 12, 2023"), // Optional: Provide effective data of subscription
-			trial: false,
-		},
-		// Phase 2
-		{
-			features: [
-				'feature:api@plan:basic@2',
-				'feature:golden-notes@plan:basic@2'
-			],
-			effective: new Date("Sun May 20, 2023"), // Optional: Provide effective data of subscription
-			trial: false,
-		}
-	],
-	{
-		paymentMethodID: 'payment-method-id', //Optional: provide if your customer wants to use something different from the default
-		info: {
-			// Optional: Update the organization/customer information if required,
-			// and provide all details even if you want to change just one field
-			name: 'Customer name', // Optional: update customer name if needed
-			email: 'customer@email.com', // Optional: update customer email if needed
-			phone: '+11 1111 1111', // Optional: update customer email if needed
-			metadata: {
-				any: 'any' // Optional: add any additional details as metadata
-			},
-			description: 'description', // Optional: update customer description if needed
-			invoiceSettings: {
-				defaultPaymentMethod: 'payment-method-id', // Optional: update customer default payment method if needed
-			},
-		},
-});
+await tier.schedule(
+  'org:customer-id-from-your-db',
+  // Array of phases
+  [
+    // Phase 1
+    {
+      features: ['plan:basic@2'],
+      effective: new Date('Sun May 12, 2023'), // Optional: Provide effective data of subscription
+      trial: false,
+    },
+    // Phase 2
+    {
+      features: [
+        'feature:api@plan:addon@2',
+        'feature:golden-notes@plan:addon@2',
+      ],
+      effective: new Date('Sun May 20, 2023'), // Optional: Provide effective data of subscription
+      trial: false,
+    },
+  ],
+  {
+    paymentMethodID: 'payment-method-id', //Optional: provide if your customer wants to use something different from the default
+    info: {
+      // Optional: Update the organization/customer information if required,
+      // and provide all details even if you want to change just one field
+      name: 'Customer name', // Optional: update customer name if needed
+      email: 'customer@email.com', // Optional: update customer email if needed
+      phone: '+11 1111 1111', // Optional: update customer email if needed
+      metadata: {}, // Optional: add any additional details as metadata
+      description: 'description', // Optional: update customer description if needed
+      invoiceSettings: {
+        defaultPaymentMethod: 'payment-method-id', // Optional: update customer default payment method if needed
+      },
+    },
+  }
+)
 ```
 
 <Banner>

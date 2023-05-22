@@ -55,13 +55,13 @@ When the customer clicks on a plan in your pricing table, the very first thing t
 
 ```js
 const paymentDetails = await tier.lookupPaymentMethods(
-	org: 'org:customer-id-from-your-db', { // This is a concatenation of 'org' and your 'customerId' from your DB
-});
+  'org:customer-id-from-your-db' // This is a concatenation of 'org' and your 'customerId' from your DB
+)
 
-if(!paymentDetails.methods.length > 0) { // I need to test this code out
-	// initiate Checkout
+if (!paymentMethod.methods[0] === undefined) {
+  // initiate Checkout
 } else {
-	// Subscribe
+  // Subscribe
 }
 ```
 
@@ -71,16 +71,33 @@ if(!paymentDetails.methods.length > 0) { // I need to test this code out
 
 If your customer has to be subscribed to a default plan of your pricing model then, you should subscribe them to it right after registering them in Tier.
 
-<CodeGroup title="Request Stripe checkout URL">
+<CodeGroup title="Register your customer">
+
+```js
+await tier.updateOrg(`org:customer-id-from-your-db`, {
+  email: 'customer@email.com', // Email of your customer
+  name: 'Customer name', // Full name of your customer
+  description: 'description', // Optional: Based on your use case add a description
+  phone: '+11 1111 1111', //Optional: Phone number of your customer
+  invoiceSettings: {
+    defaultPaymentMethod: 'payment-method-id', // Optional: update customer default payment method if needed
+  },
+  metadata: {}, // Optional: You can add additional data about the customer using metadata
+})
+```
+
+</CodeGroup>
+
+<CodeGroup title="Get checkout URL to subscribe">
 
 ```js
 const checkoutResponse = await tier.checkout('org:customer-id-from-your-db',
-		"https://success-path.com", // Redirect your customer on success
+		"https://success-path.com", // Redirect url for your customer on success
 		{
-    "https://cancel-path.com", // Redirect your customer on cancellation
-    features: 'plan-id' // or it can be an array of feature-ids,
-		requireBillingAddress: true, // Optional: If you want to save the address
-		trialDays: 30 // Optional: If you your customers to have a product trial
+    		cancelUrl: "https://cancel-path.com", // Redirect your customer on cancellation
+    		features: 'plan:plan-id@version' // Plan ID or it can be an array of feature-ids,
+			requireBillingAddress: true, // Optional: If you want to save the address
+			trialDays: 30 // Optional: If you your customers to have a product trial
 		}
 );
 
@@ -97,7 +114,7 @@ If you have saved customer payment details, as per step 2, then you can initiate
 
 ```js
 await tier.subscribe('org:customer-id-from-your-db',
-	features: 'plan:plan-id' // or it can be an array of feature-ids,
+	'plan:plan-id@version' // or it can be an array of feature-ids,
 	{
 		effective: new Date("Sun May 12, 2023"), // Optional: Provide effective data of subscription
 		paymentMethodID: 'payment-method-id', //Optional: provide if your customer wants to use something different from the default
@@ -108,9 +125,7 @@ await tier.subscribe('org:customer-id-from-your-db',
 			name: 'Customer name', // Optional: update customer name if needed
 			email: 'customer@email.com', // Optional: update customer email if needed
 			phone: '+11 1111 1111', // Optional: update customer email if needed
-			metadata: {
-				any: 'any' // Optional: add any additional details as metadata
-			},
+			metadata: {}, // Optional: add any additional details as metadata
 			description: 'description', // Optional: update customer description if needed
 			invoiceSettings: {
 				defaultPaymentMethod: 'payment-method-id', // Optional: update customer default payment method if needed
