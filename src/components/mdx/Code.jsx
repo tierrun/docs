@@ -1,5 +1,6 @@
 import {
   Children,
+  Fragment,
   createContext,
   useContext,
   useEffect,
@@ -271,53 +272,47 @@ export function CodeGroup({ children, title, ...props }) {
   )
 }
 
-export function PlainCodePanel({ tag, label, code, children }) {
-  let child = Children.only(children)
-
+export function CodeTabs({ children }) {
   return (
-    <div>{child}</div>
-    // <div className="group dark:bg-d-slate-2">
-    //   <div className="relative">
-    //     <div className="p-4 overflow-x-auto text-xs text-white">{children}</div>
-    //     {/* <CopyButton code={child.props.code ?? code} /> */}
-    //   </div>
-    // </div>
-  )
-}
-
-export function PlainCodeGroupPanels({ children, ...props }) {
-  return (
-    <Tab.Panels>
-      {Children.map(children, (child) => (
-        <Tab.Panel>
-          <PlainCodePanel {...props}>{child}</PlainCodePanel>
-        </Tab.Panel>
-      ))}
-    </Tab.Panels>
-  )
-}
-
-export function PlainCodeGroupHeader({ children }) {
-  return (
-    <Tab.List className="flex gap-4 -mb-px text-xs font-medium">
-      {Children.map(children, (child, childIndex) => (
-        <Tab key={childIndex} className="px-3 py-2">
-          {child.props.id}
-        </Tab>
-      ))}
-    </Tab.List>
-  )
-}
-
-export function CodeTabs({ children, ...props }) {
-  return (
-    <Tab.Group
-      as="div"
-      className="mt-9 overflow-hidden rounded shadow-md not-prose bg-l-slate-12 dark:ring-1 dark:ring-d-slate-6"
-    >
-      <PlainCodeGroupHeader>{children}</PlainCodeGroupHeader>
-      <PlainCodeGroupPanels {...props}>{children}</PlainCodeGroupPanels>
-    </Tab.Group>
+    <CodeGroupContext.Provider value={true}>
+      <Tab.Group
+        as="div"
+        className="mt-[60px] my-6 overflow-hidden rounded shadow-md not-prose bg-d-slate-2 dark:ring-1 dark:ring-d-slate-6"
+      >
+        <Tab.List className="flex min-h-[calc(theme(spacing.12)+1px)] flex-wrap items-start border-b border-d-slate-7 bg-l-slate-12 px-4">
+          {Children.map(children, (child) => (
+            <Tab as={Fragment}>
+              {({ selected }) => (
+                <button
+                  className={clsx(
+                    'border-b px-4 py-4 caption transition focus:[&:not(:focus-visible)]:outline-none',
+                    selected
+                      ? 'border-d-blue-9 text-d-blue-9'
+                      : 'border-transparent text-d-slate-11 hover:text-d-slate-12'
+                  )}
+                >
+                  {child.props.name}
+                </button>
+              )}
+            </Tab>
+          ))}
+        </Tab.List>
+        <Tab.Panels>
+          {Children.map(children, (child) => (
+            <Tab.Panel>
+              <div className="group dark:bg-d-slate-2">
+                <div className="relative">
+                  <pre className="p-4 overflow-x-auto text-xs text-white">
+                    {child}
+                  </pre>
+                  <CopyButton code={child.props.code ?? code} />
+                </div>
+              </div>
+            </Tab.Panel>
+          ))}
+        </Tab.Panels>
+      </Tab.Group>
+    </CodeGroupContext.Provider>
   )
 }
 
