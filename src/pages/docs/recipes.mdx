@@ -1,0 +1,227 @@
+---
+description: "This document describes some common pricing model approaches, and shows how to express those in a `pricing.json` file."
+published: true
+---
+
+# Recipes
+
+This document describes some common pricing model approaches, and shows how to express those in a `pricing.json` file.
+
+Tier is very flexible. All of these options can be mixed and matched, but are mostly shown in isolation here to more clearly show what they're doing.
+
+## Flat Monthly Price
+
+Each customer of our app pays $30/month to access our service.
+
+[Model link](https://model.tier.run/cldp0ax6w1bv2fof42xim4qzw)
+
+```json
+{
+  "plans": {
+    "plan:flatrate@0": {
+      "features": {
+        "feature:access": {
+          "base": 3000
+        }
+      }
+    }
+  }
+}
+```
+
+The `tier_plan_flatrate_0` Product will be created, with the `tier_plan_flatrate_0__feature_access` flat-rate Price.
+
+## Simple Per-Seat Pricing
+
+Our app charges $10 per user within an org. There's only one tier, and it is technically a usage-based price, because it's based on how many seats are being used. However, unlike something like disk space or requests, the counter is not reset each billing cycle.
+
+We use `"aggregate":"perpetual"` to always charge them based on the most recent usage level, across all billing periods. This way, we only have to update their seat consumption when it changes.
+
+[Model link](https://model.tier.run/cldp0calb1bvxfof43td2rc1u)
+
+```json
+{
+  "plans": {
+    "plan:perseat@0": {
+      "features": {
+        "feature:seat": {
+          "aggregate": "perpetual",
+          "tiers": [{ "price": 1000 }]
+        }
+      }
+    }
+  }
+}
+```
+
+## Seat Pricing with Initial Tier
+
+Let's say we've noticed that users of our app only seem to "stick" once they get up to 3-5 users, and can benefit from the social aspects. To encourage them getting to that point quickly, we offer a discounted flat rate of $25 for the first 5 seats, and charge $10 per seat from then on.
+
+This is the same as the previous example, just with the addition of an initial tier with a flat base price.
+
+[Model link](https://model.tier.run/cldp0d2mx1bwlfof4c3rxz75n)
+
+```json
+{
+  "plans": {
+    "plan:perseat@1": {
+      "features": {
+        "feature:seat": {
+          "aggregate": "perpetual",
+          "tiers": [{ "upto": 5, "base": 2500 }, { "price": 1000 }]
+        }
+      }
+    }
+  }
+}
+```
+
+## Messages Sent (or any other countable "action")
+
+This can stand in for any metered feature.
+
+The simplest approach, usage costs some fixed amount. In this example, it's $0.01 per message sent.
+
+[Model link](https://model.tier.run/cldp0dplf1bx0fof4rz2bo1uz)
+
+```json
+{
+  "plans": {
+    "plan:messages@1": {
+      "features": {
+        "feature:message": {
+          "tiers": [
+            {
+              "price": 1
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+In this approach, we charge $10 for the first 1000 messages, then $0.01 per message thereafter.
+
+[Model link](https://model.tier.run/cldp0eltx1bxsfof4uy41net4)
+
+```json
+{
+  "plans": {
+    "plan:messages@2": {
+      "features": {
+        "feature:message": {
+          "tiers": [
+            {
+              "upto": 1000,
+              "base": 1000
+            },
+            {
+              "price": 1
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+## Mixing Periods: Domains Yearly, Bandwidth Monthly
+
+Our hosting platform allows users to register domains, for which we charge $10/year. We also track their bandwidth usage in GB, and bill for that on a monthly basis, at $1 per gigabyte transferred.
+
+Since a plan can only have a single `interval`, we approach this by creating two separate subscriptions for our users.
+
+[Model link](https://model.tier.run/cldp0i0yv1c0bfof4gdwyp1ft)
+
+```json
+{
+  "plans": {
+    "plan:domain@0": {
+      "interval": "@yearly",
+      "features": {
+        "feature:domain": {
+          "tiers": [
+            {
+              "price": 1000
+            }
+          ]
+        }
+      }
+    },
+    "plan:bandwidth@0": {
+      "interval": "@monthly",
+      "features": {
+        "feature:bandwidth": {
+          "tiers": [
+            {
+              "price": 100
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+## Spike Pricing (Mixing Aggregations)
+
+This is the same as the previous example, but we've added a new feature, where we charge users for spikes in bandwidth.
+
+The basic prices are the same as the plan above, but if there's ever more than 100gb transferred in a single hour, we charge an extra fee based on the largest "spike" to occur within a single day.
+
+[Model link](https://model.tier.run/cldp0l38j1c2afof4iryb5gzw)
+
+```json
+{
+  "plans": {
+    "plan:domain@0": {
+      "interval": "@yearly",
+      "features": {
+        "feature:domain": {
+          "tiers": [
+            {
+              "price": 1000
+            }
+          ]
+        }
+      }
+    },
+    "plan:bandwidth@0": {
+      "interval": "@monthly",
+      "features": {
+        "feature:bandwidth": {
+          "tiers": [
+            {
+              "price": 100
+            }
+          ]
+        }
+      }
+    },
+    "plan:bandwidth:spike@0": {
+      "interval": "@daily",
+      "features": {
+        "feature:bandwidth:spike": {
+          "aggregate": "max",
+          "tiers": [
+            {
+              "upto": 100,
+              "price": 0
+            },
+            {
+              "price": 100
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+So, every hour, we roll up the number of GB transferred, and create a usage record for both the `"feature:bandwidth"` and the `"feature:bandwidth:spike"` features. The plans that the customer is on will take care of sorting out how much each costs, so our application logic can remain blissfully unaware.
