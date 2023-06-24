@@ -1,0 +1,123 @@
+:root {
+  --shiki-color-text: theme('colors.d.blue.12');
+  --shiki-token-constant: theme('colors.d.crimson.11');
+  --shiki-token-string: theme('colors.d.crimson.11');
+  --shiki-token-comment: theme('colors.d.slate.11');
+  --shiki-token-keyword: theme('colors.d.blue.11');
+  --shiki-token-parameter: theme('colors.d.grass.11');
+  --shiki-token-function: theme('colors.d.violet.11');
+  --shiki-token-string-expression: theme('colors.d.crimson.11');
+  --shiki-token-punctuation: theme('colors.d.slate.11');
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* DMSans Normal - Subsetting : Latin */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('/fonts/dmsans/dmsans-latin-400.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+      U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212,
+      U+2215, U+FEFF, U+FFFD;
+  }
+  /* DMSans SemiBold - Subsetting : Latin */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('/fonts/dmsans/dmsans-latin-500.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+      U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212,
+      U+2215, U+FEFF, U+FFFD;
+  }
+  /* DMSans Bold - Subsetting : Latin */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-display: optional;
+    src: url('/fonts/dmsans/dmsans-latin-700.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+      U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212,
+      U+2215, U+FEFF, U+FFFD;
+  }
+
+  /* Inter Variable - Subsetting : Latin */
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: optional;
+    src: url('/assets/fonts/inter/inter-var-latin.woff2') format('woff2');
+  }
+}
+
+@layer components {
+  .display {
+    @apply font-display text-[80px] font-semibold leading-[88px] tracking-[-2%];
+  }
+  .h1 {
+    @apply font-display text-[56px] font-semibold leading-[64px] tracking-[0%];
+  }
+  .h2 {
+    @apply font-display text-[40px] font-semibold leading-[48px] tracking-[0%];
+  }
+  .h3 {
+    @apply font-display text-[38px] font-semibold leading-[48px] tracking-[-0.75%];
+  }
+  .h4 {
+    @apply font-display text-[32px] font-semibold leading-[40px] tracking-[-0.2%];
+  }
+  .h5 {
+    @apply font-sans text-[16px] font-bold uppercase leading-[20px] tracking-[5%];
+  }
+  .h6 {
+    @apply font-sans text-[14px] font-semibold  uppercase leading-[16px] tracking-[5%];
+  }
+  .body-xl {
+    @apply font-sans text-[24px] font-normal leading-[36px] tracking-[0%];
+  }
+  .body-l {
+    @apply font-sans text-[20px] font-normal leading-[32px] tracking-[-0.1%];
+  }
+  .body-l-medium {
+    @apply font-sans text-[20px] font-medium leading-[32px] tracking-[-0.1%];
+  }
+  .body-l-semibold {
+    @apply font-sans text-[20px] font-semibold leading-[32px] tracking-[-0.1%];
+  }
+  .body {
+    @apply font-sans text-[16px] font-normal leading-[24px] tracking-[0%];
+  }
+  .body-medium {
+    @apply font-sans text-[16px] font-medium leading-[24px] tracking-[0%];
+  }
+  .body-semibold {
+    @apply font-sans text-[16px] font-semibold leading-[24px] tracking-[0%];
+  }
+  .caption {
+    @apply font-sans text-[14px] font-normal leading-[20px] tracking-[0%];
+  }
+  .caption-medium {
+    @apply font-sans text-[14px] font-medium leading-[20px] tracking-[0%];
+  }
+  .caption-semibold {
+    @apply font-sans text-[14px] font-semibold leading-[20px] tracking-[0%];
+  }
+  .caption-s {
+    @apply font-sans text-[12px] font-normal leading-[16px] tracking-[0%];
+  }
+  .caption-s-medium {
+    @apply font-sans text-[12px] font-medium leading-[16px] tracking-[0%];
+  }
+  .caption-s-semibold {
+    @apply font-sans text-[12px] font-semibold leading-[16px] tracking-[0%];
+  }
+}

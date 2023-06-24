@@ -1,0 +1,93 @@
+---
+description: "Get started with our guides, tutorials, references and examples to kickstart with Tier"
+published: true
+---
+
+import { TierCloud } from "@/images/TierCloud"
+import { NewToTier } from "@/components/doc/overview/NewToTier"
+import { Quickstarts } from "@/components/doc/overview/Quickstarts"
+import { ExploreTier } from "@/components/doc/overview/ExploreTier"
+import { TabbedOnboarding } from "@/components/doc/overview/TabbedOnboarding"
+import { ExploreReferences } from "@/components/doc/overview/ExploreReferences"
+
+<Row>
+    <Col>
+
+        # Welcome to Tier Docs
+
+        Get started with our guides, tutorials, references and examples to kickstart with Tier
+        <div className="not-prose mb-16 mt-6 flex flex-wrap gap-3">
+            <Button href="/docs#quickstarts" children="Quickstarts" />
+            <Button href="/docs/references/tier-cli" variant="outline" children="Explore Tier CLI" />
+        </div>
+    </Col>
+    <Col>
+        <TierCloud className="w-auto"/>
+    </Col>
+
+</Row>
+
+{/* <NewToTier /> */}
+
+<CodeTabs>
+
+```js {{name:"Subscribe"}}
+await tier.subscribe(
+  "org:customer-id-from-your-db",
+  "plan:plan-id@version" // or it can be an array of feature-ids,
+)
+```
+
+```js {{name:"Usage"}}
+await tier.report("org:customer-id-from-your-db", "feature:feature-id")
+```
+
+```js {{name:"Access"}}
+const access = await tier.can(
+  "org:customer-id-from-your-db",
+  "feature:feature-from-base-plan"
+)
+```
+
+```js {{name:"Checkout"}}
+const checkoutResponse = await tier.checkout(
+  "org:customer-id-from-your-db",
+  "https://success-path.com", // Redirect url for your customer on success
+  {
+    cancelUrl: "https://cancel-path.com", // Redirect your customer on cancellation
+    features: "plan:plan-id@version", // Plan ID or it can be an array of feature-ids,
+  }
+)
+
+const checkoutUrl = checkoutResponse.url
+```
+
+```js {{name:"Lookup Phase"}}
+const phase = await tier.lookupPhase(`org:customer-id-from-your-db`)
+```
+
+</CodeTabs>
+
+## Quickstarts
+
+Explore how to setup pricing with Tier and wire it up with your application in a few minutes
+
+#### YOU'LL LEARN HOW TO
+
+- Build pricing models and sync with Stripe.
+- Integrate SDK, initiate subscription / checkout, check for entitlements, and report usage.
+- Show pricing table and render customer billing portal.
+
+<Quickstarts />
+
+---
+
+## Explore Tier
+
+<ExploreTier />
+
+---
+
+## Explore References
+
+<ExploreReferences />

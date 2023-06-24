@@ -1,0 +1,16 @@
+Sitemap: https://tier.run/sitemap.xml
+
+User-agent: ia_archiver
+Disallow: /docs
+Disallow: /docs$
+
+User-agent: *
+Allow: /docs
+Allow: /docs$
+Allow: /blog
+Allow: /blog$
+Allow: /changelog
+Allow: /changelog$
+
+User-agent: rogerbot
+Crawl-delay: 2

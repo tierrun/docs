@@ -1,0 +1,95 @@
+---
+description: "Grant or revoke access to features within your application based on your customer’s existing subscription plan."
+published: true
+---
+
+# Entitlements & access
+
+Grant or revoke access to features within your application based on your customer’s existing subscription plan.
+
+## Introduction
+
+You will need to ensure that your customers are bound to the features that they are subscribed to. Tier makes it easy to check access control of features based on your customer’s subscription.
+
+You have 3 different ways to check for entitlements, aka access configuration to a feature of your product.
+
+## Check usage & access to all the features
+
+If you want to know the usage and access of all the features that your customer has access to with their subscription, we suggest that you use `lookupLimits()`. This is really helpful to create upsell banners inside your application for features that your customer do not have access.
+
+```js
+const answer = await tier.lookupLimits(orgId)
+```
+
+This will return an object which lists all the features and their corresponding usage details.
+
+```json
+{
+  "org": "org:userId",
+  "usage": [
+    {
+      "feature": "feature:notes",
+      "used": 250,
+      "limit": 500
+    },
+    {
+      "feature": "feature:api",
+      "used": 1500,
+      "limit": 5000
+    }
+  ]
+}
+```
+
+## Check usage & access for a specific feature
+
+If you have a feature and want to know in detail how much of it has been used and how much is left then you can use `lookupLimit()`. This is really helpful when you have to check if the user has access to the feature right before you give them access to the feature.
+
+```js
+const answer = await tier.lookupLimit(orgId, featureId)
+```
+
+If your customer has access to the feature then you should get a response that details the amount that was consumed and the total limit of the feature that can be consumed as per the plan.
+
+```json
+{
+  "feature": "feature:notes",
+  "used": 250,
+  "limit": 500
+}
+```
+
+If your customer doesn’t have access to the feature then it should return an object with `limit` set to 0.
+
+```json
+{
+  "feature": "feature:notes",
+  "used": 0,
+  "limit": 0
+}
+```
+
+## Checking access and reporting usage
+
+If you want a convenient way to just check if your customer has access to a given feature and wants to report its usage post-check and consumption, then we suggest using `can()`.
+
+```js
+const access = await tier.can(
+  "org:customer-id-from-your-db",
+  "feature:feature-from-base-plan"
+)
+
+if (access.ok) {
+  // Give access to the feature here
+  access.report() // Report feature usage here
+} else {
+  // Handle restriction and even upselling here.
+}
+```
+
+You can also use this function just to check the access for a given feature, but since this method returns `Answer`, you can make use of it to report the usage of the feature that was checked with it.
+
+<Banner>
+You can find more details about entitlements and access control in our SDK references.
+
+</Banner>

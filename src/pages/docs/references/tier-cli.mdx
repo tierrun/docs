@@ -1,0 +1,513 @@
+---
+description: "Reference documentation for Tier CLI"
+published: true
+---
+
+# Tier CLI
+
+```js
+tier [flags] <command> [<arguments>]
+```
+
+The commands are:
+
+- `tier clean` - Remove objects from Stripe Test Mode accounts.
+- `tier connect` - Authorize the Tier client to access your Stripe account with a restricted key. Note that this may be overridden by the `STRIPE_API_KEY` environment variable.
+- `tier limits` - List a provided org's limits and usage.
+- `tier ls` - List features and plans pushed to Stripe.
+- `tier phases` - Display the phases in an org subscription schedule.
+- `tier pull` - Fetch all plans in Stripe, and format in a `pricing.json`.
+- `tier push [<filename>]` - Create plans in Stripe based on a `pricing.json` file.
+- `tier report` - Report usage of a feature.
+- `tier serve` - Run the Tier sidecar API
+- `tier subscribe` - Create or modify a org subscription.
+- `tier switch` - Use (or create) a Stripe Connect account.
+- `tier version` - Display the version of Tier in use.
+- `tier whoami` - Show the currently logged in Stripe account.
+- `tier whois` - Get the Stripe customer ID for an org.
+
+---
+
+## Installing Tier CLI
+
+Tier can either be installed as a static binary, or run from source with `go`.
+
+### Homebrew (macOS)
+
+```
+brew install tierrun/tap/tier
+```
+
+### Binary (macOS, linux, Windows)
+
+Binaries for major architectures can be found [on Github](https://tier.run/releases).
+
+### Go (most operating systems and architectures)
+
+If `go1.19` or later is installed, run or install tier like:
+
+```
+go run tier.run/cmd/tier@latest
+```
+
+or
+
+```
+go install tier.run/cmd/tier@latest
+```
+
+---
+
+## `tier switch`
+
+```js
+tier switch [-c] [accountID]
+```
+
+This command tells tier to use the provided accountID, or, if run with `-c`, to create and use a new isolation account, when run from the current working directory.
+
+To switch back to the default account:
+
+1. rename the tier.state file,
+2. change your working directory, or
+3. delete the tier.state file.
+
+### Example
+
+This example demostrates pushing a pricing model to an isolated account and then starting fresh with a new isolated account, and then switching back to the default account by deleting the tier.state file.
+
+```
+tier connect
+tier switch -c
+tier push pricing.json
+tier pull
+rm tier.state
+tier switch -c
+tier pull
+tier push pricing2.json
+rm tier.state
+tier pull
+```
+
+### Prerequisites
+
+Connected accounts MUST be enabled in your Stripe account. [Enable Connect on the Stripe dashboard](https://dashboard.stripe.com/test/connect/accounts/overview)
+
+### Constraints
+
+Commands run in isloated mode for an account not accessible by the current API key, will fail. Move to a new directory or move the `tier.state` file to resume using the API key, or run `tier connect` and login to the root account that owns the account in the tier.state file.
+
+---
+
+## `tier ls`
+
+```js
+tier ls
+```
+
+This command pulls the list of plans and features created via `tier push`, along with the mode, aggregation, and base price specified in the model.
+
+```
+$ tier ls
+PLAN        FEATURE                          MODE       AGG        BASE
+plan:pro@1  feature:base                     licensed   -          1000
+plan:pro@1  feature:dailyspike               graduated  sum        0
+plan:pro@1  feature:graduated                graduated  sum        0
+plan:pro@1  feature:limited:price:tier       graduated  sum        0
+plan:pro@1  feature:max                      volume     max        0
+plan:pro@1  feature:storage:base:price       graduated  sum        0
+plan:pro@1  feature:storage:free:infinite    graduated  sum        0
+plan:pro@1  feature:seats                    graduated  last_ever  0
+plan:pro@1  feature:title                    licensed   -          0
+plan:pro@1  feature:shares                   volume     sum        0
+```
+
+See Mapping to Stripe and Pricing JSON for more information about the various fields displayed.
+
+---
+
+## `tier report`
+
+```js
+tier [--live] report <org> <feature> <n>
+```
+
+This command reports to Stripe that `n` units of `feature` were used by `org`.
+
+For a report of usage, see `tier limits`.
+
+If the `--live` flag is provided, your account's live mode data will be used.
+
+This will only work if the key minted with `tier connect` is granted `write` access to "Billing Resources and Core Resources", or if a suitable `STRIPE_API_KEY` is set in the environment. See the `tier connect` documentation for more information.
+
+---
+
+## `tier push`
+
+```js
+tier push [<filename> | -]
+```
+
+This command reads the `pricing.json` data from the specified filename (or `stdin` if no filename provided) and sets up Stripe with the appropriate data.
+
+Any plans that already exist will be ignored.
+
+Output reports whether each plan was created, already exists, or had an error. A url to each created Product and Price in the Stripe dashboard is printed for easy access.
+
+```
+$ tier push pricing.json
+ok	plan:free@1	feature:convert	https://dashboard.stripe.com/acct_15MpCwKajPHS2Vke/prices/price_1M75toKajPHS2VkeYLDV1wZR	[created]
+ok	plan:pro@1	feature:convert	https://dashboard.stripe.com/acct_15MpCwKajPHS2Vke/prices/price_1M75toKajPHS2VkeKQOSJYTP	[created]
+```
+
+If the `pricing.json` file contains any changes to previously-pushed plans, those changes will not be pushed, and an error will be reported. New versions of plans must be new entries in the `"plans"` section of the `pricing.json` file.
+To read pricing.json data from standard input, supply `-` as the filename.
+
+To push live mode data, run:
+
+```js
+tier push --live <filename>
+```
+
+This will only work if the key minted with `tier connect` is granted `write` access to "Billing Resources and Core Resources", or if a suitable `STRIPE_API_KEY` is set in the environment. See the `tier connect` documentation for more information.
+
+---
+
+## `tier limits`
+
+```js
+tier [--live] limits <org>
+```
+
+Tier limits lists the provided org's limits and usage per feature subscribed.
+
+Features that are not limited will print the `∞` character in the `LIMITS` column.
+
+```
+$ tier limits org:user
+FEATURE          LIMIT  USED
+feature:convert  ∞     4
+feature:reports  10     3
+```
+
+If the `--live` flag is provided, your account's live mode data will be used.
+
+This will only work if the key minted with `tier connect` is granted `write` access to "Billing Resources and Core Resources", or if a suitable `STRIPE_API_KEY` is set in the environment. See the `tier connect` documentation for more information.
+
+---
+
+## `tier phases`
+
+```js
+tier [--live] [--verbose] phases <org>
+```
+
+Tier phases lists all phases scheduled by Tier for the provided org.
+
+The output is in the format:
+
+```
+EFFECTIVE                  FEATURE                 PLAN
+2022-10-10T23:26:10-07:00  feature:convert:temp    plan:pro@0
+2022-10-10T23:26:10-07:00  feature:convert:volume  plan:pro@0
+2022-10-10T23:26:10-07:00  feature:convert:weight  plan:pro@0
+```
+
+If the `--live` flag is provided, your account's live mode data will be used.
+
+This will only work if the key minted with `tier connect` is granted `write` access to "Billing Resources and Core Resources", or if a suitable `STRIPE_API_KEY` is set in the environment. See the `tier connect` documentation for more information.
+
+---
+
+## `tier connect`
+
+```js
+tier connect
+```
+
+Tier connect creates a set of Stripe restricted keys and writes them to `~/.config/tier/config.json` for use with push, pull, and other commands that interact with Stripe.
+
+A random human-readable key will be generated, along with a confirmation link to the Stripe dashboard. When the URL is loaded, the key will be displayed again on the web page for confirmation.
+
+At the Stripe dashboard URL, ensure that the key matches, and select which Stripe account should be used with Tier.
+
+```
+$ tier connect
+Tier connect instructions:
+
+1. Take a mental note of the following code:
+
+	reform-softer-jovial-usable
+
+2. Follow this link and verify the above code:
+
+	https://dashboard.stripe.com/stripecli/confirm_auth?t=1cL3Wp9w7l5nkchlUaofzSf4WFjyqmrE
+
+3. Return here and continue using Tier.
+```
+
+Upon completion of the authorization step, new restricted livemode and testmode keys will be minted and stored in `~/.config/tier/config.json` for Tier's use.
+
+### Important Caveat
+
+The minted key is _only_ used if the `STRIPE_API_KEY` is not set in the environment. If it is, then the supplied private key from the environment is used, regardless of what is stored in `~/.config/tier/config.json`. If you are using `tier connect` and it seems to still not be working, ensure that you do not have `STRIPE_API_KEY` set in your environment, and try again:
+
+```
+
+$ tier connect
+# ...
+
+$ tier pull
+tier: {"status":401,"message":"Invalid API Key provided: pk_live_************Tier","type":"invalid_request_error"}
+exit status 1
+
+$ # ???
+
+$ echo $STRIPE_API_KEY
+pk_live_notTheKeyForTier
+
+$ # aha
+
+$ unset STRIPE_API_KEY
+
+$ # now it'll work
+
+$ tier pull
+{
+     "plans": {
+          "plan:foo:bar@1": {
+...
+
+```
+
+### Live Mode Usage
+
+In order to use the generated restricted key for live mode pushes, it must have additional permissions granted on the Stripe dashboard.
+
+Go to https://dashboard.stripe.com/apikeys, and scroll to the bottom of the list to find the newly minted key.
+
+Click the `[...]` button on the right-hand side, and select `Edit`.
+
+Click `Write` for the "All Billing Resources" and "All Core Resources" sections, and click "Apply Changes" at the bottom.
+
+More documentation about restricted key usage and permissions is available .
+
+### Alternative: Use `STRIPE_API_KEY` Environment Variable
+
+An alternative to using `tier connect` is to set the `STRIPE_API_KEY` environment variable to a Stripe private key. If this is set, then it will take precedence over the key minted by `tier connect`.
+
+---
+
+## `tier serve`
+
+```js
+tier serve [--addr <addr>] [--live]
+```
+
+This command starts a web server that exposes the Tier API over HTTP listening on the provided service address.
+
+The default service address is `localhost:8080`.
+
+To run the service against your live data, run:
+
+```js
+tier serve --live
+```
+
+This will only work if the key minted with `tier connect` is granted `write` access to "Billing Resources and Core Resources", or if a suitable `STRIPE_API_KEY` is set in the environment. See the `tier connect` documentation for more information.
+
+---
+
+## `tier subscribe`
+
+```js
+tier [--live] subscribe [--email=[email]] <org> [plan|featurePlan]...
+```
+
+Tier subscribe creates or updates a subscription for the provided org, applying the features in the plan.
+
+If a `customer` object does not yet exist corresponding to the provided org name, then a new customer will be created in Stripe.
+
+See `tier whois` to get the Stripe customer id for a given org name.
+
+To subscribe a customer in live mode, use the `--live` flag.
+
+This will only work if the key minted with `tier connect` is granted `write` access to "Billing Resources and Core Resources", or if a suitable `STRIPE_API_KEY` is set in the environment. See the `tier connect` documentation for more information.
+
+```js
+Usage:
+
+        tier [--live] subscribe [flags] <org> [plan|featurePlan]...
+```
+
+```
+Tier subscribe creates or updates a subscription for the provided org, applying
+the features in the plan.
+
+Flags:
+
+        --email
+                set the org's email address
+        --cancel
+                cancel the org's subscription. It is an error to provide a plan
+                or featurePlan with this flag.
+
+Checkout only flags:
+        --checkout=<success_url>
+                subscribe the org to plans and features using Stripe Checkout.
+                The success url is required, and may be used with the
+                --cancel_url flag.
+        --trial days
+                set the org's trial period to the provided number of days. If
+                negative, the tial period will last indefinitely, and no other
+                phase will come after it.
+        --cancel_url=<cancel_url>
+                specify a cancel_url for Stripe Checkout. This flag is ignored
+                if --checkout is not set.
+```
+
+---
+
+## `tier clean`
+
+```js
+tier clean <flags>
+```
+
+Clean removes objects from Stripe Test Mode accounts. It can be used with a cron job to keep your test accounts clean.
+
+The `-switchaccounts` flag, takes a duration as its value and causes clean to remove connected Stripe accounts created by the switch command. Accounts are only considered for removal if they were created by the switch command, older than the provided duration of time specified in the flag, and exist in Test Mode. The duration may be an integer representing seconds, or a duration string such as `"1h30m"`. The default duration is `-1` which disables the cleaning of accounts.
+
+### Examples
+
+```
+tier clean -switchaccounts 1h   # remove all switch accounts older than 1 hour
+tier clean -switchaccounts 730h # remove all switch accounts older than 30 days
+tier clean -switchaccounts 0    # remove all switch accounts
+tier clean -switchaccounts -1   # nop
+```
+
+---
+
+### `tier version`
+
+```js
+tier version
+```
+
+Print the version of the Tier CLI.
+
+---
+
+## `tier pull`
+
+```js
+tier pull
+```
+
+This command pulls your current pricing model from Stripe, and prints it in `pricing.json` format.
+
+This can be useful for generating content such as pricing pages in a CMS, synchronizing a `pricing.json` file in source control, or any other cases where the pricing model information could be needed.
+
+All optional fields are filled in with their default values, even if they were not specified in the original `pricing.json` file used to create the plans.
+
+```js
+$ tier pull
+```
+
+```json
+{
+  "plans": {
+    "plan:free@1": {
+      "title": "plan:free@1",
+      "features": {
+        "feature:convert": {
+          "tiers": [
+            {
+              "upto": 10
+            }
+          ]
+        }
+      }
+    },
+    "plan:free@2": {
+      "title": "plan:free@2",
+      "features": {
+        "feature:convert": {
+          "tiers": [
+            {
+              "upto": 42
+            }
+          ]
+        }
+      }
+    },
+    "plan:pro@1": {
+      "title": "plan:pro@1",
+      "features": {
+        "feature:convert": {
+          "tiers": [
+            {
+              "upto": 100,
+              "base": 1000
+            },
+            {
+              "price": 1
+            }
+          ]
+        }
+      }
+    },
+    "plan:pro@2": {
+      "title": "plan:pro@2",
+      "features": {
+        "feature:convert": {
+          "tiers": [
+            {
+              "upto": 200,
+              "base": 2000
+            },
+            {
+              "price": 1
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+## `tier whoami`
+
+```js
+tier whoami
+```
+
+This command reports Stripe account information associated with the current key in use as a result of `tier connect`, `tier switch`, or the `STRIPE_API_KEY`.
+
+```
+$ tier whoami
+ID:         acct_1M21pw4Ca38FM8xh
+KeySource:  /Users/isaacs/.config/tier/config.json
+Isolated:   false
+Email:
+Created:    2022-11-08T18:08:12-06:00
+URL:        https://dashboard.stripe.com/acct_1M21pw4Ca38F
+```
+
+---
+
+## `tier whois`
+
+```js
+tier [--live] whois <org>
+```
+
+This command reports the Stripe customer ID for the provided org.
+
+To get the ID of a customer in live mode, use the `--live` flag.
+
+This will only work if the key minted with `tier connect` is granted `write` access to "Billing Resources and Core Resources", or if a suitable `STRIPE_API_KEY` is set in the environment. See the `tier connect` documentation for more information.

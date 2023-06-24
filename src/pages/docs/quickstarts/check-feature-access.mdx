@@ -1,0 +1,83 @@
+---
+description: "Learn how to implement entitlement checks, for hiding or displaying features to your customer based on their current subscription plan."
+published: true
+---
+
+# Check for feature access
+
+Learn how to implement entitlement checks, for hiding or displaying features to your customer based on their current subscription plan.
+
+### Before getting started
+
+To get the most out of this quick-start guide, you’ll need:
+
+1. Stripe secret key
+2. Select your pricing model & sync with Stripe
+3. Basic auth implementation with auth guards
+4. [Subscribed customers](/docs/quickstarts/initiate-subscription)
+
+<Banner>
+You will never have to sync any Tier or pricing-specific details to your DB, Tier will ensure that you get the most updated pricing and usage data, except user data.
+
+</Banner>
+
+<Banner>
+You do not have to track feature usage in your DB, with Tier these are already handled for you and you can just call `can()` to determine whether your customers have access to the feature or not.
+
+</Banner>
+
+### SDK Object definition
+
+|                                                                         |                                                                                                                       |
+| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| [Answer](https://tierrun.github.io/node-sdk/classes/answer.Answer.html) | This object will be returned by the can() method to help the user report any usage of a given feature in the product. |
+|                                                                         |                                                                                                                       |
+
+## 1. Initialize Tier SDK
+
+Initialize the Tier SDK, ideally in a singleton design pattern, with both `TIER_BASE_URL` and `TIER_API_KEY` environment variables set with the prescribed values.
+
+```js
+// To make use of Tier Cloud Alpha you need to
+// points base URL to the Tier API server
+TIER_BASE_URL = "https://api.tier.run"
+// and set Tier API Key as your Stripe secret key
+TIER_API_KEY = "sk_test_51..."
+```
+
+<CodeGroup title="Initialize Tier">
+
+```js
+import tier from "tier"
+```
+
+</CodeGroup>
+
+## 2. Check access to a feature for your customer
+
+You can easily provide/restrict access to a given feature for a customer using Tier’s entitlement checks.
+
+If your customer is in the base plan it can ensure that you only show features that are assigned under the base plan, and you can even ask them to upgrade to a paid plan when they try to access a restricted feature.
+
+<CodeGroup title="Check entitlement">
+
+```js
+const access = await tier.can(
+  "org:customer-id-from-your-db",
+  "feature:feature-from-base-plan"
+)
+if (access.ok) {
+  // Give access to the feature here
+} else {
+  // Handle restriction and even upselling here.
+}
+```
+
+</CodeGroup>
+
+This quickstart will give you an idea of how to give access to features for your customers using entitlements in Tier. You can also refer to our SDK references to understand more about `can()`, `lookupLimits()`, and `lookupLimit()`.
+
+<Banner>
+Check our SDK references for more details on these topics.
+
+</Banner>

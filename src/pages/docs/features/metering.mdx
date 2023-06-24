@@ -1,0 +1,55 @@
+---
+description: "Charge your customers based on how much they use a particular feature of your application."
+published: true
+---
+
+# Metering
+
+Charge your customers based on how much they use a particular feature of your application.
+
+## Introduction
+
+Once you’ve created a metered feature as part of your pricing model, it is important for you to have a way to report the usage of that feature. You can report the usage of a feature with ease using Tier SDK.
+
+## Report usage of a feature
+
+You can easily report the usage of a feature and even mention the quantity of consumption using our `report()` method. Ideally, you should report the usage after you checked access for your customer and after your customer consumed the feature. You can add an option called `clobber` if you want the usage amount to overriding any previously reported usage of the feature for the current subscription.
+
+```js
+await tier.report('org:customer-id-from-your-db',
+	'feature:feature-id',
+	 1 // This is the unit of feature consumption and it can be any number,
+	{
+		at: new Date('23 March 2023'),
+		clobber: true // If you want the usage amount to override any previously reported usage of the feature for the current phase
+	}
+);
+```
+
+<Banner>
+You have to ensure that the features are reported correctly and if there are any failures, you have to retry and make sure it is entered. This is extremely relevant if your resource consumption per feature usage is costly.
+
+</Banner>
+
+## Report usage using `can()`
+
+When you use the convenient entitlement check method `can()` it returns an `Answer` object which has a reporting function with respect to the feature that was checked. You can use the `report()` without any params as it is already recorded when you made the call with `can()`
+
+```js
+const access = await tier.can(
+  "org:customer-id-from-your-db",
+  "feature:feature-from-base-plan"
+)
+
+if (access.ok) {
+  // Give access to the feature here
+  access.report() // Report feature usage here
+} else {
+  // Handle restriction and even upselling here.
+}
+```
+
+<Banner>
+You can find more details about metering in our SDK references.
+
+</Banner>

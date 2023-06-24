@@ -1,0 +1,65 @@
+---
+title: "Billing Engines Don't Solve Pricing Problems"
+publishedAt: "2023-04-26T23:21:20.906Z"
+updatedAt: "2023-04-26T23:21:20.906Z"
+description: "One lesson we've learned talking to companies on their pricing journeys (and from our own in the past) is the importance of separating the concepts of 'Billing Engine' and 'Pricing Engine'."
+author: "issac"
+category: "Pricing"
+published: true
+---
+
+One lesson we've learned talking to companies on their pricing journeys (and from our own in the past) is the importance of separating the concepts of "Billing Engine" and "Pricing Engine".
+
+It's one of those things that feels obvious when you see it, but until you do, it can be hard to grasp why it's important. The result is that we end up with the wrong abstraction trying to do double duty.
+
+Just as you probably wouldn't use a relational database as a message bus, mixing the concepts of Pricing and Billing can bring disaster.
+
+## The Problem
+
+Most companies approach their pricing implementation in the following way:
+
+1. Choose a billing engine (Stripe, Lago, etc.)
+2. Have a bunch of meetings where they argue about the best pricing model (and hopefully write it down somewhere!)
+3. Configure the billing engine with the model they decided on (or realize it's too complicated, and go back to step 2).
+4. Store all the information that the billing engine needs in their application database (identifiers for prices, products, customer IDs associated with each user, etc.), and add the required reporting logic in the application in the appropriate places.
+5. Pray that no one ever has to touch it again. (Or failing that, hope you've got a new job somewhere else before that happens.)
+
+Where does the pricing model live? Typically, it's smeared across a variety of loosely connected components, some of which store it as implicit assumptions.
+
+- The billing engine
+- The application code
+- The CFO's spreadsheets
+- The `/pricing` page
+- The terms and conditions of various customer contracts
+- Feature requests from PMs and PMMs who want to make changes
+- The fallible human brains of everyone on the team
+
+## Billing Engine vs Pricing Engine
+
+A lot of value can be unlocked by separating these two abstractions.
+
+A **Billing Engine** is the component in the stack that _bills customers_. Its "one job" is to send an invoice at the right time, in the right amount, to the right buyer.
+
+To do this, it needs to know some information about the customer, what thing they bought, the price they should be charged for it, and in the case of metered billing, the amount of that thing that they consumed.
+
+A **Pricing Engine** is the component in the stack that _manages and implements the pricing model_. You can think of it as "the thing that does [PriceOps](https://priceops.org)". It knows what the various pricing plans are, and where they live in the Billing Engine, and thus can present a clean API surface for application code to create subscriptions and report usage.
+
+To do its job (and prevent other components from trying to take over!) it needs to store the pricing model itself, and present a clean abstraction to the application code, billing engine, and all other technical and business components that need access to price information.
+
+And perhaps most importantly, it must support making _changes_ to the pricing model, without its abstractions leaking out to consumers.
+
+## Benefits
+
+The most tangible immediate benefit of a comprehensive Pricing Engine is that it can simplify the process of setting up a Billing Engine, and reduce the amount of billing-related metadata that needs to be tracked and managed by application code.
+
+While this is enough of a reason to use it, it doesn't always _feel_ like a huge win. Integrating with a whole new component in the stack feels like adding complexity in one place to maybe save it elsewhere. Even if it makes your code cleaner and simpler, it's not _that_ bad, right? Isn't "having too many customers and complicated deals" sort of a problem I can worry about when I'm rich and successful?
+
+However, the trouble with this line of thinking (which all of us at Tier have learned through painful expensive experience) is that it can be very difficult for a company to _become_ successful if they cannot easily iterate on their approach to pricing and packaging.
+
+**Streamlining pricing with a comprehensive Pricing Engine lets everyone focus on their specialty.** This unlocks growth that would otherwise be lost to inefficient processes.
+
+## Why We Made Tier
+
+What we've found is that the most experienced and insightful practitioners in this space follow exactly this kind of approach. That's how the concept of PriceOps was born.
+
+Tier is a comprehensive Pricing Engine, which drives your billing engine and application code from a single source of pricing model truth, so that everything in your company can work in concert, even as your business changes and grows.

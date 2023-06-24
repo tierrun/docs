@@ -1,0 +1,47 @@
+---
+publishedAt: '2023-01-06T13:25:36.614Z'
+title: Tier Fly.io Template
+---
+
+A community member has contributed a Fly.io template. (Thank you [Samuel Gordalina](https://github.com/gordalina)!)
+
+
+This template will provision Tier as a private service on [Fly.io](https://fly.io).
+
+
+Setup
+-----
+
+
+Create an app out of [this template](https://github.com/gordalina/fly-tier).
+
+
+
+```
+sh flyctl launch --no-deploy
+
+```
+
+Then we set the stripe api key secret, and deploy it
+
+
+
+```
+sh flyctl secrets set STRIPE_API_KEY=sk_live_...
+
+```
+
+Usage
+-----
+
+
+The app is now available internally at `http://<app>.internal/`.
+
+
+Support
+-------
+
+
+For further questions, please join our [Community Slack](https://join.slack.com/t/tier-community/shared_invite/zt-1blotqjb9-wvkYMo8QkhaEWziprdjnIA).
+
+

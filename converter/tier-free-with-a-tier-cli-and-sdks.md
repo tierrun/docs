@@ -1,0 +1,130 @@
+---
+publishedAt: '2022-11-02T11:58:34.349Z'
+title: Tier Free with a Tier CLI and SDKs
+---
+
+We are proud to share [Tier CLI](https://github.com/tierrun/tier/), a tool that lets you define and manage your SaaS application's pricing model following best [PriceOps](https://priceops.org) practices. 
+
+
+Pricing is the most effective lever to unlock SaaS performance. However, attempts to iterate on pricing are too often hamstrung by complicated workflows, ad hoc conventions, and hidden cross-organization dependencies.
+
+
+[Tier](https://www.tier.run) helps you to define a single source of pricing truth that can be safely and easily updated, with a simple json definition optimized for SaaS use cases. This keeps everything aligned as you find the best product-market fit.
+
+
+### Why we are building Tier
+
+
+
+> 
+> We are building Tier to bring sanity to the process of implementing and modifying software pricing. 
+> 
+> 
+> 
+
+
+It's a common pattern to build an app, API or service without any built-in logic to manage pricing, plans or customer access. At some point, it's time to charge money for your product. Eventually, you have to make a change to that pricing, either by modifying the features it grants access to or changing the price or both. Without a single source of truth, a change anywhere means making changes everywhere.
+
+
+### Building something maintainable
+
+
+Typically there is no single point of truth for pricing in software. Do you know where to look to see which of your users are paying, what they are entitled to access, and how they will be impacted by future changes? Most of us don't. 
+
+
+If you are at this stage, you may be familiar with the different products out there:
+
+
+* Subscription Management tools
+* Configure Price Quote
+* Payment gateways
+* Metering services
+![grid1.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1666971402064/BAgNBeZlU.png)
+
+
+Your app or service also likely has some type of user authentication and authorization service. You may be using a feature flagging service to manage feature enablement for end users. 
+
+
+Most of the time you will end up writing custom connectors between these tools. Keeping track of which tool holds the authoritative data for any given request is unwieldy. 
+
+
+### Configuration is the foundation for a safe system
+
+
+As part of this release, we are also sharing more about [pricing.json](https://www.tier.run/docs/pricing.json) and our overall configuration-driven approach to Price Operations. 
+
+
+Our goal is to make software price operations safe, easy and reliable.
+
+
+
+> 
+> #### Safe
+> 
+> 
+> All pricing configurations are **immutable and versioned** within Tier. Once pushed, a plan version and its associated data cannot be changed. This protects against one system being updated, while another gets out of sync. 
+> 
+> 
+> #### Easy
+> 
+> 
+> Streamlined interfaces are available for pricing configuration, processing and publishing. 
+> 
+> 
+> #### Reliable
+> 
+> 
+> A pricing change or packaging reconfiguration will not be applied unless it can be done successfully.
+> 
+> 
+> 
+
+
+### Introducing [Tier CLI](https://github.com/tierrun/tier)
+
+
+![render1666929857020.gif](https://cdn.hashnode.com/res/hashnode/image/upload/v1666929976844/DhIoBM7qh.gif)
+
+
+Today's release is the Tier CLI. A powerful tool to manage your Stripe account using [PriceOps](https://www.priceops.org) patterns. 
+
+
+The Tier CLI will interface directly with your Stripe account in order to reliably manage your product, pricing, subscription and metering data. 
+
+
+You can then use a [Tier SDK](https://www.tier.run/docs/sdk/) to implement usage limits and metering in your app or service. 
+![stripey.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1666974779403/aDZbi0o8O.png)
+
+
+Our design goal is to make using the Tier CLI **easier than using Stripe itself**. With the SDK implemented, you will be able to make pricing changes without having to make code changes.
+
+
+
+> 
+> "With the SDK implemented, you will be able to make pricing changes without having to make code changes."
+> 
+> 
+> 
+
+
+By using [pricing.json](https://www.tier.run/docs/pricing.json/), the [Tier CLI](https://www.tier.run/docs/cli/) and our [SDKs](https://www.tier.run/docs/sdk/), you can begin safely and reliably applying pricing changes to your products and services. You can also request current limits for metered features, and report usage to stripe. The CLI will act as a sidecar in order to gracefully manage communication with Stripe.
+
+
+### Thank You!
+
+
+We've spent a lot of time with many eager customers in the last 8 months. These testers have given us an endless amount of insight and have helped us continually improve our design and implementation of [Tier](https://www.tier.run), the [Tier CLI](https://github.com/tierrun/tier) and our [SDK](https://www.tier.run/docs/sdk/)s. 
+
+
+There is much more coming that we are eager to share with you! 
+
+
+* [Hello World example](https://blog.tier.run/tier-hello-world-demo)
+* [Read our docs](https://tier.run/docs)
+* [Join our Slack](https://join.slack.com/t/tier-community/shared_invite/zt-1blotqjb9-wvkYMo8QkhaEWziprdjnIA)
+* [Get a demo of the full set of Tier services](https://cal.com/tier/tier-demo)
+
+
+Jevon, Blake and Isaac.
+
+
