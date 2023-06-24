@@ -214,13 +214,13 @@ export function Navigation(props) {
     <nav {...props}>
       <ul role="list">
         {/* Main Search */}
-        {pathname.startsWith('/docs') ? (
+        {/* {pathname.startsWith('/docs') ? (
           <div className="lg:block hidden pb-4 pt-4 fixed dark:bg-d-slate-1 bg-l-slate-1 xl:w-[272px] lg:w-[240px] z-10 -mt-4 mb-16">
             <Search />
           </div>
         ) : (
           <></>
-        )}
+        )} */}
 
         {main.map((mainNavItem, mainNavItemIndex) => (
           <TopLevelNavItem key={mainNavItemIndex} href={mainNavItem.href}>
@@ -228,7 +228,7 @@ export function Navigation(props) {
           </TopLevelNavItem>
         ))}
         {pathname.startsWith('/docs') ? (
-          <div className="lg:pt-16 pt-0">
+          <>
             {/* Insert External Links */}
             <MainLinks />
             {navigation.map((group, groupIndex) => (
@@ -238,7 +238,7 @@ export function Navigation(props) {
                 className={groupIndex === 0 && 'md:mt-0'}
               />
             ))}
-          </div>
+          </>
         ) : (
           <></>
         )}

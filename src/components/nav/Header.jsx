@@ -12,7 +12,7 @@ import {
 } from '@/components/nav/MobileNav'
 import { useMobileNavigationStore } from '@/components/nav/MobileNav'
 import { ModeToggle } from '@/components/common/ModeToggle'
-import { MobileSearch } from '@/components/Search'
+import { MobileSearch, Search } from '@/components/Search'
 
 // Navigation Links
 import { main } from '@/navs/main'
@@ -62,10 +62,11 @@ export const Header = forwardRef(function Header({ className }, ref) {
             'bg-l-slate-alpha-6 dark:bg-d-slate-alpha-6'
         )}
       />
-      <div className="hidden gap-6 lg:flex lg:w-[450px]">
+      <div className="hidden gap-6 lg:flex lg:items-center lg:w-[450px]">
         <Link href="/" aria-label="Home">
           <Logo className="h-6" />
         </Link>
+        <Search />
       </div>
       <div className="flex items-center gap-5 lg:hidden">
         <MobileNavigation />
@@ -85,7 +86,7 @@ export const Header = forwardRef(function Header({ className }, ref) {
         </nav>
         <div className="hidden md:block md:h-5 md:w-px md:bg-l-slate-alpha-6 md:dark:bg-d-slate-alpha-6" />
         <div className="flex gap-4">
-          {pathname.startsWith('/docs') ? <MobileSearch /> : <></>}
+          <MobileSearch />
           <ModeToggle />
         </div>
         <div className="hidden min-[416px]:contents">
