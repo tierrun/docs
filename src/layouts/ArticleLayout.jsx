@@ -25,7 +25,7 @@ export function ArticleLayout({ frontMatter, title, children, sections = [] }) {
     // If parent path
     case pathName === '/blog':
       siteTitle = siteConfig.blogSiteName
-      ogImage = siteConfig.blogsOgImage
+      ogImage = `https://${siteConfig.domain}${siteConfig.blogsOgImage}`
       description = siteConfig.blogSiteDescription
       url = `https://${siteConfig.domain}/blog`
       break
@@ -45,7 +45,7 @@ export function ArticleLayout({ frontMatter, title, children, sections = [] }) {
     // If parent path
     case pathName === '/changelog':
       siteTitle = siteConfig.changelogSiteName
-      ogImage = siteConfig.changelogsOgImage
+      ogImage = `https://${siteConfig.domain}${siteConfig.changelogsOgImage}`
       description = siteConfig.changelogSiteDescription
       url = `https://${siteConfig.domain}/changelog`
       break
@@ -64,7 +64,7 @@ export function ArticleLayout({ frontMatter, title, children, sections = [] }) {
 
     default:
       siteTitle = title ? title : siteConfig.name
-      ogImage = siteConfig.siteOgImage
+      ogImage = `https://${siteConfig.domain}${siteConfig.siteOgImage}`
       description = ''
       url = frontMatter
         ? `https://${siteConfig.domain}${frontMatter.path}`
@@ -78,7 +78,7 @@ export function ArticleLayout({ frontMatter, title, children, sections = [] }) {
         data={{
           title: siteTitle,
           description: description,
-          image: `https://${siteConfig.domain}${ogImage}`,
+          image: ogImage,
           url: url,
         }}
       />
