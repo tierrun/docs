@@ -33,9 +33,9 @@ export default async function handler(request) {
     // ?description=<description>
     const hasDescription = searchParams.has('description')
     const description = hasDescription
-      ? searchParams.get('description')?.slice(0, 280).length < 280
-        ? `${searchParams.get('description')?.slice(0, 280)}`
-        : `${searchParams.get('description')?.slice(0, 280)} ...`
+      ? searchParams.get('description')?.slice(0, 175).length < 175
+        ? `${searchParams.get('description')?.slice(0, 175)}`
+        : `${searchParams.get('description')?.slice(0, 175)} ...`
       : siteConfig.docsSiteDescription
 
     return new ImageResponse(
@@ -239,7 +239,9 @@ export default async function handler(request) {
             </div>
             <div tw="flex flex-col pt-32">
               <h1 tw="flex text-[#FFFFFF] font-bold text-7xl">{title}</h1>
-              <p tw="flex text-3xl leading-10 text-[#FFFFFF]">{description}</p>
+              <p tw="flex text-4xl leading-normal text-[#FFFFFF]">
+                {description}
+              </p>
             </div>
           </div>
         </div>
