@@ -55,15 +55,14 @@ export function ArticleLayout({ frontMatter, title, children, sections = [] }) {
     // If leaf node add path
     case pathName.startsWith('/changelog'):
       siteTitle = `${frontMatter.title} | ${siteConfig.changelogSiteName}`
-      ogImage = encodeURI(
-        `https://${
-          siteConfig.domain
-        }/api/og/ogChangelog?title=${encodeURIComponent(
-          frontMatter.title
-        )}&description=${encodeURIComponent(
-          frontMatter ? frontMatter.description : ''
-        )}`
-      )
+      ogImage = `https://${
+        siteConfig.domain
+      }/api/og/ogChangelog?title=${encodeURIComponent(
+        frontMatter.title
+      )}&description=${encodeURIComponent(
+        frontMatter ? frontMatter.description : ''
+      )}`
+
       description = frontMatter ? frontMatter.description : ''
       url = `https://${siteConfig.domain}${frontMatter.path}`
       break
