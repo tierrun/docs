@@ -12,7 +12,6 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": false
   },
-  "eslint.packageManager": "pnpm",
   // For activating stylelint config
   // "css.validate": false,
   // "less.validate": false,
@@ -26,6 +25,7 @@
   // Custom file nesting
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
+  "tailwindCSS.classAttributes": ["class", "className", "ngClass", "tw"],
 
   "[mdx]": {
     "editor.wordWrap": "on"

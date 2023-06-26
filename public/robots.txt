@@ -12,6 +12,8 @@ Allow: /blog$
 Allow: /changelog
 Allow: /changelog$
 Allow: /api/og/ogDocs/*
+Allow: /api/og/ogDocs
+Allow: /api/og/ogDocs$
 
 User-agent: rogerbot
 Crawl-delay: 2
