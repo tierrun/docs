@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@algolia/autocomplete-core": "^1.8.3",
@@ -55,10 +57,19 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.5",
     "@commitlint/config-conventional": "^17.6.5",
+    "@storybook/addon-essentials": "^7.0.23",
+    "@storybook/addon-interactions": "^7.0.23",
+    "@storybook/addon-links": "^7.0.23",
+    "@storybook/blocks": "^7.0.23",
+    "@storybook/nextjs": "^7.0.23",
+    "@storybook/react": "^7.0.23",
+    "@storybook/testing-library": "^0.0.14-next.2",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
+    "eslint-plugin-storybook": "^0.6.12",
     "husky": "^8.0.3",
-    "inquirer": "^9.2.7"
+    "inquirer": "^9.2.7",
+    "storybook": "^7.0.23"
   },
   "config": {
     "commitizen": {

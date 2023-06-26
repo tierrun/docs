@@ -18,11 +18,34 @@ import { MobileSearch, Search } from '@/components/Search'
 import { main } from '@/navs/main'
 
 function TopLevelNavItem({ href, children }) {
+  let { pathname } = useRouter()
+  let classForHighlight
+  switch (true) {
+    case href.startsWith('/docs') && pathname.startsWith('/docs'):
+      classForHighlight =
+        'text-l-blue-9 dark:text-d-blue-9 hover:text-l-blue-10 hover:dark:text-d-blue-10'
+      break
+
+    case href.startsWith('/blog') && pathname.startsWith('/blog'):
+      classForHighlight =
+        'text-l-blue-9 dark:text-d-blue-9 hover:text-l-blue-10 hover:dark:text-d-blue-10'
+      break
+
+    case href.startsWith('/changelog') && pathname.startsWith('/changelog'):
+      classForHighlight =
+        'text-l-blue-9 dark:text-d-blue-9 hover:text-l-blue-10 hover:dark:text-d-blue-10'
+      break
+
+    default:
+      classForHighlight =
+        'text-l-slate-alpha-11 hover:text-l-slate-alpha-12 dark:text-d-slate-alpha-11 dark:hover:text-d-slate-alpha-12'
+      break
+  }
   return (
     <li>
       <Link
         href={href}
-        className="text-sm leading-5 transition text-l-slate-alpha-11 hover:text-l-slate-alpha-12 dark:text-d-slate-alpha-11 dark:hover:text-d-slate-alpha-12"
+        className={clsx('text-sm leading-5 transition ', classForHighlight)}
       >
         {children}
       </Link>

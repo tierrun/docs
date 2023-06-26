@@ -43,7 +43,8 @@ export function DocumentationLayout({
         data={{
           title: siteTitle,
           description: description,
-          image: `https://${siteConfig.domain}${siteConfig.docsOgImage}`,
+          // image: `https://${siteConfig.domain}${siteConfig.docsOgImage}`,
+          image: `https://${siteConfig.domain}/api/ogDocs?title="Sample"&description="Sample description"`,
           url: url,
         }}
       />
