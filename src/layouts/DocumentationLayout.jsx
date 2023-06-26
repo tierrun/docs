@@ -21,6 +21,7 @@ export function DocumentationLayout({
   let siteTitle
   let description
   let url
+  let image
 
   // All pathnames will start with "/docs" as it is already filtered @ _app.jsx
   switch (true) {
@@ -28,12 +29,16 @@ export function DocumentationLayout({
       siteTitle = siteConfig.docsSiteName
       url = `https://${siteConfig.domain}/docs`
       description = siteConfig.docsSiteDescription
+      image = `https://${siteConfig.domain}${siteConfig.docsOgImage}`
       break
 
     default:
       siteTitle = `${title} | ${siteConfig.docsSiteName}`
       url = `https://${siteConfig.domain}${frontMatter.path}`
       description = frontMatter.description
+      image = encodeURI(
+        `https://${siteConfig.domain}/api/og/ogDocs?title=${title}&description=${frontMatter.description}`
+      )
       break
   }
 
@@ -43,8 +48,7 @@ export function DocumentationLayout({
         data={{
           title: siteTitle,
           description: description,
-          // image: `https://${siteConfig.domain}${siteConfig.docsOgImage}`,
-          image: `https://${siteConfig.domain}/api/og/ogDocs?title=Sample&description=SampleDescription`,
+          image: image,
           url: url,
         }}
       />
