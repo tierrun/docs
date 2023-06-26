@@ -36,9 +36,12 @@ export function DocumentationLayout({
       siteTitle = `${title} | ${siteConfig.docsSiteName}`
       url = `https://${siteConfig.domain}${frontMatter.path}`
       description = frontMatter.description
-      image = encodeURI(
-        `https://${siteConfig.domain}/api/og/ogDocs?title=${title}&description=${frontMatter.description}`
-      )
+      image = `https://${
+        siteConfig.domain
+      }/api/og/ogDocs?title=${encodeURIComponent(
+        title
+      )}&description=${encodeURIComponent(frontMatter.description)}`
+
       break
   }
 
