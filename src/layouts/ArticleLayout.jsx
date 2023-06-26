@@ -33,7 +33,11 @@ export function ArticleLayout({ frontMatter, title, children, sections = [] }) {
     // If leaf node add path
     case pathName.startsWith('/blog'):
       siteTitle = `${frontMatter.title} | ${siteConfig.blogSiteName}`
-      ogImage = siteConfig.blogsOgImage
+      ogImage = encodeURI(
+        `https://${siteConfig.domain}/api/og/ogBlog?title=${
+          frontMatter.title
+        }&description=${frontMatter ? frontMatter.description : ''}`
+      )
       description = frontMatter ? frontMatter.description : ''
       url = `https://${siteConfig.domain}${frontMatter.path}`
       break
@@ -49,7 +53,11 @@ export function ArticleLayout({ frontMatter, title, children, sections = [] }) {
     // If leaf node add path
     case pathName.startsWith('/changelog'):
       siteTitle = `${frontMatter.title} | ${siteConfig.changelogSiteName}`
-      ogImage = siteConfig.changelogsOgImage
+      ogImage = encodeURI(
+        `https://${siteConfig.domain}/api/og/ogChangelog?title=${
+          frontMatter.title
+        }&description=${frontMatter ? frontMatter.description : ''}`
+      )
       description = frontMatter ? frontMatter.description : ''
       url = `https://${siteConfig.domain}${frontMatter.path}`
       break

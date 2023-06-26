@@ -28,13 +28,15 @@ export default async function handler(request) {
     const hasTitle = searchParams.has('title')
     const title = hasTitle
       ? searchParams.get('title')?.slice(0, 100)
-      : siteConfig.blogSiteName
+      : siteConfig.docsSiteName
 
     // ?description=<description>
     const hasDescription = searchParams.has('description')
     const description = hasDescription
-      ? `${searchParams.get('description')?.slice(0, 280)} ...`
-      : siteConfig.blogSiteDescription
+      ? searchParams.get('description')?.slice(0, 280).length < 280
+        ? `${searchParams.get('description')?.slice(0, 280)}`
+        : `${searchParams.get('description')?.slice(0, 280)} ...`
+      : siteConfig.docsSiteDescription
 
     return new ImageResponse(
       (
@@ -235,10 +237,8 @@ export default async function handler(request) {
                 </defs>
               </svg>
             </div>
-            <div tw="flex flex-col pt-32" className="">
-              <h1 tw="flex text-[#FFFFFF] font-bold text-7xl" className="">
-                {title}
-              </h1>
+            <div tw="flex flex-col pt-32">
+              <h1 tw="flex text-[#FFFFFF] font-bold text-7xl">{title}</h1>
               <p tw="flex text-3xl leading-10 text-[#FFFFFF]">{description}</p>
             </div>
           </div>
