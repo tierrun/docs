@@ -44,7 +44,7 @@ export function DocumentationLayout({
           title: siteTitle,
           description: description,
           // image: `https://${siteConfig.domain}${siteConfig.docsOgImage}`,
-          image: `https://${siteConfig.domain}/api/og/ogDocs?title="Sample"&description="Sample description"`,
+          image: `https://${siteConfig.domain}/api/og/ogDocs?title=Sample&description=SampleDescription`,
           url: url,
         }}
       />
