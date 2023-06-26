@@ -27,7 +27,7 @@ export default async function handler(request) {
     // ?title=<title>
     const hasTitle = searchParams.has('title')
     const title = hasTitle
-      ? searchParams.get('title')?.slice(0, 100)
+      ? searchParams.get('title')?.slice(0, 50)
       : siteConfig.docsSiteName
 
     // ?description=<description>
@@ -237,8 +237,10 @@ export default async function handler(request) {
                 </defs>
               </svg>
             </div>
-            <div tw="flex flex-col pt-32">
-              <h1 tw="flex text-[#FFFFFF] font-bold text-7xl">{title}</h1>
+            <div tw="flex h-full flex-col justify-end pb-16">
+              <h1 tw="flex text-[#FFFFFF] font-bold text-7xl leading-tight">
+                {title}
+              </h1>
               <p tw="flex text-4xl leading-normal text-[#FFFFFF]">
                 {description}
               </p>
