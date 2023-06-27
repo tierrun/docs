@@ -92,10 +92,81 @@ export const redirects = [
   },
   // CLI Old Documentation remapping
   {
+    source: '/docs/cli/whois',
+    destination: '/docs/references/tier-cli#tier-whois',
+    permanent: false,
+  },
+  {
+    source: '/docs/cli/whoami',
+    destination: '/docs/references/tier-cli#tier-whoami',
+    permanent: false,
+  },
+  {
+    source: '/docs/cli/phases',
+    destination: '/docs/references/tier-cli#tier-phases',
+    permanent: false,
+  },
+  {
+    source: '/docs/cli/report',
+    destination: '/docs/references/tier-cli#tier-report',
+    permanent: false,
+  },
+  {
+    source: '/docs/cli/push',
+    destination: '/docs/references/tier-cli#tier-push',
+    permanent: false,
+  },
+  {
+    source: '/docs/cli/clean',
+    destination: '/docs/references/tier-cli#tier-clean',
+    permanent: false,
+  },
+  {
+    source: '/docs/cli/version',
+    destination: '/docs/references/tier-cli#tier-version',
+    permanent: false,
+  },
+  {
+    source: '/docs/cli/pull',
+    destination: '/docs/references/tier-cli#tier-pull',
+    permanent: false,
+  },
+  {
     source: '/docs/cli/connect',
     destination: '/docs/references/tier-cli#tier-connect',
     permanent: false,
   },
+  {
+    source: '/docs/cli/limits',
+    destination: '/docs/references/tier-cli#tier-limits',
+    permanent: false,
+  },
+  {
+    source: '/docs/cli/index',
+    destination: '/docs/references/tier-cli',
+    permanent: false,
+  },
+  {
+    source: '/docs/cli/subscribe',
+    destination: '/docs/references/tier-cli#tier-subscribe',
+    permanent: false,
+  },
+  {
+    source: '/docs/cli/serve',
+    destination: '/docs/references/tier-cli#tier-serve',
+    permanent: false,
+  },
+  {
+    source: '/docs/cli/switch',
+    destination: '/docs/references/tier-cli#tier-switch',
+    permanent: false,
+  },
+  {
+    source: '/docs/cli/ls',
+    destination: '/docs/references/tier-cli#tier-ls',
+    permanent: false,
+  },
+
   // Redirects for the main website links
   {
     source: '/releases',
