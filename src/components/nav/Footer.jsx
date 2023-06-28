@@ -106,10 +106,10 @@ function SmallPrint() {
         &copy; Tier.run, Inc. {new Date().getFullYear()}. All rights reserved.
       </p>
       <div className="flex gap-4">
-        <SocialLink href="#" icon={TwitterIcon}>
+        <SocialLink href="https://twitter.com/tierdotrun" icon={TwitterIcon}>
           Follow us on Twitter
         </SocialLink>
-        <SocialLink href="#" icon={GitHubIcon}>
+        <SocialLink href="https://github.com/tierrun/tier" icon={GitHubIcon}>
           Follow us on GitHub
         </SocialLink>
         <SocialLink href="#" icon={DiscordIcon}>
