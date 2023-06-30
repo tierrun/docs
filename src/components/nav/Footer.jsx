@@ -160,10 +160,7 @@ function FooterBase() {
             >
               Follow us on Twitter
             </SocialLink>
-            <SocialLink
-              href="https://github.com/tierrun/tier"
-              icon={GitHubIcon}
-            >
+            <SocialLink href="https://github.com/tierrun" icon={GitHubIcon}>
               Follow us on GitHub
             </SocialLink>
             <SocialLink href="/slack" icon={SlackIcon}>
