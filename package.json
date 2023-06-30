@@ -9,7 +9,8 @@
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "commit": "cz"
+    "commit": "cz",
+    "knip": "knip"
   },
   "dependencies": {
     "@algolia/autocomplete-core": "^1.8.3",
@@ -69,6 +70,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "eslint-plugin-storybook": "^0.6.12",
     "husky": "^8.0.3",
+    "knip": "^2.13.0-next-webpack.0",
     "storybook": "^7.0.23"
   },
   "config": {

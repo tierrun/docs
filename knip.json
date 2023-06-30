@@ -1,0 +1,54 @@
+{
+  "next": {
+    "entry": ["next.config.{js,ts,cjs,mjs}", "src/pages/**/*.{js,jsx,ts,tsx}"]
+  },
+  "husky": {
+    "config": [
+      ".husky/commit-msg",
+      ".husky/pre-{applypatch,commit,merge-commit,push,rebase,receive}",
+      ".husky/post-{checkout,commit,merge,rewrite}"
+    ]
+  },
+  "prettier": {
+    "config": [
+      ".prettierrc",
+      ".prettierrc.{json,js,cjs,yml,yaml}",
+      "prettier.config.{js,cjs}",
+      "package.json"
+    ]
+  },
+  "commitlint": {
+    "config": [
+      ".commitlintrc",
+      ".commitlintrc.{json,yaml,yml,js,cjs,ts,cts}",
+      "commitlint.config.{js,cjs,ts,cts}",
+      "package.json"
+    ]
+  },
+  "commitizen": {
+    "config": [".czrc", "package.json"]
+  },
+  "eslint": {
+    "config": [
+      ".eslintrc",
+      ".eslintrc.{js,json,cjs}",
+      ".eslintrc.{yml,yaml}",
+      "package.json"
+    ],
+    "entry": ["eslint.config.js"]
+  },
+  "postcss": {
+    "config": ["postcss.config.js", "postcss.config.json", "package.json"]
+  },
+  "storybook": {
+    "config": [".storybook/{main,manager}.{js,ts}"],
+    "entry": [
+      ".storybook/preview.{js,jsx,ts,tsx}",
+      "**/*.stories.{js,jsx,ts,tsx}"
+    ],
+    "project": [".storybook/**/*.{js,jsx,ts,tsx}"]
+  },
+  "tailwind": {
+    "config": ["tailwind.config.{js,cjs,mjs,ts}"]
+  }
+}
