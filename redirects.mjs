@@ -14,12 +14,6 @@ export const redirects = [
     destination: 'https://github.com/tierrun/tier-run-buildpack',
     permanent: false,
   },
-
-  {
-    source: '/docs/references/node',
-    destination: 'https://www.npmjs.com/package/tier',
-    permanent: false,
-  },
   {
     source: '/docs/references/go',
     destination: 'https://pkg.go.dev/tier.run/client/tier',

@@ -97,9 +97,13 @@ export const navigation = [
         algoliaTitle: 'CLI',
       },
       {
-        title: 'Node',
+        title: 'Pricing JSON',
+        href: '/docs/pricing-json',
+        algoliaTitle: 'Pricing JSON',
+      },
+      {
+        title: 'Node SDK',
         href: '/docs/references/node',
-        external: true,
         algoliaTitle: 'Node',
       },
       {
