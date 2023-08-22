@@ -244,10 +244,16 @@ ok	plan:pro@1	feature:convert	https://dashboard.stripe.com/acct_15MpCwKajPHS2Vke
 If the `pricing.json` file contains any changes to previously-pushed plans, those changes will not be pushed, and an error will be reported. New versions of plans must be new entries in the `"plans"` section of the `pricing.json` file.
 To read pricing.json data from standard input, supply `-` as the filename.
 
-To push live mode data, run:
+If you have a pricing.json file that you want to push to a live account, you can do so by running:
 
 ```bash
-tier push --live < filename >
+tier --live push < filename >
+```
+
+If you used model builder instead of writing the pricing.json file by hand, you can push the model directly from the model URL:
+
+```bash
+tier --live push <https://model.tier.run/XXXXXXXX>
 ```
 
 This will only work if the key minted with `tier connect` is granted `write` access to "Billing Resources and Core Resources", or if a suitable `STRIPE_API_KEY` is set in the environment. See the `tier connect` documentation for more information.
