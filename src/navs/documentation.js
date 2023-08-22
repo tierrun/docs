@@ -89,20 +89,30 @@ export const navigation = [
     ],
   },
   {
+    title: 'Command Line',
+    links: [
+      {
+        title: 'Overview',
+        href: '/docs/cli/overview',
+        algoliaTitle: 'Tier CLI Overview',
+      },
+      {
+        title: 'CLI Install',
+        href: '/docs/cli/install',
+        algoliaTitle: 'Tier CLI Install',
+      },
+      {
+        title: 'Core commands',
+        href: '/docs/cli/commands',
+        algoliaTitle: 'Tier CLI Commands',
+      },
+    ],
+  },
+  {
     title: 'References',
     links: [
       {
-        title: 'Tier CLI',
-        href: '/docs/references/tier-cli',
-        algoliaTitle: 'CLI',
-      },
-      {
-        title: 'Pricing JSON',
-        href: '/docs/pricing-json',
-        algoliaTitle: 'Pricing JSON',
-      },
-      {
-        title: 'Node SDK',
+        title: 'Node',
         href: '/docs/references/node',
         algoliaTitle: 'Node',
       },

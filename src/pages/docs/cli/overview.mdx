@@ -1,0 +1,27 @@
+---
+description: "Overview of Tier CLI and list of commands"
+published: true
+---
+
+# Tier CLI
+
+```bash
+tier [flags] < command > [< arguments >]
+```
+
+The commands are:
+
+- [`tier connect`](/docs/cli/commands#tier-connect) - Authorize the Tier client to access your Stripe account with a restricted key. Note that this may be overridden by the `STRIPE_API_KEY` environment variable.
+- [`tier switch`](/docs/cli/commands#tier-switch) - Use (or create) a Stripe Connect account.
+- [`tier ls`](/docs/cli/commands#tier-ls) - List features and plans pushed to Stripe.
+- [`tier report`](/docs/cli/commands#tier-report) - Report usage of a feature.
+- [`tier push [<filename>]`](/docs/cli/commands#tier-push) - Create plans in Stripe based on a `pricing.json` file.
+- [`tier limits`](/docs/cli/commands#tier-limits) - List a provided org's limits and usage.
+- [`tier phases`](/docs/cli/commands#tier-phases) - Display the phases in an org subscription schedule.
+- [`tier serve`](/docs/cli/commands#tier-serve) - Run the Tier sidecar API
+- [`tier subscribe`](/docs/cli/commands#tier-subscribe) - Create or modify a org subscription.
+- [`tier clean`](/docs/cli/commands#tier-clean) - Remove objects from Stripe Test Mode accounts.
+- [`tier version`](/docs/cli/commands#tier-version) - Display the version of Tier in use.
+- [`tier pull`](/docs/cli/commands#tier-pull) - Fetch all plans in Stripe, and format in a `pricing.json`.
+- [`tier whoami`](/docs/cli/commands#tier-whoami) - Show the currently logged in Stripe account.
+- [`tier whois`](/docs/cli/commands#tier-whois) - Get the Stripe customer ID for an org.

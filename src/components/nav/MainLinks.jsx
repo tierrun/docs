@@ -103,8 +103,8 @@ export function MainLinks({ mobile }) {
           </div>
           Examples & recipes
         </Link>
-      </li> */}
-      {/* <li>
+      </li>
+      <li>
         <Link
           href="/components"
           className={clsx(
