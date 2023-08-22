@@ -1,0 +1,32 @@
+---
+description: "Installation of Tier CLI"
+published: true
+---
+
+# Installing Tier CLI
+
+Tier can either be installed as a static binary, or run from source with `go`.
+
+### Homebrew (macOS)
+
+```bash
+brew install tierrun/tap/tier
+```
+
+### Binary (macOS, linux, Windows)
+
+Binaries for major architectures can be found [on Github](https://tier.run/releases).
+
+### Go (most operating systems and architectures)
+
+If `go1.19` or later is installed, run or install tier like:
+
+```bash
+go run tier.run/cmd/tier@latest
+```
+
+or
+
+```bash
+go install tier.run/cmd/tier@latest
+```

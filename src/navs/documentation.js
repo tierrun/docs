@@ -89,13 +89,28 @@ export const navigation = [
     ],
   },
   {
-    title: 'References',
+    title: 'Command Line',
     links: [
       {
-        title: 'Tier CLI',
-        href: '/docs/references/tier-cli',
-        algoliaTitle: 'CLI',
+        title: 'Overview',
+        href: '/docs/cli/overview',
+        algoliaTitle: 'Tier CLI Overview',
       },
+      {
+        title: 'CLI Install',
+        href: '/docs/cli/install',
+        algoliaTitle: 'Tier CLI Install',
+      },
+      {
+        title: 'Core commands',
+        href: '/docs/cli/commands',
+        algoliaTitle: 'Tier CLI Commands',
+      },
+    ],
+  },
+  {
+    title: 'References',
+    links: [
       {
         title: 'Node',
         href: '/docs/references/node',

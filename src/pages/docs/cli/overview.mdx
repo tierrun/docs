@@ -1,0 +1,27 @@
+---
+description: "Overview of Tier CLI and list of commands"
+published: true
+---
+
+# Tier CLI
+
+```bash
+tier [flags] < command > [< arguments >]
+```
+
+The commands are:
+
+- `tier connect` - Authorize the Tier client to access your Stripe account with a restricted key. Note that this may be overridden by the `STRIPE_API_KEY` environment variable.
+- `tier switch` - Use (or create) a Stripe Connect account.
+- `tier ls` - List features and plans pushed to Stripe.
+- `tier report` - Report usage of a feature.
+- `tier push [<filename>]` - Create plans in Stripe based on a `pricing.json` file.
+- `tier limits` - List a provided org's limits and usage.
+- `tier phases` - Display the phases in an org subscription schedule.
+- `tier serve` - Run the Tier sidecar API
+- `tier subscribe` - Create or modify a org subscription.
+- `tier clean` - Remove objects from Stripe Test Mode accounts.
+- `tier version` - Display the version of Tier in use.
+- `tier pull` - Fetch all plans in Stripe, and format in a `pricing.json`.
+- `tier whoami` - Show the currently logged in Stripe account.
+- `tier whois` - Get the Stripe customer ID for an org.
