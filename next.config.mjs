@@ -23,6 +23,9 @@ const nextConfig = {
   async rewrites() {
     return rewrites
   },
+  images: {
+    domains: ['assets.tina.io'],
+  },
   reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
   experimental: {

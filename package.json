@@ -1,11 +1,11 @@
 {
-  "name": "docs-new",
+  "name": "tier-docs",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "tinacms dev -c \"next dev\"",
+    "build": "tinacms build && tinacms build && next build",
+    "start": "tinacms build && tinacms build && next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -22,6 +22,7 @@
     "@next/mdx": "^13.2.4",
     "@sindresorhus/slugify": "^2.2.0",
     "@tailwindcss/typography": "^0.5.9",
+    "@tinacms/cli": "^1.5.31",
     "@vercel/og": "^0.5.8",
     "abstract-syntax-tree": "^2.20.7",
     "acorn": "^8.8.2",
@@ -52,6 +53,7 @@
     "simple-functional-loader": "^1.2.1",
     "stringify-object": "^5.0.0",
     "tailwindcss": "3.3.1",
+    "tinacms": "^1.5.22",
     "unist-util-visit": "^4.1.2",
     "zustand": "^4.3.7"
   },
