@@ -38,10 +38,14 @@
   },
   // Override spellings in workspace
   "cSpell.words": [
+    "algoliasearch",
+    "badrap",
     "clsx",
+    "commitlint",
     "Grandparenting",
     "headlessui",
     "infisical",
+    "knip",
     "mdast",
     "navs",
     "nextjs",
@@ -52,6 +56,7 @@
     "shiki",
     "sindresorhus",
     "tailwindcss",
+    "tinacms",
     "unist",
     "zustand"
   ]

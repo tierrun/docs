@@ -58,6 +58,11 @@ const BlogIndex = ({ changelogs, totalChangelogs }) => {
                               (author) => author.id === changelog.data.author
                             ).avatar
                           }
+                          alt={
+                            authors.find(
+                              (author) => author.id === changelog.data.author
+                            ).name
+                          }
                           width={20}
                           height={20}
                         />
