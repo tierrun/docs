@@ -27,8 +27,10 @@ export default async function handler(request) {
     // ?title=<title>
     const hasTitle = searchParams.has('title')
     const title = hasTitle
-      ? searchParams.get('title')?.slice(0, 50)
+      ? searchParams.get('title')?.slice(0, 75)
       : siteConfig.blogSiteName
+
+    console.log(title)
 
     // ?description=<description>
     const hasDescription = searchParams.has('description')
