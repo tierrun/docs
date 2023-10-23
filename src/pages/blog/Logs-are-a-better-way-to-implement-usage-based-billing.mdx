@@ -7,35 +7,35 @@ category: blog
 published: true
 ---
 
-Why Usage-Based?
+**Why Usage-Based?**
 
 It’s never been easier to conceive, prototype, and release a commercial web application that leverages exciting generative AI models like OpenAI, but as everyone from solo entrepreneurs to large companies integrating AI into their products are starting to discover – it also isn’t cheap. The costs incurred by these models are changing the MO for SaaS applications in some obvious ways: you’ll see fewer free trials, and you’ll often have to put a credit card down to experiment with a product. If operators don’t get the pricing of their products right, profit margins can easily be threatened. All of this leads to a common sight – the introduction of some usage-based aspects of pricing for many apps that use AI.
 
-Implementation Gotchas and Challenges
+**Implementation Gotchas and Challenges**
 
 Implementing usage-based billing starts simple but can get complex and fiddly very quickly. One common way people start is by calling out to their billing system in-line, e.g. using Stripe’s built-in usage-based billing product directly – directly after a certain amount of product X is used, an HTTP API call is made to Stripe’s endpoint directly. This can cause a number of issues, from introducing unnecessary latency in hot paths to a lack of reliable mechanisms for ensuring data accuracy. Instead of directly sending usage data to stripe, we recommend logging the usage data and dealing with checking, batching, and sending out of band. 
 
-Log-Based Billing: A High Level View
+**Log-Based Billing: A High Level View**
 
 Centralized logging systems are de rigueur in modern web applications, and are built into every major modern programming language. While most engineers know to reach for logs for tracking system metrics, their use for user and usage metrics is becoming increasingly more common. 
 Here’s an overview of replacing a brittle, in-line billing solution with a robust, scalable design:
 
-Leverage Existing Logs: Utilize the logs that the system already generates to extract key user metrics, such as query type, resources consumed, and timestamp. This reduces redundancy and ensures consistency across different functions.
+*Leverage Existing Logs*: Utilize the logs that the system already generates to extract key user metrics, such as query type, resources consumed, and timestamp. This reduces redundancy and ensures consistency across different functions.
 
-Periodic Syncing with Billing System: Aggregate the extracted metrics from the logs at regular intervals and synchronize them with the billing system, ensuring it's updated with the latest usage data.
+*Periodic Syncing with Billing System*: Aggregate the extracted metrics from the logs at regular intervals and synchronize them with the billing system, ensuring it's updated with the latest usage data.
 
-Validation and Error Handling: Cross-check and validate the log data before syncing to the billing system. Implement mechanisms to flag any anomalies or discrepancies for review to ensure accurate billing.
+*Validation and Error Handling*: Cross-check and validate the log data before syncing to the billing system. Implement mechanisms to flag any anomalies or discrepancies for review to ensure accurate billing.
 
-Benefits and Results
+**Benefits and Results**
 
 Implementing this solution has its quirks and tricks like all other design patterns, but the benefits are clear:
 
-Simplicity and Elegance: By using logs, we avoid the need to introduce third-party libraries or additional code into the application. This not only maintains the integrity and simplicity of the codebase but also ensures that the data used for billing aligns with the data logged for other system operations.
+*Simplicity and Elegance*: By using logs, we avoid the need to introduce third-party libraries or additional code into the application. This not only maintains the integrity and simplicity of the codebase but also ensures that the data used for billing aligns with the data logged for other system operations.
 
-Consistent and Reliable Data Source: Logs are a natural and consistent source of system and user activity, making them a reliable source for billing metrics. Leveraging them reduces discrepancies between operational tracking and billing.
+*Consistent and Reliable Data Source*: Logs are a natural and consistent source of system and user activity, making them a reliable source for billing metrics. Leveraging them reduces discrepancies between operational tracking and billing.
 
-Efficiency in Operations: Tapping into existing logs reduces redundancy, streamlines operations, and ensures that there's a single point of truth in terms of system and user metrics. This holistic approach fosters trust with users and guarantees a smoother operational flow.
+*Efficiency in Operations*: Tapping into existing logs reduces redundancy, streamlines operations, and ensures that there's a single point of truth in terms of system and user metrics. This holistic approach fosters trust with users and guarantees a smoother operational flow.
 
-A Closer Look
+**A Closer Look**
 
 If you’re interested in reading more about implementing the particulars of the system above, please let us know – we have a lot to say about the issue. If you want to check out Tier, which solves the usage-based billing problem for AI applications with one line of code, reach out to us [here](https://cal.com/forms/16bb9e85-c7d1-44bc-8b85-1861459c2cc8).
