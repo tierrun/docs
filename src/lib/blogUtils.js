@@ -32,6 +32,8 @@ export const getBlogs = (pageIndex) => {
         'utf-8'
       )
       const { data, content } = matter(fileContent)
+      const proxyDate = new Date(data.publishedAt)
+      data.publishedAt = proxyDate.toISOString()
 
       const timeToRead = readingTime(content)
 
