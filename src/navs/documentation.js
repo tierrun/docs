@@ -114,7 +114,6 @@ export const navigation = [
       {
         title: 'Node',
         href: '/docs/references/node',
-        external: true,
         algoliaTitle: 'Node',
       },
       {
